@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/case-contract.schema.json",
+  "title": "Synthetic Business Case Contract",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "case_id",
+    "status",
+    "source_type",
+    "name",
+    "scope",
+    "entities",
+    "rules",
+    "risks",
+    "p0_tests",
+    "unknowns_to_approve"
+  ],
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "case_id": {
+      "enum": [
+        "E1",
+        "M1",
+        "S1"
+      ]
+    },
+    "status": {
+      "enum": [
+        "proposed_for_demo",
+        "approved_for_demo"
+      ]
+    },
+    "source_type": {
+      "const": "synthetic_teaching_assumption"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ui",
+        "allowed_writes",
+        "prohibited"
+      ],
+      "properties": {
+        "ui": {
+          "$ref": "#/$defs/stringList"
+        },
+        "allowed_writes": {
+          "$ref": "#/$defs/stringList"
+        },
+        "prohibited": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "entities": {
+      "$ref": "#/$defs/stringList"
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "statement",
+          "oracle"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(E1|M1|S1)-R[0-9]{2}$"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oracle": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "risks": {
+      "$ref": "#/$defs/stringList"
+    },
+    "p0_tests": {
+      "$ref": "#/$defs/stringList"
+    },
+    "unknowns_to_approve": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "scenario": {
+      "type": "object"
+    },
+    "tiers": {
+      "$ref": "#/$defs/stringList"
+    },
+    "transition_examples": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "parameters": {
+      "type": "object"
+    },
+    "inventory_model": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "case_id": {
+            "const": "E1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "rules": {
+            "items": {
+              "properties": {
+                "id": {
+                  "pattern": "^E1-R[0-9]{2}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "case_id": {
+            "const": "M1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "rules": {
+            "items": {
+              "properties": {
+                "id": {
+                  "pattern": "^M1-R[0-9]{2}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "case_id": {
+            "const": "S1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "rules": {
+            "items": {
+              "properties": {
+                "id": {
+                  "pattern": "^S1-R[0-9]{2}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "stringList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

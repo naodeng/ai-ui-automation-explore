@@ -1,0 +1,16 @@
+{
+  "evidence_id": "E1-EV-EXAMPLE-000",
+  "run_id": "E1-DEMO-PLANNED-001",
+  "case_id": "E1",
+  "kind": "test_result",
+  "producer": "synthetic_document_example",
+  "captured_at": "2026-11-23T00:00:00Z",
+  "path": "reports/example/NOT_RUN.md",
+  "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "redaction_status": "synthetic_only",
+  "classification": "public_synthetic",
+  "rule_ids": [
+    "E1-R01"
+  ],
+  "notes": "Demonstration object, not evidence; zero digest is a placeholder. Must be replaced with real artifact hash before use."
+}

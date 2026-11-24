@@ -1,0 +1,53 @@
+{
+  "manifest_version": "1.0-demo",
+  "status": "specification_only_not_seeded",
+  "cases": [
+    {
+      "case_id": "E1",
+      "seed_id": "e1-threshold",
+      "clock_epoch": "2026-11-23T10:00:00Z",
+      "synthetic_users": [
+        "user_e1"
+      ],
+      "initial_conditions": {
+        "subtotal": 100,
+        "coupon_code": "C20",
+        "coupon_status": "available",
+        "orders": 0
+      }
+    },
+    {
+      "case_id": "M1",
+      "seed_id": "m1-gold-to-silver",
+      "clock_epoch": "2026-11-23T10:00:00Z",
+      "synthetic_users": [
+        "user_m1"
+      ],
+      "initial_conditions": {
+        "tier": "gold",
+        "claimed_coupon": "already_claimed_and_not_expired",
+        "event_version": 5,
+        "old_session_available": true
+      }
+    },
+    {
+      "case_id": "S1",
+      "seed_id": "s1-100-stock",
+      "clock_epoch": "2026-11-23T09:59:50Z",
+      "synthetic_users": [
+        "user_s1_001"
+      ],
+      "initial_conditions": {
+        "stock": 100,
+        "per_user_limit": 1,
+        "sale_start": "2026-11-23T10:00:00Z",
+        "orders": 0
+      }
+    }
+  ],
+  "notes": [
+    "All users are synthetic. No real accounts, payments or shipments.",
+    "Seed IDs and timestamps are examples; runtime must create a new unique run_id.",
+    "Seed/reset implementation is a Codex P2 task."
+  ]
+}

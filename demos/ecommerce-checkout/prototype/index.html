@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN" data-type="software">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="page-type" content="software" />
+    <meta name="site-kind" content="software" />
+    <meta name="theme-color" content="#f4f5f1" />
+    <title>E1 结算原型 · AI UI Automation Explore</title>
+    <meta name="description" content="E1 优惠券与下单 Demo 的界面评审原型。" />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17221f;
+        --muted: #59645e;
+        --line: #e4e8e2;
+        --surface: #fff;
+        --ground: #f4f5f1;
+        --green: #17664f;
+        --green-dark: #124d3d;
+        --green-pale: #eaf3ee;
+        --orange: #a64624;
+        --orange-pale: #fff2eb;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+      }
+
+      * { box-sizing: border-box; }
+      ::selection { background: var(--green-pale); color: var(--ink); }
+      body { margin: 0; min-width: 320px; background: var(--ground); color: var(--ink); }
+      button, select { font: inherit; }
+      button, select, a { -webkit-tap-highlight-color: transparent; }
+      .shell { width: min(1120px, calc(100% - 64px)); margin: 0 auto; }
+      .topbar { height: 76px; border-bottom: 1px solid rgba(28, 49, 41, .08); background: rgba(255,255,255,.68); }
+      .topbar-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+      .brand { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 720; letter-spacing: -.02em; }
+      .brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: var(--green); color: white; font-size: 12px; letter-spacing: -.04em; }
+      .brand span:last-child { color: #56615c; font-weight: 560; }
+      .top-meta { display: flex; align-items: center; gap: 18px; color: var(--muted); font-size: 13px; }
+      .local-pill { display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid #cde1d4; border-radius: 999px; color: var(--green-dark); background: #f3f8f4; font-size: 13px; font-weight: 650; }
+      .local-dot { width: 6px; height: 6px; border-radius: 50%; background: #439a70; }
+      main { padding: 54px 0 76px; }
+      .intro { display: flex; justify-content: space-between; align-items: end; margin-bottom: 30px; gap: 28px; }
+      h1 { margin: 0; font-size: clamp(30px, 3vw, 40px); line-height: 1.12; letter-spacing: -.04em; font-weight: 690; }
+      .intro-copy { margin: 12px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+      .steps { display: flex; align-items: center; gap: 10px; padding: 0 0 5px; color: #66726b; font-size: 13px; white-space: nowrap; }
+      .step { display: flex; align-items: center; gap: 8px; }
+      .step-number { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid #d6ddd7; border-radius: 50%; background: white; font-size: 13px; font-style: normal; font-weight: 700; }
+      .step.current { color: var(--green-dark); font-weight: 690; }
+      .step.current .step-number { border-color: var(--green); background: var(--green); color: white; }
+      .step-line { width: 28px; height: 1px; background: #dfe4df; }
+      .layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; align-items: start; gap: 22px; }
+      .panel { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+      .main-panel { overflow: hidden; }
+      .panel-head { padding: 23px 26px 18px; border-bottom: 1px solid #edf0ec; }
+      .panel-title-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      h2 { margin: 0; font-size: 16px; letter-spacing: -.025em; font-weight: 690; }
+      .item-count { color: #65716a; font-size: 13px; }
+      .section-body { padding: 23px 26px 27px; }
+      .product-row { display: grid; grid-template-columns: 62px minmax(0, 1fr) auto; align-items: center; gap: 16px; }
+      .product-swatch { height: 62px; display: grid; place-items: center; border: 1px solid #dce7de; border-radius: 13px; background: linear-gradient(140deg,#f0f5ee,#e2ece4); color: #2f6146; font-size: 13px; font-weight: 750; letter-spacing: -.04em; }
+      .product-name { margin: 0; font-size: 14px; font-weight: 650; }
+      .product-detail { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+      .product-price { font-size: 14px; font-weight: 680; font-variant-numeric: tabular-nums; }
+      .rule { height: 1px; margin: 23px 0; background: #edf0ec; }
+      .field-label { display: block; margin-bottom: 10px; color: #3c4943; font-size: 13px; font-weight: 670; }
+      .select-wrap { position: relative; }
+      select { width: 100%; height: 48px; padding: 0 44px 0 14px; border: 1px solid #dce2dc; border-radius: 10px; outline: none; background: #fff; color: var(--ink); font-size: 13px; appearance: none; transition: border-color .16s, box-shadow .16s; }
+      select:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(23,102,79,.12); }
+      .select-arrow { position: absolute; top: 17px; right: 16px; width: 12px; height: 8px; color: #7c8781; pointer-events: none; }
+      .select-arrow svg { display: block; width: 12px; height: 8px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      .coupon-card { display: flex; align-items: center; gap: 13px; min-height: 76px; padding: 15px 16px; border: 1px solid #f0d7ca; border-radius: 12px; background: #fffaf7; }
+      .coupon-icon { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid #f0c7b3; border-radius: 10px; background: #fff; color: var(--orange); font-size: 13px; font-weight: 800; }
+      .coupon-copy { min-width: 0; flex: 1; }
+      .coupon-name { margin: 0; color: #563a2e; font-size: 13px; font-weight: 690; }
+      .coupon-note { margin: 5px 0 0; color: #755e53; font-size: 13px; }
+      .coupon-state { color: var(--orange); font-size: 13px; font-weight: 720; white-space: nowrap; }
+      .coupon-state.applied { color: var(--green); }
+      .side-panel { position: sticky; top: 24px; padding: 25px 24px 22px; }
+      .summary-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+      .summary-tag { padding: 5px 8px; border-radius: 6px; background: #f0f3ef; color: #5c6861; font-size: 13px; font-weight: 690; }
+      .summary-line { display: flex; justify-content: space-between; gap: 18px; margin: 14px 0; color: #626e67; font-size: 13px; }
+      .summary-line strong { color: #35423c; font-weight: 580; font-variant-numeric: tabular-nums; }
+      .summary-line.discount strong { color: var(--green); }
+      .summary-total { display: flex; align-items: end; justify-content: space-between; gap: 16px; padding-top: 18px; margin-top: 18px; border-top: 1px solid #e9ede8; }
+      .summary-total span { color: #4c5952; font-size: 13px; }
+      .amount { color: var(--ink); font-size: 30px; line-height: 1; letter-spacing: -.04em; font-weight: 710; font-variant-numeric: tabular-nums; }
+      .amount small { margin-right: 3px; font-size: 17px; letter-spacing: -.02em; }
+      .primary { width: 100%; min-height: 50px; margin-top: 24px; border: 0; border-radius: 10px; background: var(--green); color: white; cursor: pointer; font-size: 13px; font-weight: 700; box-shadow: 0 5px 12px rgba(23,102,79,.16); transition: transform .16s, background .16s, box-shadow .16s; }
+      .primary:hover { transform: translateY(-1px); background: var(--green-dark); box-shadow: 0 8px 18px rgba(23,102,79,.2); }
+      .primary:active { transform: translateY(1px); }
+      .primary:focus-visible { outline: 3px solid rgba(23,102,79,.27); outline-offset: 3px; }
+      .safe-note { display: flex; justify-content: center; align-items: center; gap: 7px; margin: 13px 0 0; color: #5e6c64; font-size: 13px; text-align: center; }
+      .safe-mark { width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--green); }
+      .prototype-note { margin-top: 18px; padding: 12px 13px; border: 1px dashed #d6ddd7; border-radius: 9px; color: #57635d; background: #fafbf9; font-size: 13px; line-height: 1.55; }
+      .message { display: none; margin-top: 14px; padding: 12px 13px; border: 1px solid #d5e5da; border-radius: 9px; color: var(--green-dark); background: var(--green-pale); font-size: 13px; line-height: 1.5; }
+      footer { padding: 18px 0 26px; color: #626e67; font-size: 13px; text-align: center; }
+      .skip-link { position: absolute; top: -60px; left: 16px; z-index: 2; padding: 10px 14px; border-radius: 6px; background: var(--green-dark); color: white; font-size: 13px; }
+      .skip-link:focus { top: 12px; }
+
+      @media (max-width: 800px) {
+        .shell { width: min(100% - 40px, 620px); }
+        .topbar { height: 66px; }
+        main { padding: 37px 0 52px; }
+        .intro { align-items: start; flex-direction: column; gap: 22px; margin-bottom: 22px; }
+        .steps { padding: 0; }
+        .layout { grid-template-columns: 1fr; gap: 16px; }
+        .side-panel { position: static; }
+      }
+      @media (max-width: 480px) {
+        .shell { width: calc(100% - 32px); }
+        .top-meta > span:first-child { display: none; }
+        .brand { gap: 9px; font-size: 13px; }
+        .brand-mark { width: 28px; height: 28px; }
+        .top-meta { gap: 0; font-size: 13px; }
+        main { padding-top: 30px; }
+        h1 { font-size: 31px; }
+        .intro-copy { font-size: 13px; }
+        .steps { width: 100%; justify-content: space-between; font-size: 13px; }
+        .step { gap: 6px; }
+        .step-line { width: clamp(8px, 5vw, 22px); }
+        .panel { border-radius: 14px; }
+        .panel-head { padding: 19px 18px 15px; }
+        .section-body { padding: 19px 18px 22px; }
+        .product-row { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; }
+        .product-swatch { height: 52px; }
+        .product-name { font-size: 13px; }
+        .product-detail { font-size: 13px; }
+        .product-price { font-size: 13px; }
+        .coupon-card { gap: 10px; padding: 13px 11px; }
+        .coupon-state { font-size: 13px; }
+        .side-panel { padding: 21px 18px 19px; }
+        .amount { font-size: 28px; }
+        footer { padding-top: 12px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="skip-link" href="#main">跳到主要内容</a>
+        <div class="brand"><span class="brand-mark">QA</span><span>AI UI Automation</span><span>/ Explore</span></div>
+        <div class="top-meta"><span>E1 · Checkout Demo</span><span class="local-pill"><i class="local-dot"></i>本地沙盒</span></div>
+      </div>
+    </header>
+    <main class="shell" id="main">
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <h1 id="page-title">确认订单</h1>
+          <p class="intro-copy">检查优惠与应付金额，然后创建一笔本地沙盒订单。</p>
+        </div>
+        <nav class="steps" aria-label="下单步骤">
+          <span class="step"><i class="step-number">1</i>购物车</span><i class="step-line"></i>
+          <span class="step current"><i class="step-number">2</i>确认订单</span><i class="step-line"></i>
+          <span class="step"><i class="step-number">3</i>完成</span>
+        </nav>
+      </section>
+
+      <div class="layout">
+        <section class="panel main-panel" aria-labelledby="cart-heading">
+          <div class="panel-head">
+            <div class="panel-title-row"><h2 id="cart-heading">商品与优惠</h2><span class="item-count">1 件商品</span></div>
+          </div>
+          <div class="section-body">
+            <div class="product-row">
+              <div class="product-swatch" aria-hidden="true">E1</div>
+              <div><p class="product-name">结算边界演示商品</p><p class="product-detail">合成商品 · 数量 1</p></div>
+              <strong class="product-price" id="item-price">¥100.00</strong>
+            </div>
+
+            <div class="rule"></div>
+            <label class="field-label" for="cart-scenario">选择购物车金额</label>
+            <div class="select-wrap">
+              <select id="cart-scenario" aria-label="选择购物车金额">
+                <option value="100">达到优惠门槛 · ¥100.00</option>
+                <option value="99">低于优惠门槛 · ¥99.00</option>
+              </select>
+              <span class="select-arrow" aria-hidden="true"><svg viewBox="0 0 12 8"><path d="M2 2 6 6 10 2" /></svg></span>
+            </div>
+
+            <div class="rule"></div>
+            <div class="coupon-card" aria-live="polite">
+              <div class="coupon-icon">C20</div>
+              <div class="coupon-copy"><p class="coupon-name">优惠券 C20 · 满 ¥100 减 ¥20</p><p class="coupon-note" id="coupon-note">已满足使用条件</p></div>
+              <span class="coupon-state applied" id="coupon-state">已应用</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel side-panel" aria-labelledby="summary-heading">
+          <div class="summary-head"><h2 id="summary-heading">金额明细</h2><span class="summary-tag">E1 沙盒</span></div>
+          <div class="summary-line"><span>商品小计</span><strong id="subtotal">¥100.00</strong></div>
+          <div class="summary-line discount"><span>优惠券 C20</span><strong id="discount">− ¥20.00</strong></div>
+          <div class="summary-line"><span>运费</span><strong>¥0.00</strong></div>
+          <div class="summary-line"><span>税费</span><strong>¥0.00</strong></div>
+          <div class="summary-total"><span>应付金额</span><strong class="amount" id="payable"><small>¥</small>80.00</strong></div>
+          <button class="primary" id="create-order" type="button">创建沙盒订单</button>
+          <p class="safe-note"><span class="safe-mark" aria-hidden="true"></span>只写入本地演示数据，不会付款或发货</p>
+          <div class="prototype-note">评审原型：按钮不会创建订单。正式 Demo 会由服务端报价与订单 Oracle 决定结果。</div>
+          <div class="message" id="prototype-message" role="status">这是可交互的界面原型，尚未连接 E1 服务端。</div>
+        </aside>
+      </div>
+    </main>
+    <footer>AI UI Automation Explore <span aria-hidden="true">·</span> 合成数据，仅供测试研究</footer>
+    <script>
+      const scenario = document.querySelector('#cart-scenario');
+      const price = document.querySelector('#item-price');
+      const subtotal = document.querySelector('#subtotal');
+      const discount = document.querySelector('#discount');
+      const payable = document.querySelector('#payable');
+      const note = document.querySelector('#coupon-note');
+      const state = document.querySelector('#coupon-state');
+      const message = document.querySelector('#prototype-message');
+      const money = (value) => `¥${value.toFixed(2)}`;
+
+      scenario.addEventListener('change', () => {
+        const amount = Number(scenario.value);
+        const eligible = amount >= 100;
+        price.textContent = money(amount);
+        subtotal.textContent = money(amount);
+        discount.textContent = eligible ? '− ¥20.00' : '− ¥0.00';
+        payable.innerHTML = `<small>¥</small>${(amount - (eligible ? 20 : 0)).toFixed(2)}`;
+        note.textContent = eligible ? '已满足使用条件' : '还差 ¥1.00 可使用';
+        state.textContent = eligible ? '已应用' : '未达到门槛';
+        state.classList.toggle('applied', eligible);
+        message.style.display = 'none';
+      });
+
+      document.querySelector('#create-order').addEventListener('click', () => {
+        message.style.display = 'block';
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "case_id": "E1",
+  "clock_epoch": "2026-11-23T10:00:00Z",
+  "project": "api",
+  "run_ids": [
+    "e1-9d3be838-d9d3-484d-9a2e-d387ab86c75a"
+  ],
+  "seed_id": "e1-threshold",
+  "test_title": "Oracle fails closed for an unknown run"
+}

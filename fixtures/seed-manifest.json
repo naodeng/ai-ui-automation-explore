@@ -1,0 +1,55 @@
+{
+  "manifest_version": "1.0-demo",
+  "status": "e1_m1_runtime_verified_s1_first_runtime_slice",
+  "cases": [
+    {
+      "case_id": "E1",
+      "seed_id": "e1-threshold",
+      "clock_epoch": "2026-11-23T10:00:00Z",
+      "synthetic_users": [
+        "user_e1"
+      ],
+      "initial_conditions": {
+        "subtotal": 100,
+        "coupon_code": "C20",
+        "coupon_status": "available",
+        "orders": 0
+      }
+    },
+    {
+      "case_id": "M1",
+      "seed_id": "m1-gold-to-silver",
+      "clock_epoch": "2026-11-23T10:00:00Z",
+      "synthetic_users": [
+        "user_m1"
+      ],
+      "initial_conditions": {
+        "tier": "gold",
+        "claimed_coupon": "already_claimed_and_not_expired",
+        "event_version": 5,
+        "old_session_available": true
+      }
+    },
+    {
+      "case_id": "S1",
+      "seed_id": "s1-100-stock",
+      "clock_epoch": "2026-11-23T09:59:50Z",
+      "synthetic_users": [
+        "user_s1_001"
+      ],
+      "initial_conditions": {
+        "stock": 100,
+        "per_user_limit": 1,
+        "sale_start": "2026-11-23T10:00:00Z",
+        "orders": 0
+      }
+    }
+  ],
+  "notes": [
+    "E1 and M1 runtimes create isolated in-memory runs from their approved seed entries; each run receives a new unique run_id.",
+    "The M1 historical coupon is valid at the seed clock instant. Its exact expiry is unspecified; after clock advancement, expiry status is not evaluated.",
+    "S1 has a first local runtime slice. One purchase path, per-user limit, idempotent replay, and a single-operation stock ledger observation are covered; R02 remains partial because exhaustion and concurrency were not tested.",
+    "S1 queue semantics, eventual-consistency SLA, cancellation/timeout release timing, and load testing remain outside this demo scope.",
+    "All users are synthetic. No real accounts, payments or shipments."
+  ]
+}

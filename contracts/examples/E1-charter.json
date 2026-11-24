@@ -1,0 +1,38 @@
+{
+  "mission_id": "E1-local-observe-001",
+  "case_id": "E1",
+  "allowed_origin": "http://127.0.0.1:3000",
+  "allowed_paths": [
+    "/cart",
+    "/checkout"
+  ],
+  "account_role": "qa-synthetic-buyer",
+  "budget": {
+    "max_actions": 20,
+    "max_duration_seconds": 600,
+    "max_writes": 0
+  },
+  "allowed_actions": [
+    "observe",
+    "click_safe",
+    "navigate_allowed",
+    "refresh",
+    "read_oracle"
+  ],
+  "oracles": [
+    "checkout_quote",
+    "order_ledger"
+  ],
+  "required_evidence": [
+    "screenshot",
+    "action_log",
+    "oracle_result"
+  ],
+  "stop_conditions": [
+    "scope_violation",
+    "unauthorized_write",
+    "exhausted_budget",
+    "missing_oracle",
+    "unknown_write_result"
+  ]
+}

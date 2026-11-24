@@ -1,0 +1,39 @@
+{
+  "mission_id": "M1-local-observe-001",
+  "case_id": "M1",
+  "allowed_origin": "http://localhost:3000",
+  "allowed_paths": [
+    "/member",
+    "/benefits",
+    "/gold-only"
+  ],
+  "account_role": "qa-synthetic-member",
+  "budget": {
+    "max_actions": 20,
+    "max_duration_seconds": 600,
+    "max_writes": 0
+  },
+  "allowed_actions": [
+    "observe",
+    "click_safe",
+    "navigate_allowed",
+    "refresh",
+    "read_oracle"
+  ],
+  "oracles": [
+    "membership_authorization",
+    "membership_events"
+  ],
+  "required_evidence": [
+    "screenshot",
+    "action_log",
+    "oracle_result"
+  ],
+  "stop_conditions": [
+    "scope_violation",
+    "unauthorized_write",
+    "exhausted_budget",
+    "missing_oracle",
+    "unknown_write_result"
+  ]
+}

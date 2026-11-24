@@ -1,0 +1,40 @@
+contract_version: "1.0-demo"
+case_id: M1
+status: approved_for_demo
+source_type: synthetic_teaching_assumption
+name: Membership tier transitions
+scope:
+  ui: [/member, /benefits, /gold-only]
+  allowed_writes: [fixture_tier_change_only]
+  prohibited: [real_member_upgrade, real_entitlement_modification]
+entities: [member, tier, entitlement, membership_event, authorization]
+tiers: [normal, silver, gold, platinum]
+transition_examples:
+  - {from: silver, event: threshold_reached, to: gold}
+  - {from: gold, event: renewal_failed_at_period_end, to: silver}
+  - {from: platinum, event: renewal_failed_at_period_end, to: gold}
+parameters:
+  ui_propagation_sla_seconds: 30
+  historical_claimed_coupon_policy: retain_until_expiry
+  event_ordering: strictly_increasing_event_version
+rules:
+  - id: M1-R01
+    statement: A valid silver to gold transition enables currently gated gold-only purchases.
+    oracle: membership_authorization
+  - id: M1-R02
+    statement: After gold to silver downgrade old sessions cannot initiate new gold-only purchases.
+    oracle: membership_authorization
+  - id: M1-R03
+    statement: Claimed historical coupons remain valid until their own expiry in this demo.
+    oracle: entitlement_ledger
+  - id: M1-R04
+    statement: Duplicate or older membership events do not cause invalid state transitions.
+    oracle: membership_events
+  - id: M1-R05
+    statement: UI eventually reaches the effective server tier within 30 simulated seconds.
+    oracle: membership_state_and_fake_clock
+risks: [downgrade_privilege_bypass, stale_session, historical_entitlement_loss, replayed_event, stale_ui]
+p0_tests: [M1-01, M1-02, M1-03, M1-04, M1-06, M1-07]
+unknowns_to_approve:
+  - Exact actual tier calculation and billing cycle are demonstration-only
+  - Rules for unclaimed coupons and additional benefits are not specified

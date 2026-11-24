@@ -1,0 +1,25 @@
+﻿序号,工具,文章类型,技术分类,优先级,主案例,文章位置,状态
+1,Playwright Test,完整篇,自动化测试基础,P0,E1,articles/01-playwright-test.md,outline
+2,Playwright CLI + Skill,完整篇,Agent 浏览器执行,P0,E1,articles/02-playwright-cli.md,outline
+3,Playwright MCP,完整篇,Agent 浏览器执行,P0,M1,articles/03-playwright-mcp.md,outline
+4,Vercel agent-browser,完整篇,Agent 浏览器执行,P0,E1,articles/04-agent-browser.md,outline
+5,Codex Computer Use / Browser Use,专题篇,宿主视觉与桌面操作,P0,M1,articles/05-codex-computer-use.md,outline
+6,ego-lite / ego-browser Skill,完整篇,Agent 共享浏览器,P0,M1,articles/06-ego-lite.md,outline
+7,Midscene.js,完整篇,视觉驱动自动化,P0,M1,articles/07-midscene.md,outline
+8,Playwright Test Agents,完整篇,AI 生成与维护测试,P1,E1,articles/08-playwright-test-agents.md,outline
+9,Chrome DevTools MCP,专题篇,诊断与证据,P1,S1,articles/09-chrome-devtools-mcp.md,outline
+10,Stagehand,完整篇,AI 辅助浏览器 SDK,P1,M1,articles/10-stagehand.md,outline
+11,Browser Use CLI / MCP / SDK,完整篇,自主浏览器 Agent,P1,E1,articles/11-browser-use.md,outline
+12,Browser Harness,专题篇,共享 Chrome 与 Agent 接入,P1,M1,articles/12-browser-harness.md,outline
+13,axe-core / @axe-core/playwright,专题篇,可访问性自动化,P1,M1,articles/13-axe-core.md,outline
+14,Selenium WebDriver / WebDriver BiDi,完整篇,传统 UI 自动化生态,P2,S1,articles/14-selenium-bidi.md,outline
+15,Puppeteer,完整篇,传统 UI 自动化生态,P2,E1,articles/15-puppeteer.md,outline
+16,Skyvern,完整篇,AI 工作流自动化,P2,M1,articles/16-skyvern.md,outline
+17,Agentic Test Explorer,专题篇,探索性测试 Agent,P2,S1,articles/17-agentic-test-explorer.md,outline
+18,Mirasim Computer Use,专题篇,跨桌面与浏览器操作,P2,M1,articles/18-mirasim-computer-use.md,outline
+19,assay QA CLI,专题篇,确定性质量基线,P2,E1,articles/19-assay.md,outline
+20,OpenAI Computer Use API,专题篇,可编程计算机操作,P2,M1,articles/20-openai-computer-use-api.md,outline
+21,Browserbase 托管浏览器,专题篇,托管浏览器基础设施,P3,S1,articles/21-browserbase.md,outline
+22,BrowserGym,短篇,Agent 评估环境,P3,S1,articles/22-browsergym.md,outline
+23,AgentLab,短篇,Agent 评估框架,P3,S1,articles/23-agentlab.md,outline
+24,Accessibility Insights for Web,短篇,辅助可访问性评审,P3,M1,articles/24-accessibility-insights.md,outline

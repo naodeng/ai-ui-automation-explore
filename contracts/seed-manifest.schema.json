@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/seed-manifest.schema.json",
+  "title": "Synthetic Seed Manifest Specification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "status",
+    "cases",
+    "notes"
+  ],
+  "properties": {
+    "manifest_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "allOf": [
+        {
+          "contains": {
+            "properties": {
+              "case_id": {
+                "const": "E1"
+              }
+            },
+            "required": [
+              "case_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "case_id": {
+                "const": "M1"
+              }
+            },
+            "required": [
+              "case_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "properties": {
+              "case_id": {
+                "const": "S1"
+              }
+            },
+            "required": [
+              "case_id"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "case_id",
+          "seed_id",
+          "clock_epoch",
+          "synthetic_users",
+          "initial_conditions"
+        ],
+        "properties": {
+          "case_id": {
+            "enum": [
+              "E1",
+              "M1",
+              "S1"
+            ]
+          },
+          "seed_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "clock_epoch": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "synthetic_users": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "initial_conditions": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

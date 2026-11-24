@@ -1,0 +1,424 @@
+{
+  "kit": "ai-browser-exploratory-testing-codex-kit",
+  "version": "2.0",
+  "date": "2026-11-23",
+  "source_legacy_files_unchanged": 9,
+  "status": "specification_only",
+  "files": [
+    {
+      "path": ".gitignore",
+      "size": 282,
+      "sha256": "f9ffd0f982c8d5060c6167d6e39a92c981a576423cbf5cce2089400a621d80b5"
+    },
+    {
+      "path": "00_START_HERE.md",
+      "size": 3508,
+      "sha256": "93810663e864b8ff8e9df363a53c90c8c622dc642f800360084ae84a8c10f1aa"
+    },
+    {
+      "path": "AGENTS.md",
+      "size": 3961,
+      "sha256": "3b8b0b611753aaec4ca11c9ab67c094786d45757fb16d9c476bf145fcc9ba549"
+    },
+    {
+      "path": "AGENTS.zh-CN.md",
+      "size": 1227,
+      "sha256": "52a111785584a78b1f7240807c16006aeda1ad8689105ceef4baa2925a77ab2c"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "size": 637,
+      "sha256": "a141f5a3283e6f7c9f1de121c383a3226f32e2b3bb9f1848d0395b0d978b7e81"
+    },
+    {
+      "path": "README.en.md",
+      "size": 889,
+      "sha256": "aa4168c071c9d3b80c009e2e44e48fb9f15563aadc1d2caba137ce66749b8d1d"
+    },
+    {
+      "path": "README.md",
+      "size": 3998,
+      "sha256": "fe58d923f871acf06dbb39f165117ca940f272f2083ebcadc32619f38f7123a4"
+    },
+    {
+      "path": "SOURCE_NOTES.md",
+      "size": 779,
+      "sha256": "87d7be24d797571842d9107afc77bd57837fbcb9ccdb4c26b42e8ec0fe1378ed"
+    },
+    {
+      "path": "VERSION_STATUS.md",
+      "size": 873,
+      "sha256": "82217edd11d2aeaa29e9cfcdbc7f859afbd3373d8b1540d03891bfb032574499"
+    },
+    {
+      "path": "contracts/cases/E1.yaml",
+      "size": 1432,
+      "sha256": "64621ab60d10350e980dcf4b6f36349f3cf928ea9e81c336abcd14defc1f3dc4"
+    },
+    {
+      "path": "contracts/cases/M1.yaml",
+      "size": 1836,
+      "sha256": "a7a95fbe5f0a160c4e4a67c6945e24e460706062b1ddf0ae20a4464c1ffa62a4"
+    },
+    {
+      "path": "contracts/cases/S1.yaml",
+      "size": 1829,
+      "sha256": "61527fe8d23d8448c05440ea50ede44a63691ed9763f129ccdf6ae9c7106e171"
+    },
+    {
+      "path": "contracts/evidence.schema.json",
+      "size": 1602,
+      "sha256": "0f70f8651b6cec2c5fa0c09ff03bc21d385a2ef5356ecd1f98929145c3a53620"
+    },
+    {
+      "path": "contracts/examples/E1-charter.json",
+      "size": 712,
+      "sha256": "439b4f71be96acf3c78405d1252103ffebe8183260fc5dc83d10d772fc3c15dd"
+    },
+    {
+      "path": "contracts/examples/M1-charter.json",
+      "size": 748,
+      "sha256": "5a796cedaed9f4a473cc66eccc626edc98279aab5e3e460e2abb4a19ca9afae0"
+    },
+    {
+      "path": "contracts/examples/S1-charter.json",
+      "size": 745,
+      "sha256": "1a323e340c5aa326c863f5e38ed0583adca23674394e0d0ebfe9fed695608af8"
+    },
+    {
+      "path": "contracts/examples/sample-evidence.json",
+      "size": 572,
+      "sha256": "4b206865ac93d6ed5b5bb29de6e43fd2b0f91e999a2b20f043af9b554c212b69"
+    },
+    {
+      "path": "contracts/examples/sample-finding.json",
+      "size": 622,
+      "sha256": "fdd840c49a76418d66571373916d9e81f31e441d85cec173185e739157c6e3fa"
+    },
+    {
+      "path": "contracts/examples/sample-run-manifest.json",
+      "size": 464,
+      "sha256": "e5996a5cde1ba639204614d38605ac6aa20fa3820b0c6b614147cefb44250781"
+    },
+    {
+      "path": "contracts/exploration-charter.schema.json",
+      "size": 3568,
+      "sha256": "b2b92ebe18cd38f9d826377a1e4ac7715e2948b56529f48825f1ddd567c4dfec"
+    },
+    {
+      "path": "contracts/finding.schema.json",
+      "size": 3731,
+      "sha256": "92c4f9a837bb412177ba6c2b3ea979b872e372dff058af0abd8048c2a7f337de"
+    },
+    {
+      "path": "contracts/run-manifest.schema.json",
+      "size": 1849,
+      "sha256": "defc4bf55ab2d83dcbd062d02ed73c4d6db98951c25eacd2dec9ae95edd8fa73"
+    },
+    {
+      "path": "docs/01-项目章程与范围.md",
+      "size": 2385,
+      "sha256": "5f007f455e46cbf62719a87b59cbaefbeef2e8ffff99ee98f1a83d209bd173fb"
+    },
+    {
+      "path": "docs/02-端到端执行流程.md",
+      "size": 3096,
+      "sha256": "ea52dc5b75064894f8c1d335114a7d7719b56aa4a2c7c136e4f0d218371217a4"
+    },
+    {
+      "path": "docs/03-业务规则与真相源.md",
+      "size": 4180,
+      "sha256": "070aaa63a827c25377e432f8d50d589d56dbbba44adfdd2e557e90db34fabc9f"
+    },
+    {
+      "path": "docs/04-三案例详细探索指南.md",
+      "size": 3862,
+      "sha256": "3cea953329bec8d34c944d98abf1d887614f5ccdf51015f1461cf0ce4901b9b3"
+    },
+    {
+      "path": "docs/05-环境数据与重置.md",
+      "size": 2798,
+      "sha256": "06caee95be30171eef5d126d83bffeec45ad5484b09e556dd0f9f6bc73735c73"
+    },
+    {
+      "path": "docs/06-架构与工具适配.md",
+      "size": 2549,
+      "sha256": "a0cac34110d9c2d1b44f97970f5c22caac638972ffcb494abc5dd62573129588"
+    },
+    {
+      "path": "docs/07-方案A-确定性执行.md",
+      "size": 3160,
+      "sha256": "c63cf4dbcf59f46e3da810e64094828a9a5edfa5168cddee3c26aaed883af8ee"
+    },
+    {
+      "path": "docs/08-方案B-视觉驱动.md",
+      "size": 2361,
+      "sha256": "3720b28b6651712b0d5d7b91668f9c8f50fe72a88c7a51c26755d4e7b2577b0a"
+    },
+    {
+      "path": "docs/09-方案C-自主Agent受限PoC.md",
+      "size": 3063,
+      "sha256": "785e427cfaff217554c50b7bf51ad4c4b257348e6e8ee8d5a186652be9b6a02b"
+    },
+    {
+      "path": "docs/10-证据与缺陷治理.md",
+      "size": 2614,
+      "sha256": "0965e3100a818bc601a64e2f73eaacdeb9afa1720d7bc42a98738a02dc0a6359"
+    },
+    {
+      "path": "docs/11-对照实验与TDD验收.md",
+      "size": 2971,
+      "sha256": "a8af5217aa6bf182b09f0530521dd1cb0da863b9bf38a83393f3d09f69bc95cd"
+    },
+    {
+      "path": "docs/12-安全隔离与恢复.md",
+      "size": 2748,
+      "sha256": "ddfeb8192a3e91cefd906eebd37474af2c8b1aeff9883342a77d1e6e5fc80cfe"
+    },
+    {
+      "path": "docs/13-路线图与Codex任务拆分.md",
+      "size": 2265,
+      "sha256": "5816ad665a8891e273daf1d4672eb75ba26106a3421a5ee4803e6fc4ffd82b05"
+    },
+    {
+      "path": "docs/14-Codex协作与提交流程.md",
+      "size": 2595,
+      "sha256": "42107445e29c264b1523c09e6d1c6237b807a3af600acaac4ebe5206fece8f29"
+    },
+    {
+      "path": "docs/15-迁移到真实业务项目.md",
+      "size": 2123,
+      "sha256": "7c7991210fc2c88e503fc8a2566b32473d78791fe389b32d8d556c4da56ce1b0"
+    },
+    {
+      "path": "docs/16-文章发布与复盘.md",
+      "size": 1587,
+      "sha256": "54fedce4383854be12dbf8227494798e685bc9fd2de5010ae66f432f9afab98e"
+    },
+    {
+      "path": "docs/17-资料与工具核验.md",
+      "size": 2523,
+      "sha256": "ae1535fe50421d3edc59e32729bc9c696068dc6fe3d730325cdcd59a52861586"
+    },
+    {
+      "path": "docs/18-风险登记与阻断项.md",
+      "size": 1624,
+      "sha256": "4ff199782270a018fa3314722ae34b50615a03738cf8266fbded72a8b61d04d3"
+    },
+    {
+      "path": "docs/19-ADR-0001-测试执行架构.md",
+      "size": 1376,
+      "sha256": "792891849e93afbd204a0deffec378968042d71eadba9ff5a7d57ef6097548af"
+    },
+    {
+      "path": "docs/20-从零到复盘的实际操作顺序.md",
+      "size": 3151,
+      "sha256": "470698dd3aa0e7e460da98904228939ec52cb5a0d5c383d01c4f919bd05843fe"
+    },
+    {
+      "path": "docs/21-必须由用户审批的决策点.md",
+      "size": 1658,
+      "sha256": "82d8a56964b7a5b6d3b02e48c2b7fb08441bcdc4cf472d270624e8aac8376151"
+    },
+    {
+      "path": "fixtures/seed-manifest.json",
+      "size": 1336,
+      "sha256": "81899443039521c7fdf1980aa7ce13e67a1a6236f2cfe220a5555a5467fd9886"
+    },
+    {
+      "path": "fixtures/植入缺陷与盲评方案.md",
+      "size": 2843,
+      "sha256": "9b9c5b6482f2a99d0a2a5c213ef3330396f929fa6109b46c44e865fba7f33d22"
+    },
+    {
+      "path": "fixtures/重置与时钟规范.md",
+      "size": 1318,
+      "sha256": "d346dd68c0846f5305852261d3ed1207b7b034e1e81901eb37830f7b101f9141"
+    },
+    {
+      "path": "legacy-v1.0/01-完整科普文章-三案例版.md",
+      "size": 20411,
+      "sha256": "b49f2e9ab52570ca171d6b480efc9812a4194e4f6fb5bd6bb6c30836161bba66"
+    },
+    {
+      "path": "legacy-v1.0/02-方案A-确定性浏览器探索.md",
+      "size": 9779,
+      "sha256": "85ffc377ded5fc2c775321b2c990c8e40643eee7cd791c53a30c8fcc3598fcf1"
+    },
+    {
+      "path": "legacy-v1.0/03-方案B-视觉驱动UI探索.md",
+      "size": 9861,
+      "sha256": "8891694a1cd9e01551f60b7790355f03f08ad98a579a304dfb74c1686517b95c"
+    },
+    {
+      "path": "legacy-v1.0/04-方案C-Agent自主探索.md",
+      "size": 11726,
+      "sha256": "8db009fad44fb9597be44150cf1edaf94550f1d2090651eeb6881cf6aa9c8d57"
+    },
+    {
+      "path": "legacy-v1.0/05-三案例测试设计矩阵.md",
+      "size": 10224,
+      "sha256": "3e446d8ccb40d7dbb1260caf405c527a6e8accbdabed90712af0774348bd983f"
+    },
+    {
+      "path": "legacy-v1.0/06-三路线对照实验与TDD验收.md",
+      "size": 9415,
+      "sha256": "cf3b44fdb7b45215723fcfd806078a4fed703118c471cdcc32a2d3306ead5ef8"
+    },
+    {
+      "path": "legacy-v1.0/07-可复用Prompt与探索任务.md",
+      "size": 8079,
+      "sha256": "32e85ce141e23ccfc7365559f96fe1a4ff3e7278159c45787ea11e1d195b2d90"
+    },
+    {
+      "path": "legacy-v1.0/08-资料来源与核验边界.md",
+      "size": 5176,
+      "sha256": "6f92f97b2c7a3c2cea0ffaaac16ef417fc5dde7a2f62d1dde2fb74126a2e62f0"
+    },
+    {
+      "path": "legacy-v1.0/README.md",
+      "size": 3294,
+      "sha256": "7dbda9cca193420c6ec89773b54071e63915a77e1f704ef4e104a3a79c2116b4"
+    },
+    {
+      "path": "prompts/00-总控-交给Codex.md",
+      "size": 2688,
+      "sha256": "e53a032bbcde2ca89d45b8860ea838baa63afb14be49ab448fc8a4aabf6bf1da"
+    },
+    {
+      "path": "prompts/01-P0-仓库体检.md",
+      "size": 1481,
+      "sha256": "f03529f710345f451e95a7372d1279a2f21960cf4aa85ccfd427fe53a020c88b"
+    },
+    {
+      "path": "prompts/02-P1-契约与TDD.md",
+      "size": 1280,
+      "sha256": "25a07c4d9919471c9db361abf87384273907da0210406e08ecac640579f23214"
+    },
+    {
+      "path": "prompts/03-P2-E1-电商.md",
+      "size": 1325,
+      "sha256": "f14ed95829d2e1f0a4b0a0a0f0a437f6c7e318ae4cc632dae053e7d8fb28247a"
+    },
+    {
+      "path": "prompts/04-P2-M1-会员.md",
+      "size": 1354,
+      "sha256": "f7a4e6c0d7676d12fc2c763b312861062b3d59b58e72665b811786fa1157f0f0"
+    },
+    {
+      "path": "prompts/05-P2-S1-秒杀.md",
+      "size": 1409,
+      "sha256": "8d1eb7f8404f945c8180bee786b5d44ec629a8cfb43f7cdb6da08c6bddcebaf7"
+    },
+    {
+      "path": "prompts/06-P3-A-Playwright.md",
+      "size": 1334,
+      "sha256": "8cdcf6d7f7fcdaaeabb1c56032d05228d93654a541469848bafd4c9f9c90d92c"
+    },
+    {
+      "path": "prompts/07-P4-B-视觉.md",
+      "size": 1131,
+      "sha256": "63d2ef311ec6b35361007c5fec762d55d3af8e8acda45bf587d9e7e3bb28ceba"
+    },
+    {
+      "path": "prompts/08-P5-C-Agent.md",
+      "size": 1360,
+      "sha256": "1a7306f5f2ffbea97803ff25c07d908d80d76e251bb03453f538d6c4015ec85f"
+    },
+    {
+      "path": "prompts/09-P6-对照评估.md",
+      "size": 1295,
+      "sha256": "c9d28ed9e0fde1d6e7459382535ed00d097b2276f2e7a6be1e9a3483f44131de"
+    },
+    {
+      "path": "prompts/10-P7-最终评审.md",
+      "size": 1096,
+      "sha256": "34c0f7a4618daf4cd9ade09d54670aaa4616deea6f75526128ef6c95b34f6a05"
+    },
+    {
+      "path": "prompts/11-候选Bug独立复核.md",
+      "size": 1298,
+      "sha256": "f207eb3895f30de356238ee8d811f01d1d8820e9599143adea267d6e7adf280b"
+    },
+    {
+      "path": "prompts/12-失败诊断与恢复.md",
+      "size": 1175,
+      "sha256": "b162bc26b95fe1d25bd1c6b23a50f529a04c0fe37f48c901c67ec7d8716bbb59"
+    },
+    {
+      "path": "prompts/13-接入真实业务.md",
+      "size": 954,
+      "sha256": "6745afc33cf6df1f686b07ba6339cb0186b9e299825a28aa2f41409f665ed398"
+    },
+    {
+      "path": "prompts/14-文章与技术复盘.md",
+      "size": 1213,
+      "sha256": "ba6bc69fbe9578d2a92ebfc7ff20badc5b390b333a9b91041f563784b131d324"
+    },
+    {
+      "path": "prompts/15-评审与纠偏.md",
+      "size": 1313,
+      "sha256": "b31bbf0153a45d5a24414bd31af8d6b53bd8e055795d86babc94963dd1df4b29"
+    },
+    {
+      "path": "prompts/README.md",
+      "size": 1804,
+      "sha256": "552ba6adbe5eacc59467aaa670ab669dd8262f94d1da0e07f341c4d4a0f5adef"
+    },
+    {
+      "path": "reports/example/NOT_RUN.md",
+      "size": 387,
+      "sha256": "48a0f8515c08a75bc9dcb990d90a974d7961caf7a4e9403ed37c3fffd097080e"
+    },
+    {
+      "path": "requirements-dev.txt",
+      "size": 139,
+      "sha256": "f7caa169f2fd15e8019c29b81aa47fbcff9785cb07857ef636a19bff5ca86bfa"
+    },
+    {
+      "path": "scripts/validate_kit.py",
+      "size": 4464,
+      "sha256": "44aa8b5809d6d5a4673684dfca6179c54e7830a655bff1d85150b7198e46ee7c"
+    },
+    {
+      "path": "templates/Go-NoGo决策.md",
+      "size": 937,
+      "sha256": "8304a8ae5b0b18e038d9f9e3129e761061ba9653ba78bc2ca9db897ab4eeec3b"
+    },
+    {
+      "path": "templates/experiment-plan.csv",
+      "size": 1864,
+      "sha256": "295a0582f17a4acbde3d6f62cd41a493655393d3457f7f4961c6b49924063def"
+    },
+    {
+      "path": "templates/experiment-runs.csv",
+      "size": 329,
+      "sha256": "0bb26d9139443d483c23dcac74284db84fb0189244e573a8b8d729a4b107d8c0"
+    },
+    {
+      "path": "templates/候选缺陷报告.md",
+      "size": 813,
+      "sha256": "54adfac7e07cacaaea7e5b87c65ce4d5ee8c4dc256c1769b3cd856173bcf7de9"
+    },
+    {
+      "path": "templates/实验报告模板.md",
+      "size": 833,
+      "sha256": "c445e6d6035990f7c9ebdcfc8a71c2492e7b848792865c404880092995b2bea8"
+    },
+    {
+      "path": "templates/探索Charter模板.md",
+      "size": 743,
+      "sha256": "993eb0551ae6a6dca6efc742f1741d1c31162c0f67938f256955769ae5577498"
+    },
+    {
+      "path": "templates/证据索引模板.md",
+      "size": 566,
+      "sha256": "d8eeacc8aed1358942ae30f40b5da8bae778532166ccb83bb79c66a5de37a69b"
+    },
+    {
+      "path": "templates/阶段检查点.md",
+      "size": 953,
+      "sha256": "d119c81d0bc62083e417a25d9670a4c5b21ea3d3e3e2575ac3c3cb06c41adf48"
+    }
+  ]
+}

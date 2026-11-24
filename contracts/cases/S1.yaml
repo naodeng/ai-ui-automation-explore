@@ -1,0 +1,40 @@
+contract_version: "1.0-demo"
+case_id: S1
+status: approved_for_demo
+source_type: synthetic_teaching_assumption
+name: Flash sale
+scope:
+  ui: [/flash-sale, /queue, /flash-sale/result]
+  allowed_writes: [one_sandbox_purchase_with_approval]
+  prohibited: [real_purchase, production_load, bypass_rate_limit, uncontrolled_retry]
+entities: [campaign, product, stock_ledger, queue, order, reservation]
+scenario:
+  initial_stock: 100
+  max_effective_success_per_user: 1
+  clock: deterministic_fake_server_clock
+  permitted_client_concurrency: 1
+  server_concurrency_validation: separately_approved_and_bounded
+inventory_model:
+  components: [available, reserved, sold, pending_release, released]
+  invariant: Account for initial stock across mutually exclusive current stock states and immutable movements; verify exact conservation equation against implementation contract.
+rules:
+  - id: S1-R01
+    statement: Orders cannot succeed before server-authoritative campaign start.
+    oracle: campaign_clock_and_order_ledger
+  - id: S1-R02
+    statement: Effective sold quantity never exceeds initial allocatable stock.
+    oracle: flashsale_ledger
+  - id: S1-R03
+    statement: A user cannot have more than one effective successful purchase.
+    oracle: user_order_ledger
+  - id: S1-R04
+    statement: The same idempotency key cannot create multiple effective orders.
+    oracle: order_ledger
+  - id: S1-R05
+    statement: Cancellation and timeout releases are applied once according to sandbox stock lifecycle.
+    oracle: flashsale_ledger
+risks: [oversell, duplicate_purchase, inconsistent_soldout_ui, invalid_queue_result, missing_release]
+p0_tests: [S1-01, S1-03, S1-04, S1-05, S1-07, S1-08]
+unknowns_to_approve:
+  - Which states count as effective sold vs reserved
+  - Queue semantics and eventual consistency SLA in a real flash sale

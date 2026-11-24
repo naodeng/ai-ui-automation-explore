@@ -1,0 +1,10 @@
+{
+  "case_id": "E1",
+  "clock_epoch": "2026-11-23T10:00:00Z",
+  "project": "api",
+  "run_ids": [
+    "e1-45b6a667-ad9b-4061-baee-a6a76a060f53"
+  ],
+  "seed_id": "e1-threshold",
+  "test_title": "reset management requires a control token"
+}

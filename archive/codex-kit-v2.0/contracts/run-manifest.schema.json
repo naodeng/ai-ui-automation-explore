@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/run-manifest.schema.json",
+  "title": "Run Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "case_id",
+    "track",
+    "seed_id",
+    "contract_version",
+    "app_commit",
+    "browser",
+    "executor_version",
+    "started_at",
+    "environment",
+    "status"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "minLength": 5
+    },
+    "case_id": {
+      "enum": [
+        "E1",
+        "M1",
+        "S1"
+      ]
+    },
+    "track": {
+      "enum": [
+        "human",
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "seed_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "contract_version": {
+      "type": "string",
+      "minLength": 3
+    },
+    "app_commit": {
+      "type": "string",
+      "minLength": 3
+    },
+    "browser": {
+      "type": "string",
+      "minLength": 3
+    },
+    "executor_version": {
+      "type": "string",
+      "minLength": 3
+    },
+    "model_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "environment": {
+      "const": "isolated_local_demo"
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "running",
+        "passed",
+        "failed",
+        "blocked",
+        "incomplete",
+        "not_run"
+      ]
+    },
+    "authorization_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "budget": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "evidence_index": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}
