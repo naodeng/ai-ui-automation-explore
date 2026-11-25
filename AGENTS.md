@@ -18,10 +18,10 @@ This is a local-first practical research repo for **AI-assisted Web UI automatio
 
 ## Writing and content ownership
 1. **Canonical editable drafts:** `content/blog/drafts/` (24 outlines plus four long-form unverified drafts). `archive/` snapshots are historical and read-only.
-2. Article workflow: `outline → draft → verified → approved → published`. No self-promotion to `verified`, `approved` or `published` without evidence and human sign-off.
+2. Article workflow: `outline → draft → verified → approved → published`. When a development stage produces evidence a draft can use, advance that canonical draft in the same round using `docs/content/BLOG_WORKFLOW.zh-CN.md`; report its path and status at handoff. No self-promotion to `verified`, `approved` or `published` without evidence and human sign-off.
 3. Exact installation commands/API/versions/licenses require current official verification and successful local reproduction before claiming "tested". No fabricated bugs, screenshots, run results or benchmarks.
 4. Chinese blog Markdown is the single content source for website/WeChat once approved; only then manually sync to `naodeng/inaodeng.com`. Do not edit that remote repo as a side effect of tool experiments.
 5. Project-facing documents English-first and Chinese companion; development/process documents Chinese. Don't create AI illustrations unless separately requested.
 
 ## Per-round handoff
-Report scope, changed files, executed commands with exit codes, proof/evidence paths, unsupported claims, open risks and next required human approval. Never claim this documentation package includes runnable business demos.
+Report scope, changed files, executed commands with exit codes, proof/evidence paths, article draft path/status when evidence can advance one, unsupported claims, open risks and next required human approval. If no draft can advance, state the missing evidence. Never claim this documentation package includes runnable business demos.
