@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "node scripts/start-e1-demo.mjs",
+    "dev:blind-eval": "node scripts/start-e1-demo.mjs --blind-eval",
     "dev:m1": "node scripts/start-m1-demo.mjs",
     "dev:s1": "node scripts/start-s1-demo.mjs",
     "typecheck": "tsc --noEmit",

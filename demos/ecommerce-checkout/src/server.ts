@@ -7,6 +7,10 @@ import { E1_CATALOG, E1_POLICY, calculateQuote, type E1SkuId, type QuoteAmounts 
 const HOST = "127.0.0.1";
 const PORT = Number(process.env.PORT ?? 4179);
 const CONTROL_TOKEN = process.env.E1_CONTROL_TOKEN;
+const BLIND_EVAL_MODE = process.env.E1_BLIND_EVAL_MODE === "1";
+const PUBLIC_HOST = BLIND_EVAL_MODE ? process.env.E1_PUBLIC_HOST : HOST;
+const EVALUATOR_HOST = process.env.E1_EVALUATOR_HOST;
+const EVALUATOR_PORT = process.env.E1_EVALUATOR_PORT === undefined ? Number.NaN : Number(process.env.E1_EVALUATOR_PORT);
 const USER_ID = "user_e1";
 const DEFAULT_RUN_ID = "e1-local";
 const FIXTURE_VERSION = "1.0-demo";
@@ -234,8 +238,18 @@ function cartResponse(state: RunState) {
   };
 }
 
-async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
+type RouteSurface = "combined" | "public" | "evaluator";
+
+const evaluatorPaths = new Set(["/__test/reset", "/__test/oracle/checkout"]);
+
+async function route(req: IncomingMessage, res: ServerResponse, surface: RouteSurface): Promise<void> {
   const url = new URL(req.url ?? "/", `http://${HOST}:${PORT}`);
+  const isEvaluatorPath = evaluatorPaths.has(url.pathname);
+  if (surface === "public" && isEvaluatorPath) throw new HttpError(404, "not_found");
+  if (surface === "evaluator") {
+    if (!isEvaluatorPath) throw new HttpError(404, "not_found");
+    if (!isAuthorizedControlRequest(req)) throw new HttpError(401, "control_token_required");
+  }
   if (url.pathname === "/health") {
     requireMethod(req, "GET");
     return json(res, 200, { status: "ok", case_id: "E1", environment: "isolated_local_demo" });
@@ -302,6 +316,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
   if (url.pathname === "/api/orders") {
     requireMethod(req, "POST");
+    if (surface === "public") throw new HttpError(403, "orders_disabled_in_blind_eval");
     const body = await readJsonBody(req);
     const runId = validateRunId(body.run_id);
     const quoteId = readRequiredString(body.quote_id, "quote_id", 100);
@@ -336,7 +351,7 @@ async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   }
   if (url.pathname === "/__test/reset") {
     requireMethod(req, "POST");
-    if (!isAuthorizedControlRequest(req)) throw new HttpError(401, "control_token_required");
+    if (surface !== "evaluator" && !isAuthorizedControlRequest(req)) throw new HttpError(401, "control_token_required");
     const body = await readJsonBody(req);
     if (body.case_id !== "E1") throw new HttpError(400, "unsupported_case");
     const runId = validateRunId(body.run_id);
@@ -386,18 +401,52 @@ if (!isValidTokenConfiguration(CONTROL_TOKEN)) {
   throw new Error("Start the E1 demo with `npm run dev` to create its local control token");
 }
 if (!Number.isInteger(PORT) || PORT < 1024 || PORT > 65_535) throw new Error("PORT must be an unprivileged TCP port");
+if (BLIND_EVAL_MODE) {
+  if (!PUBLIC_HOST) throw new Error("E1_PUBLIC_HOST is required in blind evaluation mode");
+  if (!EVALUATOR_HOST) throw new Error("E1_EVALUATOR_HOST is required in blind evaluation mode");
+  if (!Number.isInteger(EVALUATOR_PORT) || EVALUATOR_PORT < 1024 || EVALUATOR_PORT > 65_535 || EVALUATOR_PORT === PORT) {
+    throw new Error("E1_EVALUATOR_PORT must be a distinct unprivileged TCP port");
+  }
+}
 runs.set(DEFAULT_RUN_ID, createInitialState(DEFAULT_RUN_ID));
 
-const server = createServer((req, res) => {
-  void route(req, res).catch((error: unknown) => {
-    if (error instanceof HttpError) return json(res, error.status, { error: error.code });
-    return json(res, 500, { error: "internal_error" });
+function createListener(surface: RouteSurface) {
+  return createServer((req, res) => {
+    void route(req, res, surface).catch((error: unknown) => {
+      if (error instanceof HttpError) return json(res, error.status, { error: error.code });
+      return json(res, 500, { error: "internal_error" });
+    });
   });
-});
+}
 
-server.listen(PORT, HOST, () => {
-  process.stdout.write(`E1 demo listening at http://${HOST}:${PORT}\n`);
-});
+const listeners: { server: ReturnType<typeof createServer>; surface: RouteSurface; host: string; port: number }[] = [];
+if (BLIND_EVAL_MODE) {
+  listeners.push({ surface: "public", host: PUBLIC_HOST!, port: PORT, server: createListener("public") });
+  listeners.push({ surface: "evaluator", host: EVALUATOR_HOST!, port: EVALUATOR_PORT, server: createListener("evaluator") });
+} else {
+  listeners.push({ surface: "combined", host: HOST, port: PORT, server: createListener("combined") });
+}
 
-process.once("SIGINT", () => server.close(() => process.exit(0)));
-process.once("SIGTERM", () => server.close(() => process.exit(0)));
+for (const listener of listeners) {
+  listener.server.listen(listener.port, listener.host, () => {
+    process.stdout.write(`E1 ${listener.surface} listener ready\n`);
+  });
+}
+
+function closeListeners(): void {
+  const openListeners = listeners.filter(({ server }) => server.listening);
+  if (openListeners.length === 0) {
+    process.exit(0);
+    return;
+  }
+  let remaining = openListeners.length;
+  for (const { server } of openListeners) {
+    server.close(() => {
+      remaining -= 1;
+      if (remaining === 0) process.exit(0);
+    });
+  }
+}
+
+process.once("SIGINT", closeListeners);
+process.once("SIGTERM", closeListeners);

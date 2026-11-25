@@ -22,6 +22,18 @@ npm run demo:reset -- --case E1 --seed e1-threshold
 
 The command prints the new `run_id` and deterministic state checksum. Open `http://127.0.0.1:4179/?run_id=<run_id>` to inspect that run.
 
+## Blind-evaluation boundary mode
+
+Normal `npm run dev` retains its existing single listener and deterministic-test behavior. The local code-level boundary mode requires explicit public and evaluator listener addresses:
+
+```bash
+E1_PUBLIC_HOST=127.0.0.1 PORT=4179 E1_EVALUATOR_HOST=127.0.0.1 E1_EVALUATOR_PORT=4180 npm run dev:blind-eval
+```
+
+The public listener serves the page and E1 business APIs. It returns 404 for `/__test/reset` and `/__test/oracle/checkout`, and blind-evaluation mode rejects `/api/orders`. The evaluator listener exposes only Reset/Oracle routes and requires the control token for both. The blind read-only charter grants no Oracle access or sandbox-order writes; cart selection and quote generation only affect the resettable in-memory Run.
+
+Blind-evaluation mode uses `.local/e1-blind-control-token`, separate from the ordinary `.local/e1-control-token`. Use the same `E1_EVALUATOR_HOST` and `E1_EVALUATOR_PORT` with `npm run demo:reset -- --blind-eval --case E1 --seed e1-threshold` to reset through the evaluator listener. If both listeners bind to loopback, this checks application route separation only; it **does not prove Agent host/network isolation**. A formal blind run still needs host-enforced separation between the Explorer and evaluator listener, plus no Explorer access to the repository, source-inspection tools, shell, filesystem, or arbitrary network.
+
 ## Checks
 
 ```bash

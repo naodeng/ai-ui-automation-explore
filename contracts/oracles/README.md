@@ -6,13 +6,13 @@
 
 Each Oracle exposes read-only observations for one synthetic `run_id` and `seed_id`. It must never reset data, advance the clock, submit an order, change membership, or inject a fault. A caller that supplies an unknown run must receive a not-found result; it must not fall back to another run or to global state.
 
-Responses should include `case_id`, `run_id`, `seed_id`, and `observed_at`. `observed_at` comes from the run-scoped fake clock so the observation can be paired with the state under test. The executor and Fixture Manager use separate credentials; browser tools receive only Oracle read access.
+Responses should include `case_id`, `run_id`, `seed_id`, and `observed_at`. `observed_at` comes from the run-scoped fake clock so the observation can be paired with the state under test. Deterministic test runners may receive read-only Oracle access. A blind Explorer receives no Oracle route or credential; only the evaluator reads the Oracle after the Explorer result is sealed. This is enforced by separate listeners and host/network controls, not CORS or prompt instructions.
 
 ## CheckoutOracle (E1 implemented)
 
 `GET /__test/oracle/checkout?run_id=...&seed_id=...&user_id=...&quote_id=...&order_id=...`
 
-The endpoint is loopback-only through the E1 demo server. It requires the matching `run_id`, `seed_id`, and synthetic `user_id`; optional quote and order IDs filter the returned records. Unknown or mismatched run identities return not found without falling back to another run.
+In normal local-demo mode, this endpoint is exposed through the E1 loopback service. In blind-evaluation mode, it is exposed only through the evaluator listener and requires the evaluator control token; the public listener returns not-found. The deployment must bind the evaluator listener to an evaluator-only interface. It requires the matching `run_id`, `seed_id`, and synthetic `user_id`; optional quote and order IDs filter the returned records. Unknown or mismatched run identities return not found without falling back to another run.
 
 Return the authoritative quote and order facts for the requested synthetic user:
 

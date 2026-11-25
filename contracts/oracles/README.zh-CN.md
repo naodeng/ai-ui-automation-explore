@@ -6,13 +6,13 @@
 
 每个 Oracle 只读取一个合成 `run_id` 和 `seed_id` 的观察结果。Oracle 不得重置数据、推进时钟、提交订单、修改会员或注入故障。调用方传入未知 Run 时必须得到 not-found 结果，不得回退到其他 Run 或全局状态。
 
-响应应包含 `case_id`、`run_id`、`seed_id` 和 `observed_at`。`observed_at` 来自当前 Run 的 Fake Clock，以便与被测状态配对。执行器与夹具管理器应使用不同凭据；浏览器工具只应获得 Oracle 读取权限。
+响应应包含 `case_id`、`run_id`、`seed_id` 和 `observed_at`。`observed_at` 来自当前 Run 的 Fake Clock，以便与被测状态配对。确定性测试执行器可获只读 Oracle 权限。盲评 Explorer 不得获得 Oracle 路由或凭据；Explorer 结果封存后才由评估方读取 Oracle。此边界由独立监听器和宿主/网络策略强制，不靠 CORS 或 Prompt。
 
 ## CheckoutOracle（E1 已实现）
 
 `GET /__test/oracle/checkout?run_id=...&seed_id=...&user_id=...&quote_id=...&order_id=...`
 
-该接口通过 E1 Demo 服务仅在本机回环地址开放。它要求匹配的 `run_id`、`seed_id` 和合成 `user_id`；可选的报价与订单 ID 用于筛选返回记录。未知或不匹配的 Run 身份会返回 not-found，不会回退到其他 Run。
+普通本地 Demo 模式下，该接口仅通过 E1 回环服务开放。盲评模式下，它只通过评估监听器开放并要求评估控制令牌；公开监听器对该路径返回 not-found。部署时必须将评估监听器绑定到仅评估方可达的接口。接口要求匹配的 `run_id`、`seed_id` 和合成 `user_id`；可选的报价与订单 ID 用于筛选返回记录。未知或不匹配的 Run 身份会返回 not-found，不会回退到其他 Run。
 
 接口返回该合成用户的权威报价和订单事实：
 

@@ -20,6 +20,16 @@ def validator_for(schema_name):
 
 
 class TestSafetySchemas(unittest.TestCase):
+    def test_blind_e1_charter_is_valid_and_exposes_no_oracle_or_order_write(self):
+        charter = load_json("contracts/examples/E1-blind-readonly-charter.json")
+        errors = list(validator_for("exploration-charter").iter_errors(charter))
+
+        self.assertEqual([], errors)
+        self.assertEqual([], charter["oracles"])
+        self.assertNotIn("read_oracle", charter["allowed_actions"])
+        self.assertEqual(0, charter["budget"]["max_writes"])
+        self.assertNotIn("oracle_result", charter.get("required_evidence", []))
+
     def test_charter_rejects_external_origin(self):
         charter = load_json("contracts/examples/E1-charter.json")
         charter["allowed_origin"] = "https://store.example.com"

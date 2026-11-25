@@ -53,7 +53,7 @@ try:
 except ImportError:
     print('OPTIONAL jsonschema not installed: skipping schema example checks')
 else:
-    examples={'exploration-charter':['E1-charter','M1-charter','S1-charter'],
+    examples={'exploration-charter':['E1-charter','E1-blind-readonly-charter','M1-charter','S1-charter'],
         'finding':['sample-finding'],'run-manifest':['sample-run-manifest'],'evidence':['sample-evidence']}
     for schema,exs in examples.items():
         o=json.loads((ROOT/'contracts'/f'{schema}.schema.json').read_text(encoding='utf-8'))

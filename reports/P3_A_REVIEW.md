@@ -62,8 +62,14 @@
 
 继续正式盲测前，须由独立评估环境提供与当前助手上下文隔离的 Explorer 运行时；评估负责人在独立工作区/进程/账号保存随机映射 Ground Truth；并保留 Explorer 无权访问该工作区的权限与 Run 日志证据。若只能提供当前助手的 Ego Browser 控制能力，则最多开展明确标记的非盲试点，不报告盲测 Recall。引入新的 Agent 运行时或主机权限隔离属于架构/权限变更，实施前需单独确认。
 
+## 盲评隔离基础层
+
+**状态：代码级路由隔离完成；宿主/网络隔离与 Agent 评估 NOT RUN。** 普通 `npm run dev` 保持单监听器。显式盲评模式下，E1 公开监听器拒绝 Reset/Oracle 路由并阻断沙盒订单；独立评估监听器仅接受 Reset/Oracle，并要求控制令牌。新增的盲评只读 Charter 不授予 Oracle、Reset 或订单写入权限。购物车选择和报价仍只写入可重置的内存 Run，不触发支付。
+
+`npm run typecheck`、`npm run test:unit`（12 项）、`npm run test:api`（5 项）、`.venv/bin/python -m unittest discover -s tests -v`（17 项）和 `.venv/bin/python scripts/validate_project.py`：均 PASS，退出码 0。新边界测试覆盖公开面 Oracle/Reset 404、订单写入 403、评估面无令牌 401/持令牌可 Reset/读 Oracle、评估面不提供页面，以及 Reset CLI 使用独立盲评令牌。测试使用本机回环监听器，未证明不同容器/账号/网络命名空间之间的隔离；浏览器 UI E2E 未运行。正式 Agent 运行、私有 Ground Truth 创建和 Recall 评估仍为 NOT RUN。
+
 ## 尚未完成
 
-- 受限 Browser Agent 盲化 Ground Truth 隔离与 Recall 评估仍为 NOT RUN，缺独立 Explorer 运行时及隔离证据；本轮的 RED/GREEN 由确定性 Playwright 完成。
+- 受限 Browser Agent 盲化 Ground Truth 隔离与 Recall 评估仍为 NOT RUN，缺独立 Explorer 运行时及宿主/网络隔离证据；本轮的 RED/GREEN 由确定性 Playwright 完成。
 - S1 并发、负载、队列 SLA、取消/超时释放；R02 仍是 PARTIAL，R05 为 NOT RUN。
 - M1 优惠券实际到期行为；因契约没有准确到期时间而 NOT RUN。

@@ -6,7 +6,8 @@ import { fileURLToPath } from "node:url";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const localDir = resolve(projectRoot, ".local");
-const tokenPath = resolve(localDir, "e1-control-token");
+const blindEval = process.argv.includes("--blind-eval");
+const tokenPath = resolve(localDir, blindEval ? "e1-blind-control-token" : "e1-control-token");
 const token = randomBytes(32).toString("hex");
 
 await mkdir(localDir, { recursive: true, mode: 0o700 });
@@ -15,7 +16,11 @@ await chmod(tokenPath, 0o600);
 
 const child = spawn(process.execPath, [resolve(projectRoot, "demos/ecommerce-checkout/src/server.ts")], {
   cwd: projectRoot,
-  env: { ...process.env, E1_CONTROL_TOKEN: token },
+  env: {
+    ...process.env,
+    E1_CONTROL_TOKEN: token,
+    E1_BLIND_EVAL_MODE: blindEval ? "1" : "0",
+  },
   stdio: "inherit",
 });
 

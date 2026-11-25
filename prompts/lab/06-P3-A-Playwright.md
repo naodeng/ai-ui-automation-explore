@@ -15,4 +15,6 @@
 
 TDD：先制造/启用演示 Fault（Agent 看不到真值），证明能 RED；在无 Fault 模式正确通过。不要为了让脚本通过改动冻结业务规则。
 
+区分可信的确定性 Playwright 执行器与盲评 Explorer：前者可读取 Oracle；后者使用 `contracts/examples/E1-blind-readonly-charter.json`，不得获得 Oracle/Reset 路由或凭据，也不得读取本仓库公开故障方案。只有宿主/网络隔离证据通过后才能启动新 Explorer 上下文；同机双监听器的路由测试不构成隔离证明。盲评结果封存后再由评估方读取 Oracle。
+
 交付：`reports/P3_A_REVIEW.md`，明确：工具/浏览器版本、具体运行命令、真实测试数与结果、失败用例、复现链接、没有覆盖的 Oracle。完成之前不做 B/C。
