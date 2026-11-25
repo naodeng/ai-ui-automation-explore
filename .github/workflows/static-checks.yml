@@ -1,4 +1,4 @@
-name: static-planning-checks
+name: project-quality-gates
 on: [push, pull_request]
 permissions:
   contents: read
@@ -6,10 +6,36 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - run: python -m pip install -r requirements-dev.txt
       - run: python scripts/validate_project.py
       - run: python -m unittest discover -s tests -v
+
+  playwright:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '26'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - name: Upload Playwright reports, traces, and synthetic evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-evidence-${{ github.run_id }}
+          path: |
+            playwright-report/
+            test-results/
+            evidence/e1/run-contexts/
+            evidence/m1/
+            evidence/s1/
+          if-no-files-found: ignore
+          retention-days: 14

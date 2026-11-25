@@ -4,9 +4,10 @@ const baseURL = "http://127.0.0.1:4179";
 
 export default defineConfig({
   testDir: "./tests/e1",
+  outputDir: "test-results/e1",
   fullyParallel: true,
   retries: 0,
-  reporter: [["list"], ["html", { open: "never" }]],
+  reporter: [["list"], ["html", { open: "never", outputFolder: "playwright-report/e1" }]],
   use: {
     baseURL,
     trace: "retain-on-failure",

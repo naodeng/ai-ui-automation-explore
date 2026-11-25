@@ -11,7 +11,7 @@ The page is a localhost-only synthetic QA console. It opens before the campaign 
 ## Contract mapping
 
 - **S1-R01: PASS.** The button is disabled before start, the server rejects a purchase without changing stock, and the Fake Clock can advance to the start boundary.
-- **S1-R02: PARTIAL.** The page and Oracle show the five stock buckets separately; one successful purchase is checked against the stock total and ledger. Sold-out, concurrent, and load scenarios were not run, so this does not prove the effective-sold limit.
+- **S1-R02: PARTIAL.** The regression makes 100 serial purchases and rejects the 101st attempt; the page and Oracle show zero available, 100 sold, and zero in all other buckets. Concurrency and load scenarios were not run, so this does not prove the effective-sold limit under concurrent writes.
 - **S1-R03: PASS.** After one synthetic user's successful purchase, a second purchase with a new idempotency key is rejected by the user limit.
 - **S1-R04: PASS.** Replaying the same idempotency key returns the original order without adding stock movements or changing bucket counts.
 - **S1-R05: NOT RUN.** The Oracle exposes stock buckets and movements; cancellation/timeout release paths are not implemented because their timing semantics are undefined.
@@ -23,7 +23,7 @@ The page is a localhost-only synthetic QA console. It opens before the campaign 
 - Cancellation or timeout timing beyond the approved exactly-once release rule.
 - Real product, account, purchase, or payment data.
 
-Queue semantics, the eventual-consistency SLA, undefined cancellation/timeout release timing, and load testing remain outside this implementation. Inventory exhaustion and server concurrency were not tested.
+Queue semantics, the eventual-consistency SLA, undefined cancellation/timeout release timing, and load testing remain outside this implementation. Server concurrency was not tested.
 
 ## Approval gate
 

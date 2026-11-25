@@ -3,7 +3,7 @@
   "clock_epoch": "2026-11-23T10:00:00Z",
   "project": "api",
   "run_ids": [
-    "e1-5d0a7fae-8113-4fbf-a5d3-401a0be00151"
+    "e1-33365b27-0104-4e14-b876-7e6dc276e79e"
   ],
   "seed_id": "e1-threshold",
   "test_title": "E1-R01: authoritative quote enforces the 99/100 C20 boundary"

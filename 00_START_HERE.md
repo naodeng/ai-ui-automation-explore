@@ -7,7 +7,7 @@
 1. 解压 ZIP 后，直接在 Codex Desktop 中打开 `ai-ui-automation-explore/`。
 2. 读取 `AGENTS.md`、`README.zh-CN.md`、`docs/project/ROADMAP.zh-CN.md`、`docs/architecture/REPOSITORY_BOUNDARIES.zh-CN.md`。
 3. 执行 `python3 scripts/validate_project.py` 与 `python3 -m unittest discover -s tests -v`；安装锁定依赖后运行 `npm test` 回归 E1/M1/S1，单独验证各 Demo 可运行 `npm run test:e2e`、`npm run test:m1` 或 `npm run test:s1`。
-4. 查看 [P0 就绪检查报告](docs/reviews/P0-readiness-report.md)、[P1 契约评审](docs/reviews/P1-contract-review.md)、[P2 E1 评审](docs/reviews/P2-E1-review.md)、[P2 M1 评审](docs/reviews/P2-M1-review.md) 与 [P2 S1 评审](docs/reviews/P2-S1-review.md)。明确批准的规则可实现；未决项保留并排除在范围外。首轮体检 Prompt 见 `prompts/00-repo-bootstrap.zh-CN.md`。
+4. 查看 [P0 就绪检查报告](docs/reviews/P0-readiness-report.md)、[P1 契约评审](docs/reviews/P1-contract-review.md)、[P2 E1 评审](docs/reviews/P2-E1-review.md)、[P2 M1 评审](docs/reviews/P2-M1-review.md)、[P2 S1 评审](docs/reviews/P2-S1-review.md) 与 [P3-A Playwright 基线评审](reports/P3_A_REVIEW.md)。明确批准的规则可实现；未决项保留并排除在范围外。首轮体检 Prompt 见 `prompts/00-repo-bootstrap.zh-CN.md`。
 5. 后续沿用 `prompts/lab/` 的 P1–P7 阶段 Prompt；对每篇文章使用 `prompts/blog/tools/` 对应单工具 Prompt。
 
 ## 当前可运行切片

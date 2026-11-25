@@ -70,7 +70,6 @@ function oracleUrl(run) {
     seed_id: run.seed_id,
     campaign_id: run.campaign_id,
     sku_id: run.sku_id,
-    user_id: run.user_id,
   });
 }
 
@@ -103,7 +102,13 @@ function render(state, oracle) {
   elements.oracleObservedAt.textContent = oracle.observed_at;
   elements.oracleChecksum.textContent = oracle.stock_ledger_checksum;
   elements.purchase.disabled = status !== "open" || alreadyPurchased;
-  elements.purchase.textContent = alreadyPurchased ? "本账号已完成测试购买" : status === "open" ? "提交一次测试购买" : "开售后提交测试购买";
+  elements.purchase.textContent = alreadyPurchased
+    ? "本账号已完成测试购买"
+    : status === "sold_out"
+      ? "测试库存已售罄"
+      : status === "open"
+        ? "提交一次测试购买"
+        : "开售后提交测试购买";
   elements.purchaseNote.textContent = alreadyPurchased
     ? "每个合成用户最多一笔有效成功购买。"
     : status === "not_started"

@@ -4,8 +4,9 @@
 
 ## 未发布
 
-- 实现 S1 首个本地合成秒杀切片，包含服务端 Fake Clock、单用户限购、幂等重放、五种库存桶和只读 Oracle。
+- 实现 S1 首个本地合成秒杀切片，包含服务端 Fake Clock、单用户限购、幂等重放、五种库存桶、只读 Oracle 和串行售罄回归。
 - 新增 S1 API/UI 回归、响应式截图、Run 证据、双语实现说明和逐规则范围记录。
+- 在 GitHub Actions 中加入 Python 与 E1/M1/S1 Playwright 质量门禁；按案例保留报告、失败 Trace 和合成证据。
 - 使用 `npm test` 验证 E1/M1/S1；使用 16 项 Python 单元测试和 `scripts/validate_project.py` 检查仓库结构与契约。
 
 ## v1.0 — 2026-11-24

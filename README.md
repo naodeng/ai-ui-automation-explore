@@ -35,6 +35,8 @@ All case rules in [`contracts/cases/`](contracts/cases/) are synthetic. The expl
 - [P2 M1 implementation review](docs/reviews/P2-M1-review.md)
 - [S1 flash-sale demo](demos/flash-sale/README.md)
 - [P2 S1 implementation review](docs/reviews/P2-S1-review.md)
+- [GitHub Actions quality gates](.github/workflows/static-checks.yml): Python checks and the complete E1/M1/S1 Playwright suite; per-case reports, failure traces, and synthetic Run evidence are uploaded for 14 days.
+- [P3-A deterministic Playwright review](reports/P3_A_REVIEW.md): current case coverage, Run IDs, evidence, and remaining gaps.
 - [Static package check](scripts/validate_project.py) and [baseline tests](tests/)
 - [Two preserved earlier source packages](archive/) — historical, read-only
 
@@ -50,4 +52,4 @@ All case rules in [`contracts/cases/`](contracts/cases/) are synthetic. The expl
 
 ## Current limitations
 
-This workspace has a configured `origin` and a local `develop` branch; the imported v1.0 package itself did not create or verify that remote. The original v1.0 package contained project documentation and plans, not runnable business demos; the E1, M1, and S1 implementations described here are subsequent workspace work. They use synthetic in-memory data and local Playwright tests. S1 covers one successful purchase, the per-user limit, idempotent replay, and a single-operation stock ledger observation. R02 is partial: inventory exhaustion and server concurrency were not tested. Queue semantics, consistency SLA, cancellation/timeout release timing, and load testing remain out of scope. M1 coupon expiry beyond the seed instant also remains unverified because no exact expiry is defined. No production service or AI browser tool comparison has been run. Do not report benchmark results or real defect discovery based on these demos. Licensing must be decided before adding a public license or copying third-party code.
+This workspace has a configured `origin` and a local `develop` branch; the imported v1.0 package itself did not create or verify that remote. The original v1.0 package contained project documentation and plans, not runnable business demos; the E1, M1, and S1 implementations described here are subsequent workspace work. They use synthetic in-memory data and local Playwright tests. S1 covers pre-open denial, 100 serial purchases, a rejected 101st attempt, the per-user limit, and idempotent replay. R02 remains partial because server concurrency and load were not tested. Queue semantics, consistency SLA, cancellation/timeout release timing, and load testing remain out of scope. M1 coupon expiry beyond the seed instant also remains unverified because no exact expiry is defined. No production service or AI browser tool comparison has been run. Do not report benchmark results or real defect discovery based on these demos. Licensing must be decided before adding a public license or copying third-party code.

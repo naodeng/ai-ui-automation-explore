@@ -3,8 +3,8 @@
   "clock_epoch": "2026-11-23T10:00:00Z",
   "project": "api",
   "run_ids": [
-    "e1-49c6a1c9-bfc5-41d2-83cf-cdf8f7a68283",
-    "e1-1be263c2-da81-444b-babf-37bc602943d4"
+    "e1-52f31988-766b-4793-a8c1-6e2398bf8f8d",
+    "e1-3f78a737-dde8-4a17-a87d-6526803a71a3"
   ],
   "seed_id": "e1-threshold",
   "test_title": "reset is deterministic and isolated to its run"
