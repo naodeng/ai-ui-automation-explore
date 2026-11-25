@@ -1,6 +1,6 @@
 # P3-A｜确定性 Playwright 自动化基线评审
 
-**状态：PARTIAL。** E1/M1/S1 确定性回归与本地 CI 配置已完成；GitHub Actions 远端运行待推送后核验。P3 的故障注入评估和受限 Agent 独立复现未完成。
+**状态：PARTIAL。** E1/M1/S1 确定性回归、本地 CI 配置和远端 GitHub Actions 验证均已完成。P3 的故障注入评估和受限 Agent 独立复现未完成。
 
 ## 工具与执行边界
 
@@ -25,7 +25,7 @@
 
 `.github/workflows/static-checks.yml` 现在有两个只读权限 Job：Python Schema/结构校验，以及 Node 26 的 E1/M1/S1 完整 Playwright 回归。工作流安装 Chromium 依赖；各案例分别写入 `playwright-report/{e1,m1,s1}/` 与 `test-results/{e1,m1,s1}/`，并上传测试报告、失败 Trace 和合成证据，保留 14 天。
 
-本地已解析 Workflow YAML，并确认三个案例各自的 HTML 报告与结果目录存在。**远端 GitHub Actions 状态：NOT RUN**，需推送本轮提交后核验。
+本地已解析 Workflow YAML，并确认三个案例各自的 HTML 报告与结果目录存在。远端 [GitHub Actions Run 45526784670](https://github.com/naodeng/ai-ui-automation-explore/actions/runs/45526784670) 对提交 `82dcd92a33973bbe999baad669b6ab774f2161be` 执行成功：`validate` 与 `playwright` 两个 Job 均为 PASS，报告与合成证据 Artifact 上传成功。
 
 ## Run 与证据
 
@@ -33,11 +33,11 @@
 - M1 Run：`m1-011fdebb-23f5-4719-88dd-c495ad3d9709`，Seed `m1-gold-to-silver`；汇总见 `evidence/m1/m1-run-record.json`。
 - S1 单笔 Run：`s1-3c40f285-b5cc-46bf-b57d-535f7a27717d`，Seed `s1-100-stock`；API 账本见 `evidence/s1/run-contexts/s1-r01-r04-api.json`。
 - S1 售罄 Run：`s1-38f5631f-93d8-4aad-83d8-87e76edc1f78`，Seed `s1-100-stock`；Oracle 快照见 `evidence/s1/run-contexts/s1-r02-serial-stockout.json`，UI 截图见 `evidence/s1/s1-desktop-sold-out.png`。
-- 失败 Trace 的默认策略为 `retain-on-failure`；CI 成功后可下载每案例报告，失败时可下载 Trace 与截图。
+- CI Artifact：`playwright-evidence-45526784670`（GitHub Artifact ID `14982802216`），包含报告、结果及合成证据；按工作流设置保留 14 天。
+- 失败 Trace 的默认策略为 `retain-on-failure`；失败时 Artifact 会包含 Trace 与截图。
 
 ## 尚未完成
 
 - 受限 Browser Agent/视觉工具故障注入评估、Agent 看不到 Oracle 真值的 RED/GREEN 对照、`suspected_issue` 独立复现。
 - S1 并发、负载、队列 SLA、取消/超时释放；R02 仍是 PARTIAL，R05 为 NOT RUN。
 - M1 优惠券实际到期行为；因契约没有准确到期时间而 NOT RUN。
-- 远端 GitHub Actions 实际结果；工作流目前仅完成本地 YAML 和命令路径检查。
