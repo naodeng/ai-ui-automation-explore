@@ -8,6 +8,7 @@
 - 新增 S1 API/UI 回归、响应式截图、Run 证据、双语实现说明和逐规则范围记录。
 - 增强 E1 99 元 UI 回归，使其与同一 Run 的 Oracle 对照；通过两次独立本地合成故障 RED 运行证明回归灵敏度，并保存带哈希索引的证据。临时故障已移除，不代表业务产品缺陷。
 - 在 GitHub Actions 中加入 Python 与 E1/M1/S1 Playwright 质量门禁；按案例保留报告、失败 Trace 和合成证据。
+- 为每条用例生成 Run Manifest 和带 SHA-256 的 Evidence Index，记录本地请求关联、业务 Run ID、Oracle 快照、测试结果与可用失败附件。
 - 使用 `npm test` 验证 E1/M1/S1；使用 16 项 Python 单元测试和 `scripts/validate_project.py` 检查仓库结构与契约。
 
 ## v1.0 — 2026-11-24

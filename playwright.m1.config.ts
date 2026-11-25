@@ -7,7 +7,7 @@ export default defineConfig({
   outputDir: "test-results/m1",
   fullyParallel: true,
   retries: 0,
-  reporter: [["list"], ["html", { open: "never", outputFolder: "playwright-report/m1" }]],
+  reporter: [["list"], ["html", { open: "never", outputFolder: "playwright-report/m1" }], ["./tests/support/playwright-evidence-reporter.mjs"]],
   use: {
     baseURL,
     trace: "retain-on-failure",

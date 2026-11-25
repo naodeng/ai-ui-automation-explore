@@ -1,6 +1,6 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "../support/playwright-api-test.ts";
 
-test("M1 baseline exposes the approved synthetic seed and read-only oracles", async ({ request }) => {
+test("M1 baseline exposes the approved synthetic seed and read-only oracles", async ({ trackedRequest: request }) => {
   const createResponse = await request.post("/api/runs");
   expect(createResponse.status()).toBe(201);
 
@@ -33,7 +33,7 @@ test("M1 baseline exposes the approved synthetic seed and read-only oracles", as
   });
 });
 
-test("Silver to Gold applies a strictly newer event and enables Gold-only authorization", async ({ request }) => {
+test("Silver to Gold applies a strictly newer event and enables Gold-only authorization", async ({ trackedRequest: request }) => {
   const response = await request.post("/api/scenarios/run", { data: { scenario_id: "silver_to_gold" } });
   expect(response.status()).toBe(201);
   const result = await response.json();
@@ -73,7 +73,7 @@ test("Silver to Gold applies a strictly newer event and enables Gold-only author
   });
 });
 
-test("Gold to Silver blocks the available old session from a new Gold-only purchase", async ({ request }) => {
+test("Gold to Silver blocks the available old session from a new Gold-only purchase", async ({ trackedRequest: request }) => {
   const response = await request.post("/api/scenarios/run", { data: { scenario_id: "gold_to_silver" } });
   expect(response.status()).toBe(201);
   const result = await response.json();
@@ -105,7 +105,7 @@ test("Gold to Silver blocks the available old session from a new Gold-only purch
   });
 });
 
-test("duplicate and older event replays leave tier and event version unchanged", async ({ request }) => {
+test("duplicate and older event replays leave tier and event version unchanged", async ({ trackedRequest: request }) => {
   const created = await (await request.post("/api/runs")).json();
   const runId = created.state.run_id;
 
@@ -142,7 +142,7 @@ test("duplicate and older event replays leave tier and event version unchanged",
   });
 });
 
-test("fake clock advances by a bounded amount without inventing coupon expiry", async ({ request }) => {
+test("fake clock advances by a bounded amount without inventing coupon expiry", async ({ trackedRequest: request }) => {
   const created = await (await request.post("/api/runs")).json();
   const response = await request.post("/api/clock/advance", {
     data: { run_id: created.state.run_id, seconds: 30 },
@@ -158,7 +158,7 @@ test("fake clock advances by a bounded amount without inventing coupon expiry", 
   expect(advanced.oracle.entitlement_ledger.historical_coupon.current_status).toBe("not_evaluated");
 });
 
-test("unknown scenarios and invalid fake clock input fail at the API boundary", async ({ request }) => {
+test("unknown scenarios and invalid fake clock input fail at the API boundary", async ({ trackedRequest: request }) => {
   const unsupported = await request.post("/api/scenarios/run", {
     data: { scenario_id: "platinum_to_gold" },
   });

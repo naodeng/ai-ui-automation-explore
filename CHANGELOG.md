@@ -8,6 +8,7 @@
 - Add S1 API/UI regressions, responsive screenshots, Run evidence, bilingual implementation notes, and rule-level scope reporting.
 - Strengthen the E1 99-boundary UI regression with a same-Run Oracle comparison; prove fault sensitivity with two independent local seeded-fault RED runs and hash-indexed evidence. The temporary fault was removed and is not a product defect.
 - Add GitHub Actions quality gates for Python and E1/M1/S1 Playwright suites; retain per-case reports, failure traces, and synthetic evidence as workflow artifacts.
+- Emit per-test Run Manifests and SHA-256 Evidence Indexes with local request correlations, business Run IDs, Oracle snapshots, test results, and available failure attachments.
 - Verify E1/M1/S1 with `npm test`; verify repository structure and schemas with 16 Python unit tests and `scripts/validate_project.py`.
 
 ## v1.0 — 2026-11-24

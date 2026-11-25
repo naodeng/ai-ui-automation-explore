@@ -1,4 +1,5 @@
-import { expect, test, type APIRequestContext } from "@playwright/test";
+import { type APIRequestContext } from "@playwright/test";
+import { expect, test } from "../support/playwright-api-test.ts";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
@@ -22,7 +23,7 @@ async function readOracle(request: APIRequestContext, runId: string) {
   );
 }
 
-test("S1-R01–R04: pre-open denial, one successful purchase, user cap, idempotency and stock Oracle", async ({ request }) => {
+test("S1-R01–R04: pre-open denial, one successful purchase, user cap, idempotency and stock Oracle", async ({ trackedRequest: request }) => {
   const created = await createRun(request);
   const runId = created.state.run_id as string;
   expect(created.state).toMatchObject({
@@ -110,7 +111,7 @@ test("S1-R01–R04: pre-open denial, one successful purchase, user cap, idempote
   await writeFile(resolve("evidence/s1/run-contexts/s1-r01-r04-api.json"), JSON.stringify(evidence, null, 2) + "\n");
 });
 
-test("FlashSaleOracle fails closed for unknown runs and clock input is bounded", async ({ request }) => {
+test("FlashSaleOracle fails closed for unknown runs and clock input is bounded", async ({ trackedRequest: request }) => {
   const missingRun = await readOracle(request, "s1-run-not-found");
   expect(missingRun.status()).toBe(404);
   expect(await missingRun.json()).toMatchObject({ error: "run_not_found" });

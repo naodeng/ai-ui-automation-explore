@@ -1,4 +1,5 @@
-import { expect, test, type Page, type Response } from "@playwright/test";
+import { type Page, type Response } from "@playwright/test";
+import { expect, test } from "../support/playwright-ui-test.ts";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -135,7 +136,7 @@ async function writeE1MismatchEvidence(input: {
   }, null, 2)}\n`);
 }
 
-test("E1-R01: checkout UI shows the 100 threshold quote", async ({ page, request }) => {
+test("E1-R01: checkout UI shows the 100 threshold quote", async ({ page, trackedRequest: request }) => {
   const runId = newRunId();
   await resetRun(request, runId);
   await ensureEvidenceDirectory();
@@ -177,7 +178,7 @@ test("E1-R01: checkout UI shows the 100 threshold quote", async ({ page, request
   expect((await oracle.json()).orders[0].payable_cents).toBe(8_000);
 });
 
-test("E1-R01: selecting the 99 boundary removes the discount", async ({ page, request }) => {
+test("E1-R01: selecting the 99 boundary removes the discount", async ({ page, trackedRequest: request }) => {
   const startedAt = new Date();
   const runId = newRunId();
   await resetRun(request, runId);

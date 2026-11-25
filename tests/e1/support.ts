@@ -1,46 +1,10 @@
 import { randomUUID } from "node:crypto";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { mkdir, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { test, type APIRequestContext } from "@playwright/test";
-
-interface RunContext {
-  case_id: "E1";
-  clock_epoch: string;
-  project: string;
-  run_ids: string[];
-  seed_id: string;
-  test_title: string;
-}
-
-const runContexts = new Map<string, RunContext>();
-const manifest = JSON.parse(readFileSync(resolve("fixtures/seed-manifest.json"), "utf8")) as {
-  cases: Array<{ case_id: string; seed_id: string; clock_epoch: string }>;
-};
-const e1Seed = manifest.cases.find((seed) => seed.case_id === "E1");
-if (!e1Seed) throw new Error("E1 seed manifest entry is missing");
-const e1SeedId = e1Seed.seed_id;
-const e1ClockEpoch = e1Seed.clock_epoch;
+import type { APIRequestContext } from "@playwright/test";
 
 export function newRunId(): string {
-  const runId = `e1-${randomUUID()}`;
-  const info = test.info();
-  const slug = `${info.project.name}-${info.title}`.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-  const outputDirectory = resolve("evidence/e1/run-contexts");
-  mkdirSync(outputDirectory, { recursive: true });
-
-  const context = runContexts.get(slug) ?? {
-    case_id: "E1",
-    clock_epoch: e1ClockEpoch,
-    project: info.project.name,
-    run_ids: [],
-    seed_id: e1SeedId,
-    test_title: info.title,
-  };
-  context.run_ids.push(runId);
-  runContexts.set(slug, context);
-  writeFileSync(resolve(outputDirectory, `${slug}.json`), `${JSON.stringify(context, null, 2)}\n`);
-  return runId;
+  return `e1-${randomUUID()}`;
 }
 
 export async function ensureEvidenceDirectory(): Promise<void> {

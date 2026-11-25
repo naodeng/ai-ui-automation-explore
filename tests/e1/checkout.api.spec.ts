@@ -1,7 +1,7 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "../support/playwright-api-test.ts";
 import { newRunId, resetRun } from "./support.ts";
 
-test("E1-R01: authoritative quote enforces the 99/100 C20 boundary", async ({ request }) => {
+test("E1-R01: authoritative quote enforces the 99/100 C20 boundary", async ({ trackedRequest: request }) => {
   const runId = newRunId();
   await resetRun(request, runId);
 
@@ -33,7 +33,7 @@ test("E1-R01: authoritative quote enforces the 99/100 C20 boundary", async ({ re
   });
 });
 
-test("E1-R02/R03: order equals its quote and the same key creates one order", async ({ request }) => {
+test("E1-R02/R03: order equals its quote and the same key creates one order", async ({ trackedRequest: request }) => {
   const runId = newRunId();
   await resetRun(request, runId);
 
@@ -72,7 +72,7 @@ test("E1-R02/R03: order equals its quote and the same key creates one order", as
   expect(oracle.orders[0].payable_cents).toBe(8_000);
 });
 
-test("reset is deterministic and isolated to its run", async ({ request }) => {
+test("reset is deterministic and isolated to its run", async ({ trackedRequest: request }) => {
   const runA = newRunId();
   const runB = newRunId();
   const resetA1 = await resetRun(request, runA);
@@ -94,14 +94,14 @@ test("reset is deterministic and isolated to its run", async ({ request }) => {
   expect((await oracleB.json()).orders).toHaveLength(1);
 });
 
-test("reset management requires a control token", async ({ request }) => {
+test("reset management requires a control token", async ({ trackedRequest: request }) => {
   const response = await request.post("/__test/reset", {
     data: { case_id: "E1", run_id: newRunId(), seed_id: "e1-threshold" },
   });
   expect(response.status()).toBe(401);
 });
 
-test("Oracle fails closed for an unknown run", async ({ request }) => {
+test("Oracle fails closed for an unknown run", async ({ trackedRequest: request }) => {
   const response = await request.get("/__test/oracle/checkout", {
     params: { run_id: newRunId(), seed_id: "e1-threshold", user_id: "user_e1" },
   });

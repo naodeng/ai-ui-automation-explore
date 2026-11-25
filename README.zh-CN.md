@@ -23,6 +23,7 @@
 - [三案例业务契约](contracts/cases/)
 - [只读业务 Oracle 接口](contracts/oracles/README.zh-CN.md)
 - [GitHub Actions 质量门禁](.github/workflows/static-checks.yml)：Python 检查和完整 E1/M1/S1 Playwright 回归；按案例保存报告、失败 Trace 与合成 Run 证据，保留 14 天。
+- 每条 E1/M1/S1 Playwright 用例都会在 `test-results/p3-evidence/` 生成符合 Schema 的独立 Run Manifest 和 SHA-256 Evidence Index，记录本地请求 ID、业务 Run ID、Oracle 响应、断言结果及可用的失败附件。
 - [P0 就绪检查报告](docs/reviews/P0-readiness-report.md)
 - [P1 契约与证据追踪评审](docs/reviews/P1-contract-review.md)（合成 Demo 规则已批准；未决行为仍在本轮范围外）
 - [P2 E1 实现评审](docs/reviews/P2-E1-review.md)

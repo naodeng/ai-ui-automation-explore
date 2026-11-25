@@ -7,6 +7,7 @@
 - 唯一浏览器执行路径：Playwright Test 1.65.1；未混用 GUI Chrome、Browser MCP 或 Computer Use。
 - 本地环境：Node v26.13.1、npm 11.20.0、Python 3.9.6；Playwright 使用项目随附的无头 Chromium。
 - E1/M1/S1 均从独立内存 Run 执行。Trace 在测试失败时保留，失败截图按 Playwright 配置保存；契约状态与账本由各自 Oracle 断言。
+- 每条 Playwright 用例结束时会生成独立 Manifest、测试结果、网络摘要和 Evidence Index；本地 JSON 请求只从项目配置的 localhost Origin 采集，Oracle 响应单独保存并计算 SHA-256。Manifest `run_id` 是测试执行 ID；业务 Run ID 与 request/quote/order 关联 ID 单列记录。API 项目不启动浏览器。
 - S1 售罄路径按 `permitted_client_concurrency: 1` 顺序提交 100 笔购买，不是并发或负载测试。
 
 ## 自动化覆盖与结果
@@ -17,7 +18,9 @@
 | M1 | 6 PASS | 3 PASS | Silver→Gold、Gold→Silver、旧会话授权、事件重放、Fake Clock、视口溢出 |
 | S1 | 2 PASS | 4 PASS | 开售前拒绝、开售、限购、幂等；100 次串行购买后售罄并拒绝第 101 次尝试 |
 
-完整命令 `npm test`：PASS，退出码 0；9 项 Node 单元测试和 22 项 Playwright API/UI 测试全部通过。另有 `.venv/bin/python -m unittest discover -s tests -v`（16 项 PASS）和 `.venv/bin/python scripts/validate_project.py`（PASS）。
+完整命令 `npm test`：PASS，退出码 0；11 项 Node 单元测试和 22 项 Playwright API/UI 测试全部通过。另有 `.venv/bin/python -m unittest discover -s tests -v`（16 项 PASS）和 `.venv/bin/python scripts/validate_project.py`（PASS）。
+
+本地保留了两次完整 `npm test` 和一次 E1 API 定向运行，共 45 组逐测试证据；最近一次完整运行贡献 22 组。45 份 Manifest 均通过 `contracts/run-manifest.schema.json` 校验；Evidence Index 的 157 个条目均通过 `contracts/evidence.schema.json` 校验，所有引用文件的 SHA-256 重算一致（45 个网络摘要、45 个测试结果、67 个 Oracle 响应）。本地 Manifest 标记 `app_commit` 为 `9de8967…+dirty`，表示验证对应当时尚未提交的工作树内容。全绿运行没有生成失败 Trace/截图；失败时的保留策略仍由 Playwright 配置启用。
 
 售罄回归按 RED→GREEN 排查了三个实际边界：Seed 最初仅有一个用户，第二笔串行购买被正确拒绝；活动 Oracle UI 原先按当前用户过滤，无法展示活动总订单；默认展示用户也参与了售罄购买，优先呈现“本账号已完成”。最终使用 `user_s1_002`–`user_s1_101` 完成 100 笔测试购买，保留 `user_s1_001` 作为未购买的页面观察用户，第 101 次尝试由 `user_s1_102` 发起并收到 `sold_out`。业务契约规则未改变。
 
@@ -35,7 +38,7 @@
 
 ## CI 配置
 
-`.github/workflows/static-checks.yml` 现在有两个只读权限 Job：Python Schema/结构校验，以及 Node 26 的 E1/M1/S1 完整 Playwright 回归。工作流安装 Chromium 依赖；各案例分别写入 `playwright-report/{e1,m1,s1}/` 与 `test-results/{e1,m1,s1}/`，并上传测试报告、失败 Trace 和合成证据，保留 14 天。
+`.github/workflows/static-checks.yml` 现在有两个只读权限 Job：Python Schema/结构校验，以及 Node 26 的 E1/M1/S1 完整 Playwright 回归。工作流安装 Chromium 依赖；各案例分别写入 `playwright-report/{e1,m1,s1}/` 与 `test-results/{e1,m1,s1}/`，逐测试 Manifest/Index 位于 `test-results/p3-evidence/`；这些报告、失败 Trace 和合成证据会作为 Artifact 上传并保留 14 天。
 
 本地已解析 Workflow YAML，并确认三个案例各自的 HTML 报告与结果目录存在。远端 [GitHub Actions Run 45526784670](https://github.com/naodeng/ai-ui-automation-explore/actions/runs/45526784670) 对前序提交 `82dcd92a33973bbe999baad669b6ab774f2161be` 执行成功：`validate` 与 `playwright` 两个 Job 均为 PASS，报告与合成证据 Artifact 上传成功。本轮新增的 E1 断言与故障复现证据尚未由远端 CI 核实；匿名 API 配额耗尽，当前状态为 **NOT VERIFIED**。
 
@@ -51,7 +54,7 @@
 ## 尚未完成
 
 - 将当前新增的 E1 UI/Oracle 断言与故障复现证据推送后，完成对应远端 CI 核验；当前本地 `npm test` 已通过。
-- 全部基线用例的统一 Run Manifest、Oracle 响应与 Evidence Index 尚未逐测试补齐；本轮故障灵敏度 Runs 已完整记录。
+- 当前代码的远端 CI 结果尚未核实；合并前需检查推送后对应的 Actions Run 与 Artifact。
 - 受限 Browser Agent 盲化 Ground Truth 隔离与 Recall 评估未运行；本轮的 RED/GREEN 由确定性 Playwright 完成。
 - S1 并发、负载、队列 SLA、取消/超时释放；R02 仍是 PARTIAL，R05 为 NOT RUN。
 - M1 优惠券实际到期行为；因契约没有准确到期时间而 NOT RUN。

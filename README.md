@@ -36,6 +36,7 @@ All case rules in [`contracts/cases/`](contracts/cases/) are synthetic. The expl
 - [S1 flash-sale demo](demos/flash-sale/README.md)
 - [P2 S1 implementation review](docs/reviews/P2-S1-review.md)
 - [GitHub Actions quality gates](.github/workflows/static-checks.yml): Python checks and the complete E1/M1/S1 Playwright suite; per-case reports, failure traces, and synthetic Run evidence are uploaded for 14 days.
+- Every E1/M1/S1 Playwright test emits its own schema-shaped Run Manifest and SHA-256 Evidence Index under `test-results/p3-evidence/`, with captured local request IDs, business Run IDs, Oracle responses, test output, and available failure attachments.
 - [P3-A deterministic Playwright review](reports/P3_A_REVIEW.md): current case coverage, Run IDs, evidence, and remaining gaps.
 - [Static package check](scripts/validate_project.py) and [baseline tests](tests/)
 - [Two preserved earlier source packages](archive/) — historical, read-only

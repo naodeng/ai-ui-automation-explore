@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "../support/playwright-ui-test.ts";
 import { writeFile } from "node:fs/promises";
 
 test("state overview runs both transitions, replay checks and simulated time", async ({ page }) => {
