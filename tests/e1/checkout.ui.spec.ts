@@ -1,6 +1,8 @@
-import { expect, test, type Page } from "@playwright/test";
-import { readFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { expect, test, type Page, type Response } from "@playwright/test";
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
 import { ensureEvidenceDirectory, newRunId, resetRun } from "./support.ts";
 
 async function expectTrackingFloor(page: Page, selector: string): Promise<void> {
@@ -25,6 +27,112 @@ async function expectE1VisualBar(page: Page, panelRadius: string): Promise<void>
   await expect(page.locator(".select-arrow svg")).toHaveCount(1);
   await expect(page.locator(".safe-mark")).toHaveText("");
   await expect(page.locator("#payable")).toHaveCSS("font-variant-numeric", "tabular-nums");
+}
+
+async function writeE1MismatchEvidence(input: {
+  page: Page;
+  runId: string;
+  startedAt: Date;
+  quoteResponse: Response;
+  browserQuote: { quote_id: string };
+  oracleSnapshot: { quotes: Array<{ quote_id: string; payable_cents: number; discount_cents: number }> };
+  oracleQuote: { quote_id: string; payable_cents: number; discount_cents: number };
+  uiPayableCents: number;
+  uiDiscountCents: number;
+}): Promise<void> {
+  const { page, runId, startedAt, quoteResponse, browserQuote, oracleSnapshot, oracleQuote, uiPayableCents, uiDiscountCents } = input;
+  const relativeDirectory = join("evidence/e1/run-contexts/p3-a", runId);
+  const directory = resolve(relativeDirectory);
+  await mkdir(directory, { recursive: true });
+  await page.screenshot({ path: resolve(directory, "ui.png") });
+  const capturedAt = new Date().toISOString();
+  const files = [
+    { evidence_id: `${runId}-screenshot`, kind: "screenshot", file: "ui.png", notes: "Synthetic localhost checkout UI after selecting the 99-unit basket." },
+    { evidence_id: `${runId}-network`, kind: "network_summary", file: "network-summary.json", notes: "Browser quote response correlated by run_id and quote_id." },
+    { evidence_id: `${runId}-oracle`, kind: "oracle_response", file: "oracle.json", notes: "Read-only synthetic checkout ledger response for the same run." },
+    { evidence_id: `${runId}-observation`, kind: "test_result", file: "observation.json", notes: "UI and Oracle payable/discount comparison." },
+  ] as const;
+  const observation = {
+    case_id: "E1",
+    rule_id: "E1-R01",
+    run_id: runId,
+    quote_id: browserQuote.quote_id,
+    observed_at: capturedAt,
+    ui: { displayed_payable_cents: uiPayableCents, displayed_discount_cents: uiDiscountCents },
+    oracle: { payable_cents: oracleQuote.payable_cents, discount_cents: oracleQuote.discount_cents },
+    note: "Run and quote IDs correlate the browser-visible quote with the read-only server Oracle; the demo does not issue a separate request ID.",
+  };
+  await writeFile(resolve(directory, "network-summary.json"), `${JSON.stringify({
+    case_id: "E1",
+    run_id: runId,
+    quote_id: browserQuote.quote_id,
+    http_status: quoteResponse.status(),
+    response: browserQuote,
+  }, null, 2)}\n`);
+  await writeFile(resolve(directory, "oracle.json"), `${JSON.stringify(oracleSnapshot, null, 2)}\n`);
+  await writeFile(resolve(directory, "observation.json"), `${JSON.stringify(observation, null, 2)}\n`);
+  const evidenceIndex = await Promise.all(files.map(async (file) => {
+    const bytes = await readFile(resolve(directory, file.file));
+    return {
+      evidence_id: file.evidence_id,
+      run_id: runId,
+      case_id: "E1",
+      kind: file.kind,
+      producer: "Playwright Test 1.65.1",
+      captured_at: capturedAt,
+      path: join(relativeDirectory, file.file),
+      sha256: createHash("sha256").update(bytes).digest("hex"),
+      redaction_status: "synthetic_only",
+      classification: "public_synthetic",
+      rule_ids: ["E1-R01"],
+      notes: file.notes,
+    };
+  }));
+  await writeFile(resolve(directory, "evidence-index.json"), `${JSON.stringify(evidenceIndex, null, 2)}\n`);
+  await writeFile(resolve(directory, "manifest.json"), `${JSON.stringify({
+    run_id: runId,
+    case_id: "E1",
+    track: "A",
+    seed_id: "e1-threshold",
+    contract_version: "1.0-demo",
+    app_commit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+    browser: `${page.context().browser()?.browserType().name() ?? "unknown"} ${page.context().browser()?.version() ?? "unknown"}`,
+    executor_version: "Playwright Test 1.65.1",
+    started_at: startedAt.toISOString(),
+    ended_at: capturedAt,
+    environment: "isolated_local_demo",
+    status: "failed",
+    model_version: null,
+    authorization_ref: null,
+    budget: null,
+    evidence_index: join(relativeDirectory, "evidence-index.json"),
+  }, null, 2)}\n`);
+  await writeFile(resolve(directory, "finding.json"), `${JSON.stringify({
+    finding_id: `E1-P3A-${runId}`,
+    case_id: "E1",
+    run_id: runId,
+    status: "suspected_issue",
+    rule_id: "E1-R01",
+    observed_behavior: `The UI displayed ${uiPayableCents} payable cents and ${uiDiscountCents} discount cents while the Oracle recorded ${oracleQuote.payable_cents} payable cents and ${oracleQuote.discount_cents} discount cents.`,
+    hypothesis: "The checkout UI may render an amount that differs from its authoritative quote.",
+    evidence_ids: files.map((file) => file.evidence_id),
+    oracle_evidence_id: `${runId}-oracle`,
+    reproduction: {
+      independent_runs: 0,
+      successful_reproductions: 0,
+      steps: [
+        "Reset a fresh E1 run using the approved e1-threshold seed.",
+        "Open the checkout UI and select synthetic SKU E1-99.",
+        "Compare the displayed payable and discount with the read-only quote ledger using the same run_id and quote_id.",
+      ],
+    },
+    human_review: {
+      status: "pending",
+      reviewer: null,
+      approved_at: null,
+      notes: "This is a controlled synthetic sensitivity run; do not treat it as a production defect.",
+    },
+  }, null, 2)}\n`);
 }
 
 test("E1-R01: checkout UI shows the 100 threshold quote", async ({ page, request }) => {
@@ -70,6 +178,7 @@ test("E1-R01: checkout UI shows the 100 threshold quote", async ({ page, request
 });
 
 test("E1-R01: selecting the 99 boundary removes the discount", async ({ page, request }) => {
+  const startedAt = new Date();
   const runId = newRunId();
   await resetRun(request, runId);
   await ensureEvidenceDirectory();
@@ -91,9 +200,45 @@ test("E1-R01: selecting the 99 boundary removes the discount", async ({ page, re
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(`/?run_id=${encodeURIComponent(runId)}`);
   await expectE1VisualBar(page, "16px");
+  await expect(page.locator("#payable-value")).toHaveText("80.00");
+  const quoteResponsePromise = page.waitForResponse((response) =>
+    new URL(response.url()).pathname === "/api/checkout/quote" && response.request().method() === "POST",
+  );
   await page.getByLabel("选择购物车金额").selectOption("E1-99");
+  const quoteResponse = await quoteResponsePromise;
+  expect(quoteResponse.ok()).toBeTruthy();
 
   await expect(page.locator("#subtotal")).toHaveText("¥99.00");
+  await expect(page.locator("#payable-value")).not.toHaveText("80.00");
+  const browserQuote = await quoteResponse.json();
+  const oracleResponse = await request.get("/__test/oracle/checkout", {
+    params: { run_id: runId, seed_id: "e1-threshold", user_id: "user_e1" },
+  });
+  expect(oracleResponse.ok()).toBeTruthy();
+  const oracleSnapshot = await oracleResponse.json();
+  const oracleQuote = oracleSnapshot.quotes.find((quote: { quote_id: string }) => quote.quote_id === browserQuote.quote_id);
+  expect(oracleQuote).toBeDefined();
+  expect(oracleQuote).toMatchObject({ subtotal_cents: 9_900, discount_cents: 0, payable_cents: 9_900 });
+  const payableText = (await page.locator("#payable-value").textContent())?.trim() ?? "";
+  const discountText = (await page.locator("#discount").textContent()) ?? "";
+  const discountAmount = discountText.match(/([0-9]+\.[0-9]{2})/);
+  const uiPayableCents = Math.round(Number(payableText) * 100);
+  const uiDiscountCents = discountAmount ? Math.round(Number(discountAmount[1]) * 100) : Number.NaN;
+  if (uiPayableCents !== oracleQuote.payable_cents || uiDiscountCents !== oracleQuote.discount_cents) {
+    await writeE1MismatchEvidence({
+      page,
+      runId,
+      startedAt,
+      quoteResponse,
+      browserQuote,
+      oracleSnapshot,
+      oracleQuote,
+      uiPayableCents,
+      uiDiscountCents,
+    });
+  }
+  expect(uiPayableCents, "E1 UI payable must match the read-only authoritative quote").toBe(oracleQuote.payable_cents);
+  expect(uiDiscountCents, "E1 UI discount must match the read-only authoritative quote").toBe(oracleQuote.discount_cents);
   await expect(page.locator("#discount")).toHaveText("− ¥0.00");
   await expect(page.locator("#coupon-state")).toHaveCSS("color", "rgb(166, 70, 36)");
   await expect(page.locator("#payable")).toContainText("99.00");

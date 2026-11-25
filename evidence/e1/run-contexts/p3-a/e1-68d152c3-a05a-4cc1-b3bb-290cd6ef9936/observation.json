@@ -1,0 +1,16 @@
+{
+  "case_id": "E1",
+  "rule_id": "E1-R01",
+  "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+  "quote_id": "8414b9cd-7eff-4905-8314-10d5fb975946",
+  "observed_at": "2026-11-25T01:53:42.258Z",
+  "ui": {
+    "displayed_payable_cents": 7900,
+    "displayed_discount_cents": 2000
+  },
+  "oracle": {
+    "payable_cents": 9900,
+    "discount_cents": 0
+  },
+  "note": "Run and quote IDs correlate the browser-visible quote with the read-only server Oracle; the demo does not issue a separate request ID."
+}

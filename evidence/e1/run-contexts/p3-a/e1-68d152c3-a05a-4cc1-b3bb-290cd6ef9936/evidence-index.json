@@ -1,0 +1,66 @@
+[
+  {
+    "evidence_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-screenshot",
+    "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+    "case_id": "E1",
+    "kind": "screenshot",
+    "producer": "Playwright Test 1.65.1",
+    "captured_at": "2026-11-25T01:53:42.258Z",
+    "path": "evidence/e1/run-contexts/p3-a/e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936/ui.png",
+    "sha256": "77f514a4f93bbe638772431d353757c98b89b713b8a7eca3aeaf04db0ba022f0",
+    "redaction_status": "synthetic_only",
+    "classification": "public_synthetic",
+    "rule_ids": [
+      "E1-R01"
+    ],
+    "notes": "Synthetic localhost checkout UI after selecting the 99-unit basket."
+  },
+  {
+    "evidence_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-network",
+    "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+    "case_id": "E1",
+    "kind": "network_summary",
+    "producer": "Playwright Test 1.65.1",
+    "captured_at": "2026-11-25T01:53:42.258Z",
+    "path": "evidence/e1/run-contexts/p3-a/e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936/network-summary.json",
+    "sha256": "a3a71afe1232eb929d54f0874f20c83f7a06ac97a9887cfd63644290e7304c14",
+    "redaction_status": "synthetic_only",
+    "classification": "public_synthetic",
+    "rule_ids": [
+      "E1-R01"
+    ],
+    "notes": "Browser quote response correlated by run_id and quote_id."
+  },
+  {
+    "evidence_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-oracle",
+    "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+    "case_id": "E1",
+    "kind": "oracle_response",
+    "producer": "Playwright Test 1.65.1",
+    "captured_at": "2026-11-25T01:53:42.258Z",
+    "path": "evidence/e1/run-contexts/p3-a/e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936/oracle.json",
+    "sha256": "ef25aac7acef6d6c045cf34a3ca92cb648e35e93a953cc00c0f23e53609817cb",
+    "redaction_status": "synthetic_only",
+    "classification": "public_synthetic",
+    "rule_ids": [
+      "E1-R01"
+    ],
+    "notes": "Read-only synthetic checkout ledger response for the same run."
+  },
+  {
+    "evidence_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-observation",
+    "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+    "case_id": "E1",
+    "kind": "test_result",
+    "producer": "Playwright Test 1.65.1",
+    "captured_at": "2026-11-25T01:53:42.258Z",
+    "path": "evidence/e1/run-contexts/p3-a/e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936/observation.json",
+    "sha256": "baf7d1245761b3224491e145f2e97435491e65078442064e24976ee34febc3b7",
+    "redaction_status": "synthetic_only",
+    "classification": "public_synthetic",
+    "rule_ids": [
+      "E1-R01"
+    ],
+    "notes": "UI and Oracle payable/discount comparison."
+  }
+]

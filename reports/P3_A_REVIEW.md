@@ -1,6 +1,6 @@
 # P3-A｜确定性 Playwright 自动化基线评审
 
-**状态：PARTIAL。** E1/M1/S1 确定性回归、本地 CI 配置和远端 GitHub Actions 验证均已完成。P3 的故障注入评估和受限 Agent 独立复现未完成。
+**状态：PARTIAL。** E1/M1/S1 确定性回归、E1 本地 Seeded Fault 灵敏度/独立复现和前序远端 GitHub Actions 验证已完成。当前代码改动的远端 CI 尚未核实；没有运行受限 Browser Agent，也没有做盲化 Ground Truth 评估。
 
 ## 工具与执行边界
 
@@ -21,23 +21,37 @@
 
 售罄回归按 RED→GREEN 排查了三个实际边界：Seed 最初仅有一个用户，第二笔串行购买被正确拒绝；活动 Oracle UI 原先按当前用户过滤，无法展示活动总订单；默认展示用户也参与了售罄购买，优先呈现“本账号已完成”。最终使用 `user_s1_002`–`user_s1_101` 完成 100 笔测试购买，保留 `user_s1_001` 作为未购买的页面观察用户，第 101 次尝试由 `user_s1_102` 发起并收到 `sold_out`。业务契约规则未改变。
 
+## Seeded Fault 灵敏度与独立复现
+
+增强 E1 99 元 UI 回归：同一 Run 中，以 `run_id + quote_id` 对照页面金额、浏览器报价响应与只读 Oracle，并仅在不一致时写入 manifest、finding 和带 SHA-256 的 Evidence Index。Demo 没有独立 `request_id`，本例用业务 `quote_id` 关联。
+
+先确认无故障回归通过；随后仅在本机工作副本临时将 `renderQuote` 改为错误显示 20 元折扣，服务器/API/Oracle 和契约保持不变。命令 `npm run test:e2e -- --grep "selecting the 99 boundary removes the discount"` 连续两次以退出码 1 失败，均明确报告 UI 79.00 与 Oracle 99.00 不一致。每次先 reset，同一 seed 使用不同 Run ID；测试各自落下 `suspected_issue`、Oracle、截图和哈希索引。恢复 UI 源码后，同一命令退出码 0，完整 `npm test` 也通过。临时故障没有保留在业务代码中。
+
+- Run 1：`e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936`，[证据目录](../evidence/e1/run-contexts/p3-a/e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936/)。
+- 独立 Run 2：`e1-6af9cb0d-4777-42ae-b538-acba74461fed`，[证据目录](../evidence/e1/run-contexts/p3-a/e1-6af9cb0d-4777-42ae-b538-acba74461fed/)。
+- 聚合 Finding：[reproduced-finding.json](../evidence/e1/run-contexts/p3-a/reproduced-finding.json)；命令/退出码与注入边界：[reproduction-log.json](../evidence/e1/run-contexts/p3-a/reproduction-log.json)。Finding 保持待人工复核，明确这是**已移除的合成故障灵敏度证明**，不是 Demo 原有缺陷或线上缺陷。
+
+本实验由确定性 Playwright 与 QA Oracle 执行，没有让 AI/Browser Agent 探索，也没有建立 Agent 无权访问 Ground Truth 的隔离环境；因此不代表 AI Agent 的盲测发现能力或 Recall。
+
 ## CI 配置
 
 `.github/workflows/static-checks.yml` 现在有两个只读权限 Job：Python Schema/结构校验，以及 Node 26 的 E1/M1/S1 完整 Playwright 回归。工作流安装 Chromium 依赖；各案例分别写入 `playwright-report/{e1,m1,s1}/` 与 `test-results/{e1,m1,s1}/`，并上传测试报告、失败 Trace 和合成证据，保留 14 天。
 
-本地已解析 Workflow YAML，并确认三个案例各自的 HTML 报告与结果目录存在。远端 [GitHub Actions Run 45526784670](https://github.com/naodeng/ai-ui-automation-explore/actions/runs/45526784670) 对提交 `82dcd92a33973bbe999baad669b6ab774f2161be` 执行成功：`validate` 与 `playwright` 两个 Job 均为 PASS，报告与合成证据 Artifact 上传成功。
+本地已解析 Workflow YAML，并确认三个案例各自的 HTML 报告与结果目录存在。远端 [GitHub Actions Run 45526784670](https://github.com/naodeng/ai-ui-automation-explore/actions/runs/45526784670) 对前序提交 `82dcd92a33973bbe999baad669b6ab774f2161be` 执行成功：`validate` 与 `playwright` 两个 Job 均为 PASS，报告与合成证据 Artifact 上传成功。本轮新增的 E1 断言与故障复现证据尚未由远端 CI 核实；匿名 API 配额耗尽，当前状态为 **NOT VERIFIED**。
 
 ## Run 与证据
 
-- E1 Run：`e1-33365b27-0104-4e14-b876-7e6dc276e79e`，Seed `e1-threshold`；API/UI Context 见 `evidence/e1/run-contexts/`。
-- M1 Run：`m1-011fdebb-23f5-4719-88dd-c495ad3d9709`，Seed `m1-gold-to-silver`；汇总见 `evidence/m1/m1-run-record.json`。
-- S1 单笔 Run：`s1-3c40f285-b5cc-46bf-b57d-535f7a27717d`，Seed `s1-100-stock`；API 账本见 `evidence/s1/run-contexts/s1-r01-r04-api.json`。
-- S1 售罄 Run：`s1-38f5631f-93d8-4aad-83d8-87e76edc1f78`，Seed `s1-100-stock`；Oracle 快照见 `evidence/s1/run-contexts/s1-r02-serial-stockout.json`，UI 截图见 `evidence/s1/s1-desktop-sold-out.png`。
+- E1 API Run：`e1-dc9e2ea0-5716-4b12-906e-c2b92995eabf`；E1 UI 99 边界 Run：`e1-6ee5d655-364a-4969-aab7-cecb53ffc16c`；Seed 均为 `e1-threshold`，Contexts 见 `evidence/e1/run-contexts/`。
+- M1 三个独立 Run：seed `m1-1728e9d8-2933-4c3f-b1ab-8367044c0f1d`、upgrade `m1-7ee2929c-de3f-4e28-a0a5-c7c82dced175`、downgrade `m1-4c9cfeb5-e1b3-4a3c-ae95-d7f6d5e5294c`；汇总见 `evidence/m1/m1-run-record.json`。
+- S1 单笔 Run：`s1-10aa93a1-8967-425d-9c82-e451cc093e4b`，Seed `s1-100-stock`；API 账本见 `evidence/s1/run-contexts/s1-r01-r04-api.json`。
+- S1 售罄 Run：`s1-f0948735-261f-407b-beb0-b2898f282389`，Seed `s1-100-stock`；Oracle 快照见 `evidence/s1/run-contexts/s1-r02-serial-stockout.json`，UI 截图见 `evidence/s1/s1-desktop-sold-out.png`。
 - CI Artifact：`playwright-evidence-45526784670`（GitHub Artifact ID `14982802216`），包含报告、结果及合成证据；按工作流设置保留 14 天。
 - 失败 Trace 的默认策略为 `retain-on-failure`；失败时 Artifact 会包含 Trace 与截图。
 
 ## 尚未完成
 
-- 受限 Browser Agent/视觉工具故障注入评估、Agent 看不到 Oracle 真值的 RED/GREEN 对照、`suspected_issue` 独立复现。
+- 将当前新增的 E1 UI/Oracle 断言与故障复现证据推送后，完成对应远端 CI 核验；当前本地 `npm test` 已通过。
+- 全部基线用例的统一 Run Manifest、Oracle 响应与 Evidence Index 尚未逐测试补齐；本轮故障灵敏度 Runs 已完整记录。
+- 受限 Browser Agent 盲化 Ground Truth 隔离与 Recall 评估未运行；本轮的 RED/GREEN 由确定性 Playwright 完成。
 - S1 并发、负载、队列 SLA、取消/超时释放；R02 仍是 PARTIAL，R05 为 NOT RUN。
 - M1 优惠券实际到期行为；因契约没有准确到期时间而 NOT RUN。

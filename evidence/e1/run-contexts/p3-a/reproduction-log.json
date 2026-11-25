@@ -1,0 +1,40 @@
+{
+  "case_id": "E1",
+  "rule_id": "E1-R01",
+  "finding_id": "E1-P3A-SEEDED-UI-FAULT-REPRODUCED",
+  "fault_injection": {
+    "scope": "local synthetic demo UI only",
+    "method": "temporary uncommitted renderQuote mutation for subtotal_cents=9900",
+    "browser_visible_fault_label": false,
+    "server_oracle_modified": false,
+    "removed_after_red_runs": true
+  },
+  "command": "npm run test:e2e -- --grep \"selecting the 99 boundary removes the discount\"",
+  "runs": [
+    {
+      "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+      "seed_id": "e1-threshold",
+      "exit_code": 1,
+      "ui_payable_cents": 7900,
+      "ui_discount_cents": 2000,
+      "oracle_payable_cents": 9900,
+      "oracle_discount_cents": 0,
+      "finding_status": "suspected_issue"
+    },
+    {
+      "run_id": "e1-6af9cb0d-4777-42ae-b538-acba74461fed",
+      "seed_id": "e1-threshold",
+      "exit_code": 1,
+      "ui_payable_cents": 7900,
+      "ui_discount_cents": 2000,
+      "oracle_payable_cents": 9900,
+      "oracle_discount_cents": 0,
+      "finding_status": "suspected_issue"
+    }
+  ],
+  "restored_baseline": {
+    "fault_removed": true,
+    "same_command_exit_code": 0
+  },
+  "interpretation": "Two isolated resets reproduced the deliberately seeded UI-only fault. This validates regression sensitivity; it is not a production defect or a blind AI-agent evaluation."
+}

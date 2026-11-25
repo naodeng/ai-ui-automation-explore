@@ -3,7 +3,7 @@
   "clock_epoch": "2026-11-23T10:00:00Z",
   "project": "api",
   "run_ids": [
-    "e1-07efc139-3311-4107-bc96-e7e757e180b7"
+    "e1-865ff1b7-b3ce-4841-b2d5-0cfba566bb3f"
   ],
   "seed_id": "e1-threshold",
   "test_title": "reset management requires a control token"

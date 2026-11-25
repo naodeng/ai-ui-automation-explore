@@ -1,0 +1,18 @@
+{
+  "run_id": "e1-6af9cb0d-4777-42ae-b538-acba74461fed",
+  "case_id": "E1",
+  "track": "A",
+  "seed_id": "e1-threshold",
+  "contract_version": "1.0-demo",
+  "app_commit": "217441695130400cfccfb4a25fbb415fed1fd439",
+  "browser": "chromium 159.0.8154.6",
+  "executor_version": "Playwright Test 1.65.1",
+  "started_at": "2026-11-25T01:54:23.082Z",
+  "ended_at": "2026-11-25T01:54:23.336Z",
+  "environment": "isolated_local_demo",
+  "status": "failed",
+  "model_version": null,
+  "authorization_ref": null,
+  "budget": null,
+  "evidence_index": "evidence/e1/run-contexts/p3-a/e1-6af9cb0d-4777-42ae-b538-acba74461fed/evidence-index.json"
+}

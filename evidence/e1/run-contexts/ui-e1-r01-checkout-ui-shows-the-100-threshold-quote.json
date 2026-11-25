@@ -3,7 +3,7 @@
   "clock_epoch": "2026-11-23T10:00:00Z",
   "project": "ui",
   "run_ids": [
-    "e1-4e62c916-cf63-43a2-b8c8-659980b8eab2"
+    "e1-7a8e1188-73ba-468b-ba98-700ce47c6bef"
   ],
   "seed_id": "e1-threshold",
   "test_title": "E1-R01: checkout UI shows the 100 threshold quote"

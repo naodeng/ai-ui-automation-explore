@@ -1,0 +1,31 @@
+{
+  "finding_id": "E1-P3A-e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+  "case_id": "E1",
+  "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+  "status": "suspected_issue",
+  "rule_id": "E1-R01",
+  "observed_behavior": "The UI displayed 7900 payable cents and 2000 discount cents while the Oracle recorded 9900 payable cents and 0 discount cents.",
+  "hypothesis": "The checkout UI may render an amount that differs from its authoritative quote.",
+  "evidence_ids": [
+    "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-screenshot",
+    "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-network",
+    "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-oracle",
+    "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-observation"
+  ],
+  "oracle_evidence_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-oracle",
+  "reproduction": {
+    "independent_runs": 0,
+    "successful_reproductions": 0,
+    "steps": [
+      "Reset a fresh E1 run using the approved e1-threshold seed.",
+      "Open the checkout UI and select synthetic SKU E1-99.",
+      "Compare the displayed payable and discount with the read-only quote ledger using the same run_id and quote_id."
+    ]
+  },
+  "human_review": {
+    "status": "pending",
+    "reviewer": null,
+    "approved_at": null,
+    "notes": "This is a controlled synthetic sensitivity run; do not treat it as a production defect."
+  }
+}
