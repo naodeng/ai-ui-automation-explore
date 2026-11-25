@@ -1,6 +1,6 @@
 # P3-A｜确定性 Playwright 自动化基线评审
 
-**状态：PARTIAL。** E1/M1/S1 确定性回归、E1 本地 Seeded Fault 灵敏度/独立复现和前序远端 GitHub Actions 验证已完成。当前代码改动的远端 CI 尚未核实；没有运行受限 Browser Agent，也没有做盲化 Ground Truth 评估。
+**状态：PARTIAL。** E1/M1/S1 确定性回归、E1 本地 Seeded Fault 灵敏度/独立复现，以及 P3 实现提交 `b09453e` 的远端 GitHub Actions 验证均已完成。没有运行受限 Browser Agent，也没有做盲化 Ground Truth 评估。
 
 ## 工具与执行边界
 
@@ -40,7 +40,7 @@
 
 `.github/workflows/static-checks.yml` 现在有两个只读权限 Job：Python Schema/结构校验，以及 Node 26 的 E1/M1/S1 完整 Playwright 回归。工作流安装 Chromium 依赖；各案例分别写入 `playwright-report/{e1,m1,s1}/` 与 `test-results/{e1,m1,s1}/`，逐测试 Manifest/Index 位于 `test-results/p3-evidence/`；这些报告、失败 Trace 和合成证据会作为 Artifact 上传并保留 14 天。
 
-本地已解析 Workflow YAML，并确认三个案例各自的 HTML 报告与结果目录存在。远端 [GitHub Actions Run 45526784670](https://github.com/naodeng/ai-ui-automation-explore/actions/runs/45526784670) 对前序提交 `82dcd92a33973bbe999baad669b6ab774f2161be` 执行成功：`validate` 与 `playwright` 两个 Job 均为 PASS，报告与合成证据 Artifact 上传成功。本轮新增的 E1 断言与故障复现证据尚未由远端 CI 核实；匿名 API 配额耗尽，当前状态为 **NOT VERIFIED**。
+本地已解析 Workflow YAML，并确认三个案例各自的 HTML 报告与结果目录存在。远端 [GitHub Actions Run 45534972281](https://github.com/naodeng/ai-ui-automation-explore/actions/runs/45534972281) 对提交 `b09453eeb17f75873f0332154c2314e49f41b246` 执行成功：`validate`、`playwright` Job 以及测试报告/证据 Artifact 上传步骤均为 PASS。Artifact `playwright-evidence-45534972281`（ID `14986652073`）已上传并包含本次 `test-results/` 路径；保留至 2026-12-09。
 
 ## Run 与证据
 
@@ -53,8 +53,6 @@
 
 ## 尚未完成
 
-- 将当前新增的 E1 UI/Oracle 断言与故障复现证据推送后，完成对应远端 CI 核验；当前本地 `npm test` 已通过。
-- 当前代码的远端 CI 结果尚未核实；合并前需检查推送后对应的 Actions Run 与 Artifact。
 - 受限 Browser Agent 盲化 Ground Truth 隔离与 Recall 评估未运行；本轮的 RED/GREEN 由确定性 Playwright 完成。
 - S1 并发、负载、队列 SLA、取消/超时释放；R02 仍是 PARTIAL，R05 为 NOT RUN。
 - M1 优惠券实际到期行为；因契约没有准确到期时间而 NOT RUN。
