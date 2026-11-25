@@ -51,8 +51,19 @@
 - CI Artifact：`playwright-evidence-45526784670`（GitHub Artifact ID `14982802216`），包含报告、结果及合成证据；按工作流设置保留 14 天。
 - 失败 Trace 的默认策略为 `retain-on-failure`；失败时 Artifact 会包含 Trace 与截图。
 
+## 盲化 Browser Agent 评估预检（2026-11-25）
+
+本节只记录运行环境就绪检查，不是 Agent 评估结果，也没有启动浏览器或修改 Demo。
+
+- `ego-browser skill`：PASS，指南版本 2.2.1（macOS）。该工具提供当前助手的浏览器控制 API，不是独立 Browser Agent 运行时；当前 Codex 可调用工具中也没有单独的 Browser Agent 运行时。
+- 本机命令检查：`agent-browser`、`browser-use` 和全局 `playwright` 均不可用（各 `command -v` 返回 1）。项目本地 Playwright Test CLI 为 1.65.1（`node_modules/.bin/playwright --version` 返回 0），仅用于确定性测试。
+- 当前工作区没有已配置的独立 Explorer 身份/运行环境，也没有评估负责人持有、Explorer 无权读取的私有 Ground Truth 与隔离日志证据。公开故障方案明确不能充当正式盲测的秘密答案。
+- 本次执行上下文已读取公开故障方案，所以不能通过新 Run ID、重置 Demo 或改用 Ego Browser 把当前助手包装成盲测 Explorer。未创建私有 Ground Truth，未启动 Agent，Recall 评估为 **NOT RUN**。
+
+继续正式盲测前，须由独立评估环境提供与当前助手上下文隔离的 Explorer 运行时；评估负责人在独立工作区/进程/账号保存随机映射 Ground Truth；并保留 Explorer 无权访问该工作区的权限与 Run 日志证据。若只能提供当前助手的 Ego Browser 控制能力，则最多开展明确标记的非盲试点，不报告盲测 Recall。引入新的 Agent 运行时或主机权限隔离属于架构/权限变更，实施前需单独确认。
+
 ## 尚未完成
 
-- 受限 Browser Agent 盲化 Ground Truth 隔离与 Recall 评估未运行；本轮的 RED/GREEN 由确定性 Playwright 完成。
+- 受限 Browser Agent 盲化 Ground Truth 隔离与 Recall 评估仍为 NOT RUN，缺独立 Explorer 运行时及隔离证据；本轮的 RED/GREEN 由确定性 Playwright 完成。
 - S1 并发、负载、队列 SLA、取消/超时释放；R02 仍是 PARTIAL，R05 为 NOT RUN。
 - M1 优惠券实际到期行为；因契约没有准确到期时间而 NOT RUN。
