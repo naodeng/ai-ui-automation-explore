@@ -66,7 +66,7 @@
 
 **状态：代码级路由隔离完成；宿主/网络隔离与 Agent 评估 NOT RUN。** 普通 `npm run dev` 保持单监听器。显式盲评模式下，E1 公开监听器拒绝 Reset/Oracle 路由并阻断沙盒订单；独立评估监听器仅接受 Reset/Oracle，并要求控制令牌。新增的盲评只读 Charter 不授予 Oracle、Reset 或订单写入权限。购物车选择和报价仍只写入可重置的内存 Run，不触发支付。
 
-`npm run typecheck`、`npm run test:unit`（12 项）、`npm run test:api`（5 项）、`.venv/bin/python -m unittest discover -s tests -v`（17 项）和 `.venv/bin/python scripts/validate_project.py`：均 PASS，退出码 0。新边界测试覆盖公开面 Oracle/Reset 404、订单写入 403、评估面无令牌 401/持令牌可 Reset/读 Oracle、评估面不提供页面，以及 Reset CLI 使用独立盲评令牌。测试使用本机回环监听器，未证明不同容器/账号/网络命名空间之间的隔离；浏览器 UI E2E 未运行。正式 Agent 运行、私有 Ground Truth 创建和 Recall 评估仍为 NOT RUN。
+`npm run typecheck`、`npm run test:unit`（13 项）、`npm run test:api`（5 项）、`.venv/bin/python -m unittest discover -s tests -v`（17 项）和 `.venv/bin/python scripts/validate_project.py`：均 PASS，退出码 0。新边界测试覆盖公开面 Oracle/Reset 404、订单写入 403、拒绝通配评估地址、评估面无令牌 401/持令牌可 Reset/读 Oracle、评估面不提供页面，以及 Reset CLI 使用独立盲评令牌。测试使用本机回环监听器，未证明不同容器/账号/网络命名空间之间的隔离；浏览器 UI E2E 未运行。正式 Agent 运行、私有 Ground Truth 创建和 Recall 评估仍为 NOT RUN。
 
 ## 尚未完成
 

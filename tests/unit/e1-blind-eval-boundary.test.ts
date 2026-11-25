@@ -150,3 +150,25 @@ test("blind evaluation separates public routes from authenticated evaluator rout
   const evaluatorPage = await fetch(evaluatorOrigin);
   assert.equal(evaluatorPage.status, 404);
 });
+
+test("blind evaluation rejects wildcard evaluator listener addresses", () => {
+  for (const host of ["0.0.0.0", "::", "0:0:0:0:0:0:0:0"]) {
+    const startup = spawnSync(process.execPath, [resolve("demos/ecommerce-checkout/src/server.ts")], {
+      cwd: process.cwd(),
+      env: {
+        ...process.env,
+        PORT: "4179",
+        E1_BLIND_EVAL_MODE: "1",
+        E1_PUBLIC_HOST: "127.0.0.1",
+        E1_EVALUATOR_HOST: host,
+        E1_EVALUATOR_PORT: "4180",
+        E1_CONTROL_TOKEN: randomBytes(32).toString("hex"),
+      },
+      encoding: "utf8",
+      timeout: 5_000,
+    });
+
+    assert.equal(startup.status, 1, `${host}: ${startup.stdout}\n${startup.stderr}`);
+    assert.match(startup.stderr, /E1_EVALUATOR_HOST must be a specific non-wildcard interface/);
+  }
+});

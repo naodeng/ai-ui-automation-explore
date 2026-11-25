@@ -1,6 +1,7 @@
 import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { readFileSync } from "node:fs";
+import { isIP } from "node:net";
 import { resolve } from "node:path";
 import { E1_CATALOG, E1_POLICY, calculateQuote, type E1SkuId, type QuoteAmounts } from "./checkout.ts";
 
@@ -397,6 +398,12 @@ function isValidTokenConfiguration(value: string | undefined): value is string {
   return typeof value === "string" && value.length >= 32;
 }
 
+function isWildcardHost(host: string): boolean {
+  const normalized = host.trim().toLowerCase();
+  if (normalized === "*" || normalized === "0.0.0.0") return true;
+  return isIP(normalized) === 6 && normalized.split(":").every((part) => part === "" || part === "0");
+}
+
 if (!isValidTokenConfiguration(CONTROL_TOKEN)) {
   throw new Error("Start the E1 demo with `npm run dev` to create its local control token");
 }
@@ -404,6 +411,7 @@ if (!Number.isInteger(PORT) || PORT < 1024 || PORT > 65_535) throw new Error("PO
 if (BLIND_EVAL_MODE) {
   if (!PUBLIC_HOST) throw new Error("E1_PUBLIC_HOST is required in blind evaluation mode");
   if (!EVALUATOR_HOST) throw new Error("E1_EVALUATOR_HOST is required in blind evaluation mode");
+  if (isWildcardHost(EVALUATOR_HOST)) throw new Error("E1_EVALUATOR_HOST must be a specific non-wildcard interface");
   if (!Number.isInteger(EVALUATOR_PORT) || EVALUATOR_PORT < 1024 || EVALUATOR_PORT > 65_535 || EVALUATOR_PORT === PORT) {
     throw new Error("E1_EVALUATOR_PORT must be a distinct unprivileged TCP port");
   }
