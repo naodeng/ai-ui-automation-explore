@@ -25,7 +25,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm run dev",
+    command: "node scripts/start-e1-demo.mjs --test-mode",
     url: `${baseURL}/health`,
     reuseExistingServer: false,
     timeout: 30_000,

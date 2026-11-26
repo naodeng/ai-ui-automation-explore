@@ -2,25 +2,25 @@
   "case_id": "M1",
   "seed_id": "m1-gold-to-silver",
   "fake_clock_epoch": "2026-11-23T10:00:00Z",
-  "captured_at": "2026-11-26T03:29:14.959Z",
+  "captured_at": "2026-11-26T07:53:47.129Z",
   "runs": [
     {
       "scenario": "seed",
-      "run_id": "m1-7ab68e49-db78-48f0-8648-a4b339596032",
+      "run_id": "m1-f7f8304a-cd3a-480f-8dcb-8fa824b7722d",
       "tier": "gold",
       "event_version": 5,
       "coupon_status": "valid_at_seed"
     },
     {
       "scenario": "silver_to_gold",
-      "run_id": "m1-1e41d6a8-0750-4b10-bd8a-eacdcad63ae3",
+      "run_id": "m1-4a8310b6-6267-4a6e-8a8a-8ee8512340a3",
       "tier": "gold",
       "event_version": 6,
       "authorization": "allowed"
     },
     {
       "scenario": "gold_to_silver",
-      "run_id": "m1-a03c7e5d-284c-4b8e-ab90-50aab69ecba1",
+      "run_id": "m1-259c7f33-e3b1-4fdc-9132-52fd660fdf5f",
       "tier": "silver",
       "event_version": 6,
       "old_session": "available",

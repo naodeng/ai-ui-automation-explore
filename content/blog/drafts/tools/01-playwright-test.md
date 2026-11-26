@@ -118,6 +118,8 @@ npm run test:e2e -- --grep "selecting the 99 boundary removes the discount"
 
 在 P3 记录的基线运行中，E1 有 5 条 API 和 2 条 UI 测试；M1 有 6 条 API 和 3 条 UI 测试；S1 有 2 条 API 和 4 条 UI 测试。合计 22 条 Playwright 测试通过。完整 `npm test` 还运行了当时的 11 条 Node 单元测试。详细命令、CI Run 和边界见[P3-A 评审报告](../../../../reports/P3_A_REVIEW.md)。
 
+2026-11-26 的本机完整回归中，`npm test` 退出码为 0：24 条 Node 单测，加上 E1 9 API / 4 UI、M1 7 API / 4 UI、S1 5 API / 5 UI，共 58 项测试。环境为 Node.js 26.13.1、npm 11.20.0、`@playwright/test` 1.65.1。这个运行同时验证了 API 与 UI 分开启动时，E1 测试服务能够使用独立控制令牌完成连续回归。
+
 | 案例 | 浏览器测试能观察什么 | 业务结论由什么核对 | 当前边界 |
 |---|---|---|---|
 | E1 优惠券与下单 | 99/100 元边界、页面金额、下单提示 | 报价、订单与优惠券账本 | 仅合成沙盒订单，不支付、不发货 |
@@ -155,6 +157,10 @@ Reset 后可同时存在多个测试 Run 和报价。仅比较金额可能会把
 ### 5. 测试在 Codex 沙箱中报 listen EPERM 127.0.0.1，是应用代码坏了吗？
 
 这次运行 `npm run test:unit` 时，一条既有盲评边界测试需要启动本机 loopback 服务。沙箱运行时报 `EPERM`，完整单测为 20 PASS / 1 FAIL；获得一次性授权后，在沙箱外以同一命令重跑，21 条全部通过。这个结果指向本机绑定权限边界，不是 E1 浏览器断言失败。不要通过关闭沙箱或添加 `--no-sandbox` 绕过；应按仓库的本机运行授权流程处理。
+
+### 6. 为什么 E1 API 测试通过后，UI 测试启动服务时报令牌已存在？
+
+PR #1 的 CI 中，24 条单测和 9 条 E1 API 测试先通过；随后 UI 阶段因 `.local/e1-control-token` 仍在而无法启动服务。单独运行 `npm run test:api` 后再运行 `npm run test:e2e`，也复现了相同错误：服务端口已关闭，但 API 与 UI 阶段共用的手动 Demo 令牌文件残留。修复后，Playwright 配置显式以 `--test-mode` 启动 E1，并使用单独的 `.local/e1-test-control-token`；手动 Demo 继续使用独占创建的 `.local/e1-control-token`。同一完整 `npm test` 现已在本机通过；修复后的 PR CI 结果待推送后核对。
 
 ## 适用范围与限制
 

@@ -12,7 +12,7 @@ export async function ensureEvidenceDirectory(): Promise<void> {
 }
 
 export async function resetRun(request: APIRequestContext, runId: string) {
-  const token = (await readFile(resolve(".local/e1-control-token"), "utf8")).trim();
+  const token = (await readFile(resolve(".local/e1-test-control-token"), "utf8")).trim();
   const response = await request.post("/__test/reset", {
     data: { case_id: "E1", run_id: runId, seed_id: "e1-threshold" },
     headers: { "x-control-token": token },
