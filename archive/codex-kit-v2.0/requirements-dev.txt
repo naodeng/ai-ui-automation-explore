@@ -1,0 +1,3 @@
+# Optional development validation dependencies; scripts/validate_kit.py runs basic checks without them.
+jsonschema>=4.20,<6
+PyYAML>=6.0,<7

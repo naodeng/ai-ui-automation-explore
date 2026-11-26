@@ -1,0 +1,23 @@
+{
+  "case_id": "E1",
+  "run_id": "e1-6af9cb0d-4777-42ae-b538-acba74461fed",
+  "quote_id": "6b93bd07-7683-4d18-a4af-e326ed20598b",
+  "http_status": 201,
+  "response": {
+    "case_id": "E1",
+    "run_id": "e1-6af9cb0d-4777-42ae-b538-acba74461fed",
+    "seed_id": "e1-threshold",
+    "user_id": "user_e1",
+    "quote_id": "6b93bd07-7683-4d18-a4af-e326ed20598b",
+    "created_at": "2026-11-23T10:00:00Z",
+    "rule_ids": [
+      "E1-R01"
+    ],
+    "subtotal_cents": 9900,
+    "coupon_code": "C20",
+    "discount_cents": 0,
+    "shipping_cents": 0,
+    "tax_cents": 0,
+    "payable_cents": 9900
+  }
+}

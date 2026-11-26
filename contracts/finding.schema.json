@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/finding.schema.json",
+  "title": "Candidate Finding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "finding_id",
+    "case_id",
+    "run_id",
+    "status",
+    "rule_id",
+    "observed_behavior",
+    "evidence_ids",
+    "reproduction",
+    "human_review"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string",
+      "minLength": 5
+    },
+    "case_id": {
+      "enum": [
+        "E1",
+        "M1",
+        "S1"
+      ]
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 5
+    },
+    "status": {
+      "enum": [
+        "observation",
+        "suspected_issue",
+        "reproduced_issue",
+        "confirmed_defect"
+      ]
+    },
+    "rule_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "observed_behavior": {
+      "type": "string",
+      "minLength": 5
+    },
+    "hypothesis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "evidence_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "oracle_evidence_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reproduction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "independent_runs",
+        "successful_reproductions"
+      ],
+      "properties": {
+        "independent_runs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "successful_reproductions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "human_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "approved",
+            "rejected",
+            "risk_accepted"
+          ]
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approved_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "confirmed_defect"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "oracle_evidence_id"
+        ],
+        "properties": {
+          "oracle_evidence_id": {
+            "type": "string",
+            "minLength": 3
+          },
+          "rule_id": {
+            "type": "string",
+            "minLength": 3
+          },
+          "human_review": {
+            "required": [
+              "status",
+              "reviewer",
+              "approved_at"
+            ],
+            "properties": {
+              "status": {
+                "const": "approved"
+              },
+              "reviewer": {
+                "type": "string",
+                "minLength": 2
+              },
+              "approved_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "reproduction": {
+            "properties": {
+              "independent_runs": {
+                "minimum": 1
+              },
+              "successful_reproductions": {
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

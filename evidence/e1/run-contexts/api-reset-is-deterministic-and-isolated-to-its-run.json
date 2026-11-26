@@ -1,0 +1,11 @@
+{
+  "case_id": "E1",
+  "clock_epoch": "2026-11-23T10:00:00Z",
+  "project": "api",
+  "run_ids": [
+    "e1-fa4aba00-67ac-40e6-9902-382c05f5b63e",
+    "e1-ac03c524-39ab-4b48-a4d3-6855ced52b11"
+  ],
+  "seed_id": "e1-threshold",
+  "test_title": "reset is deterministic and isolated to its run"
+}

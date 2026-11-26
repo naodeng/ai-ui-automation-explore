@@ -1,0 +1,54 @@
+{
+  "case_id": "E1",
+  "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+  "seed_id": "e1-threshold",
+  "user_id": "user_e1",
+  "observed_at": "2026-11-23T10:00:00Z",
+  "quotes": [
+    {
+      "case_id": "E1",
+      "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+      "seed_id": "e1-threshold",
+      "user_id": "user_e1",
+      "quote_id": "18952a8e-97a8-4905-8ca5-8afabd8ba7e1",
+      "created_at": "2026-11-23T10:00:00Z",
+      "rule_ids": [
+        "E1-R01"
+      ],
+      "subtotal_cents": 10000,
+      "coupon_code": "C20",
+      "discount_cents": 2000,
+      "shipping_cents": 0,
+      "tax_cents": 0,
+      "payable_cents": 8000
+    },
+    {
+      "case_id": "E1",
+      "run_id": "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936",
+      "seed_id": "e1-threshold",
+      "user_id": "user_e1",
+      "quote_id": "8414b9cd-7eff-4905-8314-10d5fb975946",
+      "created_at": "2026-11-23T10:00:00Z",
+      "rule_ids": [
+        "E1-R01"
+      ],
+      "subtotal_cents": 9900,
+      "coupon_code": "C20",
+      "discount_cents": 0,
+      "shipping_cents": 0,
+      "tax_cents": 0,
+      "payable_cents": 9900
+    }
+  ],
+  "orders": [],
+  "coupon_ledger": [
+    {
+      "event_type": "discount_applied_to_quote",
+      "quote_id": "18952a8e-97a8-4905-8ca5-8afabd8ba7e1",
+      "user_id": "user_e1",
+      "coupon_code": "C20",
+      "discount_cents": 2000,
+      "observed_at": "2026-11-23T10:00:00Z"
+    }
+  ]
+}

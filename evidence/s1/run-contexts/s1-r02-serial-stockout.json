@@ -1,0 +1,3439 @@
+{
+  "case_id": "S1",
+  "rule_id": "S1-R02",
+  "test_mode": "serial_functional_no_concurrency",
+  "seed_id": "s1-100-stock",
+  "run_id": "s1-3b2c3848-aa93-4217-bc6a-d14466a2e7ad",
+  "initial_stock": 100,
+  "observed_at": "2026-11-23T10:00:00.000Z",
+  "successful_purchases": [
+    {
+      "request_id": "s1-request-b06cc789-7fc2-42b8-bb66-9a11616926a8",
+      "order_id": "s1-order-bdeec61c-041a-49b4-b799-c11f6ca91b31",
+      "user_id": "user_s1_002"
+    },
+    {
+      "request_id": "s1-request-2d9cd4cf-ce86-4a8a-86e2-151d2db9c4b3",
+      "order_id": "s1-order-0302fb48-b9ff-41d5-9307-453c8ad93179",
+      "user_id": "user_s1_003"
+    },
+    {
+      "request_id": "s1-request-f59117a2-1c8e-4961-a087-d30522327cd2",
+      "order_id": "s1-order-1a44c71c-90cd-4cf9-ae27-f9ad2be3c3c4",
+      "user_id": "user_s1_004"
+    },
+    {
+      "request_id": "s1-request-e717656a-ecd2-42be-9e3b-1316710ea576",
+      "order_id": "s1-order-73c92735-f987-4626-9ee8-a4ebc422a81b",
+      "user_id": "user_s1_005"
+    },
+    {
+      "request_id": "s1-request-a7103455-99ff-47e3-be1c-2456811f813f",
+      "order_id": "s1-order-bb54a54a-301a-4ae6-829f-734c02be8d0a",
+      "user_id": "user_s1_006"
+    },
+    {
+      "request_id": "s1-request-666c297d-e654-49aa-8d95-f003f626aa48",
+      "order_id": "s1-order-d046d635-8398-44c4-8528-21fd145b7e59",
+      "user_id": "user_s1_007"
+    },
+    {
+      "request_id": "s1-request-ef52624d-e5c5-4794-b64e-69e32e195fe0",
+      "order_id": "s1-order-b7f7c601-e972-4c0b-bda1-00fa442747ca",
+      "user_id": "user_s1_008"
+    },
+    {
+      "request_id": "s1-request-76f4ad79-8b20-489d-95c4-816c5795b313",
+      "order_id": "s1-order-233eec37-075a-45e8-802d-d85900ffebeb",
+      "user_id": "user_s1_009"
+    },
+    {
+      "request_id": "s1-request-ea322e90-9ec2-49f7-bd4d-944856fe0fc8",
+      "order_id": "s1-order-7705ba4a-21f4-4d6b-b985-357269d286d9",
+      "user_id": "user_s1_010"
+    },
+    {
+      "request_id": "s1-request-7b606722-aada-4bcb-9991-674e0a0423fd",
+      "order_id": "s1-order-4b7a8e56-ec50-49d9-b80e-8308be05b991",
+      "user_id": "user_s1_011"
+    },
+    {
+      "request_id": "s1-request-7269da75-b543-42a5-b5cb-737447bb3adc",
+      "order_id": "s1-order-c125a953-d971-4764-93ec-1ff5378f4952",
+      "user_id": "user_s1_012"
+    },
+    {
+      "request_id": "s1-request-1c755cea-0c64-4937-b41f-9138f32284a0",
+      "order_id": "s1-order-1c46b963-842b-4652-b8ab-ef0ed16fd827",
+      "user_id": "user_s1_013"
+    },
+    {
+      "request_id": "s1-request-235f6f13-336c-4a69-bc80-a89800b7c7d0",
+      "order_id": "s1-order-e1d92d25-3df4-4b5d-a8c5-25f7402eb78c",
+      "user_id": "user_s1_014"
+    },
+    {
+      "request_id": "s1-request-d6d332a7-811a-4b0a-8076-3f13c031cfd9",
+      "order_id": "s1-order-2c184eb5-d4a5-43d7-b50c-64f754d3917d",
+      "user_id": "user_s1_015"
+    },
+    {
+      "request_id": "s1-request-03357baa-ecf5-4bc4-a13d-1881fc52bc1e",
+      "order_id": "s1-order-83263fe4-8e00-430a-93ad-2619c2e1b5b7",
+      "user_id": "user_s1_016"
+    },
+    {
+      "request_id": "s1-request-a9121042-7d53-4d74-9b6d-33ff28c3b65e",
+      "order_id": "s1-order-8701d9d6-e7e7-44d2-8da6-e860274ad911",
+      "user_id": "user_s1_017"
+    },
+    {
+      "request_id": "s1-request-ecebf19c-3c67-4ef7-83cd-715cfbe03022",
+      "order_id": "s1-order-c9e0cd6c-fb75-4459-b2ae-767591182216",
+      "user_id": "user_s1_018"
+    },
+    {
+      "request_id": "s1-request-1f95688e-6383-45e0-8f6d-697ec0640f9a",
+      "order_id": "s1-order-f6efc196-25f5-4aca-8a2c-2d5590e67c87",
+      "user_id": "user_s1_019"
+    },
+    {
+      "request_id": "s1-request-65565a94-5636-4cf5-8c56-d1c2655b75f4",
+      "order_id": "s1-order-70f8faee-76ad-4cce-94c1-58a615003afd",
+      "user_id": "user_s1_020"
+    },
+    {
+      "request_id": "s1-request-64e7989f-fcc0-4c99-a2cd-18ea1c8a8703",
+      "order_id": "s1-order-424a66b5-d3bf-49b8-b6ff-1d356acec061",
+      "user_id": "user_s1_021"
+    },
+    {
+      "request_id": "s1-request-b5cd39e1-c794-4349-a2a2-60e711db442e",
+      "order_id": "s1-order-8f6756bf-bdf7-42a9-acc6-ce98b49b6222",
+      "user_id": "user_s1_022"
+    },
+    {
+      "request_id": "s1-request-c505ee74-52a2-42da-8b44-a0a55ea87100",
+      "order_id": "s1-order-ed56852e-4128-447d-82d2-5f7a540ea3f9",
+      "user_id": "user_s1_023"
+    },
+    {
+      "request_id": "s1-request-1b2ce716-8f4a-4d15-970d-f541ef345680",
+      "order_id": "s1-order-974eb2b1-60e6-4a6e-8d18-118b360ebbb7",
+      "user_id": "user_s1_024"
+    },
+    {
+      "request_id": "s1-request-687ced53-7b09-42c3-95cb-dbfbc4e08cb7",
+      "order_id": "s1-order-602c5360-f550-48d1-8d7d-1501fde681f3",
+      "user_id": "user_s1_025"
+    },
+    {
+      "request_id": "s1-request-8357267f-379d-43c4-ad3e-0f79e2664451",
+      "order_id": "s1-order-bac1f564-d94c-4db2-99ff-99588552be5c",
+      "user_id": "user_s1_026"
+    },
+    {
+      "request_id": "s1-request-4be7e2aa-5bad-4b95-8ced-2aac5a558eb8",
+      "order_id": "s1-order-f1130a7f-865a-4756-b84e-b209e88260a1",
+      "user_id": "user_s1_027"
+    },
+    {
+      "request_id": "s1-request-e6583d36-c293-4dc7-902e-710052414323",
+      "order_id": "s1-order-be24f957-e457-45eb-93eb-efade2c2120c",
+      "user_id": "user_s1_028"
+    },
+    {
+      "request_id": "s1-request-9cda27a4-2580-426f-bd0a-7cf352f658b3",
+      "order_id": "s1-order-ee8ca832-f6d2-4cf7-b212-e1048f01c362",
+      "user_id": "user_s1_029"
+    },
+    {
+      "request_id": "s1-request-778e9408-225b-478a-a610-0fbbfbfafc08",
+      "order_id": "s1-order-4222868d-98a0-4f8d-a180-69654674a5a7",
+      "user_id": "user_s1_030"
+    },
+    {
+      "request_id": "s1-request-d2639817-76dd-4f19-837b-aad40bb2eaa1",
+      "order_id": "s1-order-bf23392c-49c6-4ea4-af17-eb563405d8d2",
+      "user_id": "user_s1_031"
+    },
+    {
+      "request_id": "s1-request-3b7549aa-4da0-49c2-9700-77424c15bfeb",
+      "order_id": "s1-order-0b84465e-f4ff-4370-a8aa-1b1dd7d8f0da",
+      "user_id": "user_s1_032"
+    },
+    {
+      "request_id": "s1-request-549e279e-bf69-47ec-aac8-72f27ace29b2",
+      "order_id": "s1-order-7e5bd851-ae67-4bf9-af46-db1e11d215ef",
+      "user_id": "user_s1_033"
+    },
+    {
+      "request_id": "s1-request-abdb6f5b-add5-4ab8-9798-1547bea584ea",
+      "order_id": "s1-order-4dddc739-a0ce-41a8-b5df-e4438b7ffafa",
+      "user_id": "user_s1_034"
+    },
+    {
+      "request_id": "s1-request-a6a65901-c1ae-4828-8c35-60c498cc8bc6",
+      "order_id": "s1-order-5bb36291-7bdf-47f3-9be9-ec3337f2420d",
+      "user_id": "user_s1_035"
+    },
+    {
+      "request_id": "s1-request-24519c74-334a-4193-9bc1-8b62ba1d2a47",
+      "order_id": "s1-order-b2e1ad8c-503d-4678-98d3-23b10eb54758",
+      "user_id": "user_s1_036"
+    },
+    {
+      "request_id": "s1-request-bcc288cd-125c-4c0e-9935-4f9983e410a8",
+      "order_id": "s1-order-2841bf13-1c0f-459e-9a30-fef40b8b7cae",
+      "user_id": "user_s1_037"
+    },
+    {
+      "request_id": "s1-request-14a99855-7cf2-42d0-bec7-1f325f67d876",
+      "order_id": "s1-order-054db33e-461f-4757-8d7a-81951bfdd983",
+      "user_id": "user_s1_038"
+    },
+    {
+      "request_id": "s1-request-1c6bda31-25cb-4919-a339-156768ceb1ca",
+      "order_id": "s1-order-161bd113-816e-4eb6-b6a7-0f0cbf676629",
+      "user_id": "user_s1_039"
+    },
+    {
+      "request_id": "s1-request-60799a0c-cf98-4283-a062-bf57eca909e4",
+      "order_id": "s1-order-5523bf5e-bd12-4dc4-b431-17aa0cc6b2ef",
+      "user_id": "user_s1_040"
+    },
+    {
+      "request_id": "s1-request-f7912a8f-3595-4c68-a266-91e8f3413906",
+      "order_id": "s1-order-efee316d-d0aa-4b0b-abb0-e19075c75725",
+      "user_id": "user_s1_041"
+    },
+    {
+      "request_id": "s1-request-74ccf1f3-1ae3-4153-a529-812f557bf9c1",
+      "order_id": "s1-order-5725d1ff-16be-4e9b-aa0f-650c2988699e",
+      "user_id": "user_s1_042"
+    },
+    {
+      "request_id": "s1-request-a70c1ed3-b289-4254-8a6d-8ac4cd21652d",
+      "order_id": "s1-order-efbb08c3-ac56-44ba-8996-c5f6b0c69408",
+      "user_id": "user_s1_043"
+    },
+    {
+      "request_id": "s1-request-0ee461f6-a230-434f-b63f-7ca8d0965ccf",
+      "order_id": "s1-order-0272e27b-417b-4c7f-898e-dca7bc40363c",
+      "user_id": "user_s1_044"
+    },
+    {
+      "request_id": "s1-request-5706249c-e782-4de0-b16b-c64875464c02",
+      "order_id": "s1-order-c159072e-aa6a-4758-b814-ffde8fca11b0",
+      "user_id": "user_s1_045"
+    },
+    {
+      "request_id": "s1-request-aafde089-2191-4d97-be39-35ca4e009ab6",
+      "order_id": "s1-order-44cdbb77-c48a-4aff-8933-2cd5e1ce8402",
+      "user_id": "user_s1_046"
+    },
+    {
+      "request_id": "s1-request-75d02821-bd06-4c7c-a277-a39b62045466",
+      "order_id": "s1-order-63eaec30-200f-425a-ac67-dfb737ab7618",
+      "user_id": "user_s1_047"
+    },
+    {
+      "request_id": "s1-request-458d71c0-3100-4834-9714-0fb4b10cdc3f",
+      "order_id": "s1-order-e358cdd1-ebb7-4bfc-ae6d-b9185b49905b",
+      "user_id": "user_s1_048"
+    },
+    {
+      "request_id": "s1-request-af475158-64c3-45ce-bf2e-e92cf9dc664b",
+      "order_id": "s1-order-5fe150b2-c13b-4c64-8aed-bd75e0eee278",
+      "user_id": "user_s1_049"
+    },
+    {
+      "request_id": "s1-request-3a73e89f-d12b-4edc-916d-a9b0554f74fd",
+      "order_id": "s1-order-32ebe208-3dc6-40c4-b874-33e1997650ef",
+      "user_id": "user_s1_050"
+    },
+    {
+      "request_id": "s1-request-112a217f-6ac0-4fec-8c24-1b955cf669f2",
+      "order_id": "s1-order-0d9b6b7d-1fec-4c7d-a0b5-da300ec6da9f",
+      "user_id": "user_s1_051"
+    },
+    {
+      "request_id": "s1-request-dca93db8-8207-412a-b437-bd6f13f95483",
+      "order_id": "s1-order-e147771a-acc4-4376-bd94-d6d122e28ec5",
+      "user_id": "user_s1_052"
+    },
+    {
+      "request_id": "s1-request-00831239-0e91-4ab2-8709-3830b40fa4be",
+      "order_id": "s1-order-93e26a17-c927-437b-ba38-644a3c49e280",
+      "user_id": "user_s1_053"
+    },
+    {
+      "request_id": "s1-request-bc6b3905-89e6-4e0f-8ac9-1152dde6c8a6",
+      "order_id": "s1-order-c03b2816-6397-4af2-8079-386368e10882",
+      "user_id": "user_s1_054"
+    },
+    {
+      "request_id": "s1-request-193ca507-58e8-4c55-aa57-7c1a31f5e41a",
+      "order_id": "s1-order-f8cfcb2b-ead3-413b-95fe-c4fbe3db46ef",
+      "user_id": "user_s1_055"
+    },
+    {
+      "request_id": "s1-request-76585a4d-a8f4-490c-8c7e-5b0d9c0e623c",
+      "order_id": "s1-order-1106f704-b9e7-42f1-ae5e-ab3309b35874",
+      "user_id": "user_s1_056"
+    },
+    {
+      "request_id": "s1-request-28ab6be3-fbf5-4e45-a951-2abb7443dbe1",
+      "order_id": "s1-order-62fdc1c0-2a8d-4e62-a9e2-fd3d89d8ed4d",
+      "user_id": "user_s1_057"
+    },
+    {
+      "request_id": "s1-request-4df7eb2a-44b0-40fe-bfde-77612ec8a179",
+      "order_id": "s1-order-ebb41dc1-94ff-495f-9f1d-6d8c0590a8da",
+      "user_id": "user_s1_058"
+    },
+    {
+      "request_id": "s1-request-0fc095ef-75eb-4807-b90b-5c12e847bcb6",
+      "order_id": "s1-order-a458f03a-08a1-495a-9d33-f9579e2d2b1f",
+      "user_id": "user_s1_059"
+    },
+    {
+      "request_id": "s1-request-677be5a2-b12d-4719-a17d-82351a1dd2f6",
+      "order_id": "s1-order-f1b89527-3f8b-45fc-ac34-a30dbebec618",
+      "user_id": "user_s1_060"
+    },
+    {
+      "request_id": "s1-request-3570b316-1254-4edf-9c63-b138c5c0c678",
+      "order_id": "s1-order-aff1b174-ef90-4650-845b-2415905e4dae",
+      "user_id": "user_s1_061"
+    },
+    {
+      "request_id": "s1-request-f244b886-af71-4f4f-b846-c638cc620837",
+      "order_id": "s1-order-57a4b2a8-e6ba-4298-bb53-cc17f66e1077",
+      "user_id": "user_s1_062"
+    },
+    {
+      "request_id": "s1-request-f1ee46d0-1f8e-44b5-bcb1-a6ea3efa4754",
+      "order_id": "s1-order-098de4c9-1cdf-4b32-a79b-b88fa1d51e29",
+      "user_id": "user_s1_063"
+    },
+    {
+      "request_id": "s1-request-eea0d5ab-0afd-4d3d-acea-a27f60196816",
+      "order_id": "s1-order-e0e07f7a-ea07-4996-b9e8-bd97755f6dc3",
+      "user_id": "user_s1_064"
+    },
+    {
+      "request_id": "s1-request-3655c0f7-9b78-4b3b-8317-1617756a0954",
+      "order_id": "s1-order-e2b9a3aa-f0d3-4aa6-a873-3c00acb13bba",
+      "user_id": "user_s1_065"
+    },
+    {
+      "request_id": "s1-request-af6a0f64-67fc-4827-8528-d17ca2b569a1",
+      "order_id": "s1-order-5f8fd6b2-c71f-41f5-ac5f-22666d3d89d5",
+      "user_id": "user_s1_066"
+    },
+    {
+      "request_id": "s1-request-3a7e94ec-f09d-40b6-9c41-14441c4a40d7",
+      "order_id": "s1-order-c6f0f700-5ac4-4d36-b88c-dcf741d0fc89",
+      "user_id": "user_s1_067"
+    },
+    {
+      "request_id": "s1-request-77bf2f46-f8c2-4b9c-aaa4-b6b6a26c0e2a",
+      "order_id": "s1-order-55c72528-29c9-4600-aac5-153d999dd735",
+      "user_id": "user_s1_068"
+    },
+    {
+      "request_id": "s1-request-82d8f848-8833-45c1-883c-aae9456a4384",
+      "order_id": "s1-order-32020885-d89f-40cf-95e0-289dcb7a9810",
+      "user_id": "user_s1_069"
+    },
+    {
+      "request_id": "s1-request-c5e0999a-b8b1-40a9-be67-3edeb92530cc",
+      "order_id": "s1-order-f9fe4d0f-966e-44d7-af7f-dbcbfe8d1343",
+      "user_id": "user_s1_070"
+    },
+    {
+      "request_id": "s1-request-c31c7772-fcb3-41d6-8628-b2cc78165959",
+      "order_id": "s1-order-50e50ee0-9b2f-4fe9-9799-3399f158df11",
+      "user_id": "user_s1_071"
+    },
+    {
+      "request_id": "s1-request-154bfb6d-8ce5-49f9-94f7-5235dfa4c7d3",
+      "order_id": "s1-order-0afc0e6d-ce5b-47fd-a5c8-8f7d09319b78",
+      "user_id": "user_s1_072"
+    },
+    {
+      "request_id": "s1-request-351c8802-5ca9-4bed-b740-e50a0620d861",
+      "order_id": "s1-order-af9674a2-6b1d-4886-b076-0e16ce368c6c",
+      "user_id": "user_s1_073"
+    },
+    {
+      "request_id": "s1-request-bb659b28-f663-4c8a-a6ca-0e70e5fb09b5",
+      "order_id": "s1-order-ca208975-f8f8-4bec-a76f-16d57f28b07f",
+      "user_id": "user_s1_074"
+    },
+    {
+      "request_id": "s1-request-abbaecb3-f072-44ab-b625-e095626a9cf4",
+      "order_id": "s1-order-c6ed1cd4-cc92-43e0-977e-bee7b23b63e7",
+      "user_id": "user_s1_075"
+    },
+    {
+      "request_id": "s1-request-9b7f305e-9426-40dc-8c5d-ccaa2b2cd10e",
+      "order_id": "s1-order-b3ee6319-9b30-45d3-a047-5043251e14fd",
+      "user_id": "user_s1_076"
+    },
+    {
+      "request_id": "s1-request-d15c8f15-2c4c-47a3-94a7-4d1aea5e123c",
+      "order_id": "s1-order-8a120d7d-1380-4b26-90f3-396ecb8faa93",
+      "user_id": "user_s1_077"
+    },
+    {
+      "request_id": "s1-request-ccdef848-53e7-4edc-975e-c1174dc37e0d",
+      "order_id": "s1-order-400b842b-1c09-4064-bcc6-bfc4623a7499",
+      "user_id": "user_s1_078"
+    },
+    {
+      "request_id": "s1-request-c4b072c3-e925-490c-835e-540c91ea4289",
+      "order_id": "s1-order-491622c5-6315-46b0-b897-f5cd6aa1fc12",
+      "user_id": "user_s1_079"
+    },
+    {
+      "request_id": "s1-request-dd0aa836-a021-43f7-bbff-3c0b34807c34",
+      "order_id": "s1-order-03f8c7d3-9e6f-4f32-969c-50b39949a752",
+      "user_id": "user_s1_080"
+    },
+    {
+      "request_id": "s1-request-d596c6bb-1da7-44a6-9689-e96c92408190",
+      "order_id": "s1-order-80e046a8-775e-4f84-8a06-d0de461b0d7f",
+      "user_id": "user_s1_081"
+    },
+    {
+      "request_id": "s1-request-03030a30-4935-40b7-8eb8-6fdace6e7953",
+      "order_id": "s1-order-4d4ffef8-df88-4aab-9763-5bd1daea1bdd",
+      "user_id": "user_s1_082"
+    },
+    {
+      "request_id": "s1-request-07b709e6-6e4d-4d1c-b27a-5fa7106381f4",
+      "order_id": "s1-order-d1193bff-91aa-4add-9578-4e38a0a8a80a",
+      "user_id": "user_s1_083"
+    },
+    {
+      "request_id": "s1-request-942bad1d-3fb4-4e9b-bd94-869bdfa89b9f",
+      "order_id": "s1-order-48a5c1c6-ca9f-42d0-9630-db21a78f046e",
+      "user_id": "user_s1_084"
+    },
+    {
+      "request_id": "s1-request-092e93e6-5cb6-4362-a39f-b0331f25fd70",
+      "order_id": "s1-order-8013c8e4-a40a-420b-ba7c-5f006846dd25",
+      "user_id": "user_s1_085"
+    },
+    {
+      "request_id": "s1-request-f2d609e3-f8e3-4926-96e2-3ccd1f98faa7",
+      "order_id": "s1-order-3d251017-5003-4715-bcb3-7336294b083c",
+      "user_id": "user_s1_086"
+    },
+    {
+      "request_id": "s1-request-a29c14ae-5317-439c-89e9-389167967905",
+      "order_id": "s1-order-a683b80f-0ed9-4fef-9fab-c2d34e1ae396",
+      "user_id": "user_s1_087"
+    },
+    {
+      "request_id": "s1-request-da5cc3b2-3e51-49b0-8ab8-b6a187b865e0",
+      "order_id": "s1-order-888c274e-1c18-45bb-93cd-65af3e57c096",
+      "user_id": "user_s1_088"
+    },
+    {
+      "request_id": "s1-request-be474195-69f9-4e93-a682-4b7f37bdc202",
+      "order_id": "s1-order-16682470-175d-476a-b1ba-8094b3a3b19d",
+      "user_id": "user_s1_089"
+    },
+    {
+      "request_id": "s1-request-54e4c259-89df-44a7-9a1a-b8a06d692cd4",
+      "order_id": "s1-order-0a66031d-4344-4c63-b3db-940c74105ab4",
+      "user_id": "user_s1_090"
+    },
+    {
+      "request_id": "s1-request-b551993b-01b4-4791-9f77-9aebafa42e82",
+      "order_id": "s1-order-747bf1bc-1dcb-4f3c-bea8-06d6e853306e",
+      "user_id": "user_s1_091"
+    },
+    {
+      "request_id": "s1-request-0082d34b-29b5-4d68-80a8-7e21d5a114cb",
+      "order_id": "s1-order-c14ec598-4cdc-42bc-810e-6f442a09cbef",
+      "user_id": "user_s1_092"
+    },
+    {
+      "request_id": "s1-request-5c0bb24b-24d3-4abf-91ed-1b49068f652c",
+      "order_id": "s1-order-9067373a-d877-4ae7-a029-c5762abe8930",
+      "user_id": "user_s1_093"
+    },
+    {
+      "request_id": "s1-request-8f072bee-21f1-4427-b9fa-bb36ce8cb7cf",
+      "order_id": "s1-order-ed41dbe5-3df8-4b18-8953-5c29b21ccd90",
+      "user_id": "user_s1_094"
+    },
+    {
+      "request_id": "s1-request-07e29d66-84ad-4d2c-8928-3705a0a8f5d7",
+      "order_id": "s1-order-17d8f50c-709e-4fde-8303-e176b8f3d840",
+      "user_id": "user_s1_095"
+    },
+    {
+      "request_id": "s1-request-12fc7991-9002-4ba6-abfd-9f0cdb2807cc",
+      "order_id": "s1-order-d36f66ae-6df8-4637-b735-4e96e04e517b",
+      "user_id": "user_s1_096"
+    },
+    {
+      "request_id": "s1-request-b1c4b07c-ab65-4dbb-b8ae-09c973409ce0",
+      "order_id": "s1-order-85e7bc01-95b7-491c-afef-c14fc43c4e55",
+      "user_id": "user_s1_097"
+    },
+    {
+      "request_id": "s1-request-c862c019-4db8-4be6-8db0-0fed7f013099",
+      "order_id": "s1-order-6296d4f4-02db-4826-b124-37f5f03a986d",
+      "user_id": "user_s1_098"
+    },
+    {
+      "request_id": "s1-request-761b64ca-d7cc-4702-9e62-88158aca32c8",
+      "order_id": "s1-order-5526f821-b98e-40aa-bc40-2efb718ddc04",
+      "user_id": "user_s1_099"
+    },
+    {
+      "request_id": "s1-request-9f3c6a0f-9f61-4cb6-8e6a-91482a712a26",
+      "order_id": "s1-order-6104bc37-72ba-4c5c-86b1-cf6356e58300",
+      "user_id": "user_s1_100"
+    },
+    {
+      "request_id": "s1-request-8cd18072-4715-43f6-8fe3-73cacaf3f6ea",
+      "order_id": "s1-order-a4ba3e3a-2771-486f-baea-38a439531668",
+      "user_id": "user_s1_101"
+    }
+  ],
+  "rejected_last_user_attempt": {
+    "request_id": "s1-request-f00d7aaa-d80a-4c2d-a19b-96a49a654939",
+    "error": "sold_out"
+  },
+  "oracle": {
+    "case_id": "S1",
+    "run_id": "s1-3b2c3848-aa93-4217-bc6a-d14466a2e7ad",
+    "seed_id": "s1-100-stock",
+    "campaign_id": "campaign_s1",
+    "sku_id": "s1-synthetic-item",
+    "campaign": {
+      "status": "sold_out",
+      "sale_start_at": "2026-11-23T10:00:00.000Z"
+    },
+    "observed_at": "2026-11-23T10:00:00.000Z",
+    "stock_buckets": {
+      "available": 0,
+      "reserved": 0,
+      "sold": 100,
+      "pending_release": 0,
+      "released": 0
+    },
+    "orders": [
+      {
+        "order_id": "s1-order-bdeec61c-041a-49b4-b799-c11f6ca91b31",
+        "request_id": "s1-request-b06cc789-7fc2-42b8-bb66-9a11616926a8",
+        "idempotency_key": "s1-serial-stock-2",
+        "user_id": "user_s1_002",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-0302fb48-b9ff-41d5-9307-453c8ad93179",
+        "request_id": "s1-request-2d9cd4cf-ce86-4a8a-86e2-151d2db9c4b3",
+        "idempotency_key": "s1-serial-stock-3",
+        "user_id": "user_s1_003",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-1a44c71c-90cd-4cf9-ae27-f9ad2be3c3c4",
+        "request_id": "s1-request-f59117a2-1c8e-4961-a087-d30522327cd2",
+        "idempotency_key": "s1-serial-stock-4",
+        "user_id": "user_s1_004",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-73c92735-f987-4626-9ee8-a4ebc422a81b",
+        "request_id": "s1-request-e717656a-ecd2-42be-9e3b-1316710ea576",
+        "idempotency_key": "s1-serial-stock-5",
+        "user_id": "user_s1_005",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-bb54a54a-301a-4ae6-829f-734c02be8d0a",
+        "request_id": "s1-request-a7103455-99ff-47e3-be1c-2456811f813f",
+        "idempotency_key": "s1-serial-stock-6",
+        "user_id": "user_s1_006",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-d046d635-8398-44c4-8528-21fd145b7e59",
+        "request_id": "s1-request-666c297d-e654-49aa-8d95-f003f626aa48",
+        "idempotency_key": "s1-serial-stock-7",
+        "user_id": "user_s1_007",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-b7f7c601-e972-4c0b-bda1-00fa442747ca",
+        "request_id": "s1-request-ef52624d-e5c5-4794-b64e-69e32e195fe0",
+        "idempotency_key": "s1-serial-stock-8",
+        "user_id": "user_s1_008",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-233eec37-075a-45e8-802d-d85900ffebeb",
+        "request_id": "s1-request-76f4ad79-8b20-489d-95c4-816c5795b313",
+        "idempotency_key": "s1-serial-stock-9",
+        "user_id": "user_s1_009",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-7705ba4a-21f4-4d6b-b985-357269d286d9",
+        "request_id": "s1-request-ea322e90-9ec2-49f7-bd4d-944856fe0fc8",
+        "idempotency_key": "s1-serial-stock-10",
+        "user_id": "user_s1_010",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-4b7a8e56-ec50-49d9-b80e-8308be05b991",
+        "request_id": "s1-request-7b606722-aada-4bcb-9991-674e0a0423fd",
+        "idempotency_key": "s1-serial-stock-11",
+        "user_id": "user_s1_011",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-c125a953-d971-4764-93ec-1ff5378f4952",
+        "request_id": "s1-request-7269da75-b543-42a5-b5cb-737447bb3adc",
+        "idempotency_key": "s1-serial-stock-12",
+        "user_id": "user_s1_012",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-1c46b963-842b-4652-b8ab-ef0ed16fd827",
+        "request_id": "s1-request-1c755cea-0c64-4937-b41f-9138f32284a0",
+        "idempotency_key": "s1-serial-stock-13",
+        "user_id": "user_s1_013",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-e1d92d25-3df4-4b5d-a8c5-25f7402eb78c",
+        "request_id": "s1-request-235f6f13-336c-4a69-bc80-a89800b7c7d0",
+        "idempotency_key": "s1-serial-stock-14",
+        "user_id": "user_s1_014",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-2c184eb5-d4a5-43d7-b50c-64f754d3917d",
+        "request_id": "s1-request-d6d332a7-811a-4b0a-8076-3f13c031cfd9",
+        "idempotency_key": "s1-serial-stock-15",
+        "user_id": "user_s1_015",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-83263fe4-8e00-430a-93ad-2619c2e1b5b7",
+        "request_id": "s1-request-03357baa-ecf5-4bc4-a13d-1881fc52bc1e",
+        "idempotency_key": "s1-serial-stock-16",
+        "user_id": "user_s1_016",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-8701d9d6-e7e7-44d2-8da6-e860274ad911",
+        "request_id": "s1-request-a9121042-7d53-4d74-9b6d-33ff28c3b65e",
+        "idempotency_key": "s1-serial-stock-17",
+        "user_id": "user_s1_017",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-c9e0cd6c-fb75-4459-b2ae-767591182216",
+        "request_id": "s1-request-ecebf19c-3c67-4ef7-83cd-715cfbe03022",
+        "idempotency_key": "s1-serial-stock-18",
+        "user_id": "user_s1_018",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-f6efc196-25f5-4aca-8a2c-2d5590e67c87",
+        "request_id": "s1-request-1f95688e-6383-45e0-8f6d-697ec0640f9a",
+        "idempotency_key": "s1-serial-stock-19",
+        "user_id": "user_s1_019",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-70f8faee-76ad-4cce-94c1-58a615003afd",
+        "request_id": "s1-request-65565a94-5636-4cf5-8c56-d1c2655b75f4",
+        "idempotency_key": "s1-serial-stock-20",
+        "user_id": "user_s1_020",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-424a66b5-d3bf-49b8-b6ff-1d356acec061",
+        "request_id": "s1-request-64e7989f-fcc0-4c99-a2cd-18ea1c8a8703",
+        "idempotency_key": "s1-serial-stock-21",
+        "user_id": "user_s1_021",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-8f6756bf-bdf7-42a9-acc6-ce98b49b6222",
+        "request_id": "s1-request-b5cd39e1-c794-4349-a2a2-60e711db442e",
+        "idempotency_key": "s1-serial-stock-22",
+        "user_id": "user_s1_022",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-ed56852e-4128-447d-82d2-5f7a540ea3f9",
+        "request_id": "s1-request-c505ee74-52a2-42da-8b44-a0a55ea87100",
+        "idempotency_key": "s1-serial-stock-23",
+        "user_id": "user_s1_023",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-974eb2b1-60e6-4a6e-8d18-118b360ebbb7",
+        "request_id": "s1-request-1b2ce716-8f4a-4d15-970d-f541ef345680",
+        "idempotency_key": "s1-serial-stock-24",
+        "user_id": "user_s1_024",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-602c5360-f550-48d1-8d7d-1501fde681f3",
+        "request_id": "s1-request-687ced53-7b09-42c3-95cb-dbfbc4e08cb7",
+        "idempotency_key": "s1-serial-stock-25",
+        "user_id": "user_s1_025",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-bac1f564-d94c-4db2-99ff-99588552be5c",
+        "request_id": "s1-request-8357267f-379d-43c4-ad3e-0f79e2664451",
+        "idempotency_key": "s1-serial-stock-26",
+        "user_id": "user_s1_026",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-f1130a7f-865a-4756-b84e-b209e88260a1",
+        "request_id": "s1-request-4be7e2aa-5bad-4b95-8ced-2aac5a558eb8",
+        "idempotency_key": "s1-serial-stock-27",
+        "user_id": "user_s1_027",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-be24f957-e457-45eb-93eb-efade2c2120c",
+        "request_id": "s1-request-e6583d36-c293-4dc7-902e-710052414323",
+        "idempotency_key": "s1-serial-stock-28",
+        "user_id": "user_s1_028",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-ee8ca832-f6d2-4cf7-b212-e1048f01c362",
+        "request_id": "s1-request-9cda27a4-2580-426f-bd0a-7cf352f658b3",
+        "idempotency_key": "s1-serial-stock-29",
+        "user_id": "user_s1_029",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-4222868d-98a0-4f8d-a180-69654674a5a7",
+        "request_id": "s1-request-778e9408-225b-478a-a610-0fbbfbfafc08",
+        "idempotency_key": "s1-serial-stock-30",
+        "user_id": "user_s1_030",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-bf23392c-49c6-4ea4-af17-eb563405d8d2",
+        "request_id": "s1-request-d2639817-76dd-4f19-837b-aad40bb2eaa1",
+        "idempotency_key": "s1-serial-stock-31",
+        "user_id": "user_s1_031",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-0b84465e-f4ff-4370-a8aa-1b1dd7d8f0da",
+        "request_id": "s1-request-3b7549aa-4da0-49c2-9700-77424c15bfeb",
+        "idempotency_key": "s1-serial-stock-32",
+        "user_id": "user_s1_032",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-7e5bd851-ae67-4bf9-af46-db1e11d215ef",
+        "request_id": "s1-request-549e279e-bf69-47ec-aac8-72f27ace29b2",
+        "idempotency_key": "s1-serial-stock-33",
+        "user_id": "user_s1_033",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-4dddc739-a0ce-41a8-b5df-e4438b7ffafa",
+        "request_id": "s1-request-abdb6f5b-add5-4ab8-9798-1547bea584ea",
+        "idempotency_key": "s1-serial-stock-34",
+        "user_id": "user_s1_034",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-5bb36291-7bdf-47f3-9be9-ec3337f2420d",
+        "request_id": "s1-request-a6a65901-c1ae-4828-8c35-60c498cc8bc6",
+        "idempotency_key": "s1-serial-stock-35",
+        "user_id": "user_s1_035",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-b2e1ad8c-503d-4678-98d3-23b10eb54758",
+        "request_id": "s1-request-24519c74-334a-4193-9bc1-8b62ba1d2a47",
+        "idempotency_key": "s1-serial-stock-36",
+        "user_id": "user_s1_036",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-2841bf13-1c0f-459e-9a30-fef40b8b7cae",
+        "request_id": "s1-request-bcc288cd-125c-4c0e-9935-4f9983e410a8",
+        "idempotency_key": "s1-serial-stock-37",
+        "user_id": "user_s1_037",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-054db33e-461f-4757-8d7a-81951bfdd983",
+        "request_id": "s1-request-14a99855-7cf2-42d0-bec7-1f325f67d876",
+        "idempotency_key": "s1-serial-stock-38",
+        "user_id": "user_s1_038",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-161bd113-816e-4eb6-b6a7-0f0cbf676629",
+        "request_id": "s1-request-1c6bda31-25cb-4919-a339-156768ceb1ca",
+        "idempotency_key": "s1-serial-stock-39",
+        "user_id": "user_s1_039",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-5523bf5e-bd12-4dc4-b431-17aa0cc6b2ef",
+        "request_id": "s1-request-60799a0c-cf98-4283-a062-bf57eca909e4",
+        "idempotency_key": "s1-serial-stock-40",
+        "user_id": "user_s1_040",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-efee316d-d0aa-4b0b-abb0-e19075c75725",
+        "request_id": "s1-request-f7912a8f-3595-4c68-a266-91e8f3413906",
+        "idempotency_key": "s1-serial-stock-41",
+        "user_id": "user_s1_041",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-5725d1ff-16be-4e9b-aa0f-650c2988699e",
+        "request_id": "s1-request-74ccf1f3-1ae3-4153-a529-812f557bf9c1",
+        "idempotency_key": "s1-serial-stock-42",
+        "user_id": "user_s1_042",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-efbb08c3-ac56-44ba-8996-c5f6b0c69408",
+        "request_id": "s1-request-a70c1ed3-b289-4254-8a6d-8ac4cd21652d",
+        "idempotency_key": "s1-serial-stock-43",
+        "user_id": "user_s1_043",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-0272e27b-417b-4c7f-898e-dca7bc40363c",
+        "request_id": "s1-request-0ee461f6-a230-434f-b63f-7ca8d0965ccf",
+        "idempotency_key": "s1-serial-stock-44",
+        "user_id": "user_s1_044",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-c159072e-aa6a-4758-b814-ffde8fca11b0",
+        "request_id": "s1-request-5706249c-e782-4de0-b16b-c64875464c02",
+        "idempotency_key": "s1-serial-stock-45",
+        "user_id": "user_s1_045",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-44cdbb77-c48a-4aff-8933-2cd5e1ce8402",
+        "request_id": "s1-request-aafde089-2191-4d97-be39-35ca4e009ab6",
+        "idempotency_key": "s1-serial-stock-46",
+        "user_id": "user_s1_046",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-63eaec30-200f-425a-ac67-dfb737ab7618",
+        "request_id": "s1-request-75d02821-bd06-4c7c-a277-a39b62045466",
+        "idempotency_key": "s1-serial-stock-47",
+        "user_id": "user_s1_047",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-e358cdd1-ebb7-4bfc-ae6d-b9185b49905b",
+        "request_id": "s1-request-458d71c0-3100-4834-9714-0fb4b10cdc3f",
+        "idempotency_key": "s1-serial-stock-48",
+        "user_id": "user_s1_048",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-5fe150b2-c13b-4c64-8aed-bd75e0eee278",
+        "request_id": "s1-request-af475158-64c3-45ce-bf2e-e92cf9dc664b",
+        "idempotency_key": "s1-serial-stock-49",
+        "user_id": "user_s1_049",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-32ebe208-3dc6-40c4-b874-33e1997650ef",
+        "request_id": "s1-request-3a73e89f-d12b-4edc-916d-a9b0554f74fd",
+        "idempotency_key": "s1-serial-stock-50",
+        "user_id": "user_s1_050",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-0d9b6b7d-1fec-4c7d-a0b5-da300ec6da9f",
+        "request_id": "s1-request-112a217f-6ac0-4fec-8c24-1b955cf669f2",
+        "idempotency_key": "s1-serial-stock-51",
+        "user_id": "user_s1_051",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-e147771a-acc4-4376-bd94-d6d122e28ec5",
+        "request_id": "s1-request-dca93db8-8207-412a-b437-bd6f13f95483",
+        "idempotency_key": "s1-serial-stock-52",
+        "user_id": "user_s1_052",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-93e26a17-c927-437b-ba38-644a3c49e280",
+        "request_id": "s1-request-00831239-0e91-4ab2-8709-3830b40fa4be",
+        "idempotency_key": "s1-serial-stock-53",
+        "user_id": "user_s1_053",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-c03b2816-6397-4af2-8079-386368e10882",
+        "request_id": "s1-request-bc6b3905-89e6-4e0f-8ac9-1152dde6c8a6",
+        "idempotency_key": "s1-serial-stock-54",
+        "user_id": "user_s1_054",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-f8cfcb2b-ead3-413b-95fe-c4fbe3db46ef",
+        "request_id": "s1-request-193ca507-58e8-4c55-aa57-7c1a31f5e41a",
+        "idempotency_key": "s1-serial-stock-55",
+        "user_id": "user_s1_055",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-1106f704-b9e7-42f1-ae5e-ab3309b35874",
+        "request_id": "s1-request-76585a4d-a8f4-490c-8c7e-5b0d9c0e623c",
+        "idempotency_key": "s1-serial-stock-56",
+        "user_id": "user_s1_056",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-62fdc1c0-2a8d-4e62-a9e2-fd3d89d8ed4d",
+        "request_id": "s1-request-28ab6be3-fbf5-4e45-a951-2abb7443dbe1",
+        "idempotency_key": "s1-serial-stock-57",
+        "user_id": "user_s1_057",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-ebb41dc1-94ff-495f-9f1d-6d8c0590a8da",
+        "request_id": "s1-request-4df7eb2a-44b0-40fe-bfde-77612ec8a179",
+        "idempotency_key": "s1-serial-stock-58",
+        "user_id": "user_s1_058",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-a458f03a-08a1-495a-9d33-f9579e2d2b1f",
+        "request_id": "s1-request-0fc095ef-75eb-4807-b90b-5c12e847bcb6",
+        "idempotency_key": "s1-serial-stock-59",
+        "user_id": "user_s1_059",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-f1b89527-3f8b-45fc-ac34-a30dbebec618",
+        "request_id": "s1-request-677be5a2-b12d-4719-a17d-82351a1dd2f6",
+        "idempotency_key": "s1-serial-stock-60",
+        "user_id": "user_s1_060",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-aff1b174-ef90-4650-845b-2415905e4dae",
+        "request_id": "s1-request-3570b316-1254-4edf-9c63-b138c5c0c678",
+        "idempotency_key": "s1-serial-stock-61",
+        "user_id": "user_s1_061",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-57a4b2a8-e6ba-4298-bb53-cc17f66e1077",
+        "request_id": "s1-request-f244b886-af71-4f4f-b846-c638cc620837",
+        "idempotency_key": "s1-serial-stock-62",
+        "user_id": "user_s1_062",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-098de4c9-1cdf-4b32-a79b-b88fa1d51e29",
+        "request_id": "s1-request-f1ee46d0-1f8e-44b5-bcb1-a6ea3efa4754",
+        "idempotency_key": "s1-serial-stock-63",
+        "user_id": "user_s1_063",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-e0e07f7a-ea07-4996-b9e8-bd97755f6dc3",
+        "request_id": "s1-request-eea0d5ab-0afd-4d3d-acea-a27f60196816",
+        "idempotency_key": "s1-serial-stock-64",
+        "user_id": "user_s1_064",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-e2b9a3aa-f0d3-4aa6-a873-3c00acb13bba",
+        "request_id": "s1-request-3655c0f7-9b78-4b3b-8317-1617756a0954",
+        "idempotency_key": "s1-serial-stock-65",
+        "user_id": "user_s1_065",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-5f8fd6b2-c71f-41f5-ac5f-22666d3d89d5",
+        "request_id": "s1-request-af6a0f64-67fc-4827-8528-d17ca2b569a1",
+        "idempotency_key": "s1-serial-stock-66",
+        "user_id": "user_s1_066",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-c6f0f700-5ac4-4d36-b88c-dcf741d0fc89",
+        "request_id": "s1-request-3a7e94ec-f09d-40b6-9c41-14441c4a40d7",
+        "idempotency_key": "s1-serial-stock-67",
+        "user_id": "user_s1_067",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-55c72528-29c9-4600-aac5-153d999dd735",
+        "request_id": "s1-request-77bf2f46-f8c2-4b9c-aaa4-b6b6a26c0e2a",
+        "idempotency_key": "s1-serial-stock-68",
+        "user_id": "user_s1_068",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-32020885-d89f-40cf-95e0-289dcb7a9810",
+        "request_id": "s1-request-82d8f848-8833-45c1-883c-aae9456a4384",
+        "idempotency_key": "s1-serial-stock-69",
+        "user_id": "user_s1_069",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-f9fe4d0f-966e-44d7-af7f-dbcbfe8d1343",
+        "request_id": "s1-request-c5e0999a-b8b1-40a9-be67-3edeb92530cc",
+        "idempotency_key": "s1-serial-stock-70",
+        "user_id": "user_s1_070",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-50e50ee0-9b2f-4fe9-9799-3399f158df11",
+        "request_id": "s1-request-c31c7772-fcb3-41d6-8628-b2cc78165959",
+        "idempotency_key": "s1-serial-stock-71",
+        "user_id": "user_s1_071",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-0afc0e6d-ce5b-47fd-a5c8-8f7d09319b78",
+        "request_id": "s1-request-154bfb6d-8ce5-49f9-94f7-5235dfa4c7d3",
+        "idempotency_key": "s1-serial-stock-72",
+        "user_id": "user_s1_072",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-af9674a2-6b1d-4886-b076-0e16ce368c6c",
+        "request_id": "s1-request-351c8802-5ca9-4bed-b740-e50a0620d861",
+        "idempotency_key": "s1-serial-stock-73",
+        "user_id": "user_s1_073",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-ca208975-f8f8-4bec-a76f-16d57f28b07f",
+        "request_id": "s1-request-bb659b28-f663-4c8a-a6ca-0e70e5fb09b5",
+        "idempotency_key": "s1-serial-stock-74",
+        "user_id": "user_s1_074",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-c6ed1cd4-cc92-43e0-977e-bee7b23b63e7",
+        "request_id": "s1-request-abbaecb3-f072-44ab-b625-e095626a9cf4",
+        "idempotency_key": "s1-serial-stock-75",
+        "user_id": "user_s1_075",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-b3ee6319-9b30-45d3-a047-5043251e14fd",
+        "request_id": "s1-request-9b7f305e-9426-40dc-8c5d-ccaa2b2cd10e",
+        "idempotency_key": "s1-serial-stock-76",
+        "user_id": "user_s1_076",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-8a120d7d-1380-4b26-90f3-396ecb8faa93",
+        "request_id": "s1-request-d15c8f15-2c4c-47a3-94a7-4d1aea5e123c",
+        "idempotency_key": "s1-serial-stock-77",
+        "user_id": "user_s1_077",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-400b842b-1c09-4064-bcc6-bfc4623a7499",
+        "request_id": "s1-request-ccdef848-53e7-4edc-975e-c1174dc37e0d",
+        "idempotency_key": "s1-serial-stock-78",
+        "user_id": "user_s1_078",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-491622c5-6315-46b0-b897-f5cd6aa1fc12",
+        "request_id": "s1-request-c4b072c3-e925-490c-835e-540c91ea4289",
+        "idempotency_key": "s1-serial-stock-79",
+        "user_id": "user_s1_079",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-03f8c7d3-9e6f-4f32-969c-50b39949a752",
+        "request_id": "s1-request-dd0aa836-a021-43f7-bbff-3c0b34807c34",
+        "idempotency_key": "s1-serial-stock-80",
+        "user_id": "user_s1_080",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-80e046a8-775e-4f84-8a06-d0de461b0d7f",
+        "request_id": "s1-request-d596c6bb-1da7-44a6-9689-e96c92408190",
+        "idempotency_key": "s1-serial-stock-81",
+        "user_id": "user_s1_081",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-4d4ffef8-df88-4aab-9763-5bd1daea1bdd",
+        "request_id": "s1-request-03030a30-4935-40b7-8eb8-6fdace6e7953",
+        "idempotency_key": "s1-serial-stock-82",
+        "user_id": "user_s1_082",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-d1193bff-91aa-4add-9578-4e38a0a8a80a",
+        "request_id": "s1-request-07b709e6-6e4d-4d1c-b27a-5fa7106381f4",
+        "idempotency_key": "s1-serial-stock-83",
+        "user_id": "user_s1_083",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-48a5c1c6-ca9f-42d0-9630-db21a78f046e",
+        "request_id": "s1-request-942bad1d-3fb4-4e9b-bd94-869bdfa89b9f",
+        "idempotency_key": "s1-serial-stock-84",
+        "user_id": "user_s1_084",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-8013c8e4-a40a-420b-ba7c-5f006846dd25",
+        "request_id": "s1-request-092e93e6-5cb6-4362-a39f-b0331f25fd70",
+        "idempotency_key": "s1-serial-stock-85",
+        "user_id": "user_s1_085",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-3d251017-5003-4715-bcb3-7336294b083c",
+        "request_id": "s1-request-f2d609e3-f8e3-4926-96e2-3ccd1f98faa7",
+        "idempotency_key": "s1-serial-stock-86",
+        "user_id": "user_s1_086",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-a683b80f-0ed9-4fef-9fab-c2d34e1ae396",
+        "request_id": "s1-request-a29c14ae-5317-439c-89e9-389167967905",
+        "idempotency_key": "s1-serial-stock-87",
+        "user_id": "user_s1_087",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-888c274e-1c18-45bb-93cd-65af3e57c096",
+        "request_id": "s1-request-da5cc3b2-3e51-49b0-8ab8-b6a187b865e0",
+        "idempotency_key": "s1-serial-stock-88",
+        "user_id": "user_s1_088",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-16682470-175d-476a-b1ba-8094b3a3b19d",
+        "request_id": "s1-request-be474195-69f9-4e93-a682-4b7f37bdc202",
+        "idempotency_key": "s1-serial-stock-89",
+        "user_id": "user_s1_089",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-0a66031d-4344-4c63-b3db-940c74105ab4",
+        "request_id": "s1-request-54e4c259-89df-44a7-9a1a-b8a06d692cd4",
+        "idempotency_key": "s1-serial-stock-90",
+        "user_id": "user_s1_090",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-747bf1bc-1dcb-4f3c-bea8-06d6e853306e",
+        "request_id": "s1-request-b551993b-01b4-4791-9f77-9aebafa42e82",
+        "idempotency_key": "s1-serial-stock-91",
+        "user_id": "user_s1_091",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-c14ec598-4cdc-42bc-810e-6f442a09cbef",
+        "request_id": "s1-request-0082d34b-29b5-4d68-80a8-7e21d5a114cb",
+        "idempotency_key": "s1-serial-stock-92",
+        "user_id": "user_s1_092",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-9067373a-d877-4ae7-a029-c5762abe8930",
+        "request_id": "s1-request-5c0bb24b-24d3-4abf-91ed-1b49068f652c",
+        "idempotency_key": "s1-serial-stock-93",
+        "user_id": "user_s1_093",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-ed41dbe5-3df8-4b18-8953-5c29b21ccd90",
+        "request_id": "s1-request-8f072bee-21f1-4427-b9fa-bb36ce8cb7cf",
+        "idempotency_key": "s1-serial-stock-94",
+        "user_id": "user_s1_094",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-17d8f50c-709e-4fde-8303-e176b8f3d840",
+        "request_id": "s1-request-07e29d66-84ad-4d2c-8928-3705a0a8f5d7",
+        "idempotency_key": "s1-serial-stock-95",
+        "user_id": "user_s1_095",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-d36f66ae-6df8-4637-b735-4e96e04e517b",
+        "request_id": "s1-request-12fc7991-9002-4ba6-abfd-9f0cdb2807cc",
+        "idempotency_key": "s1-serial-stock-96",
+        "user_id": "user_s1_096",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-85e7bc01-95b7-491c-afef-c14fc43c4e55",
+        "request_id": "s1-request-b1c4b07c-ab65-4dbb-b8ae-09c973409ce0",
+        "idempotency_key": "s1-serial-stock-97",
+        "user_id": "user_s1_097",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-6296d4f4-02db-4826-b124-37f5f03a986d",
+        "request_id": "s1-request-c862c019-4db8-4be6-8db0-0fed7f013099",
+        "idempotency_key": "s1-serial-stock-98",
+        "user_id": "user_s1_098",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-5526f821-b98e-40aa-bc40-2efb718ddc04",
+        "request_id": "s1-request-761b64ca-d7cc-4702-9e62-88158aca32c8",
+        "idempotency_key": "s1-serial-stock-99",
+        "user_id": "user_s1_099",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-6104bc37-72ba-4c5c-86b1-cf6356e58300",
+        "request_id": "s1-request-9f3c6a0f-9f61-4cb6-8e6a-91482a712a26",
+        "idempotency_key": "s1-serial-stock-100",
+        "user_id": "user_s1_100",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      },
+      {
+        "order_id": "s1-order-a4ba3e3a-2771-486f-baea-38a439531668",
+        "request_id": "s1-request-8cd18072-4715-43f6-8fe3-73cacaf3f6ea",
+        "idempotency_key": "s1-serial-stock-101",
+        "user_id": "user_s1_101",
+        "sku_id": "s1-synthetic-item",
+        "quantity": 1,
+        "status": "success",
+        "created_at": "2026-11-23T10:00:00.000Z",
+        "reservation_expires_at": "2026-11-23T10:00:30.000Z"
+      }
+    ],
+    "stock_movements": [
+      {
+        "movement_id": "s1-movement-1f17202e-f510-418d-a792-14a7cd4adab6",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-bdeec61c-041a-49b4-b799-c11f6ca91b31",
+        "request_id": "s1-request-b06cc789-7fc2-42b8-bb66-9a11616926a8",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-b0a019f1-03ff-43f4-a86f-0be64757c30f",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-bdeec61c-041a-49b4-b799-c11f6ca91b31",
+        "request_id": "s1-request-b62d7a2c-0313-48ad-aada-da99f3d7c0d3",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-6e60e269-4a42-4950-a821-7417a23bca6e",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-0302fb48-b9ff-41d5-9307-453c8ad93179",
+        "request_id": "s1-request-2d9cd4cf-ce86-4a8a-86e2-151d2db9c4b3",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-94b74a86-0073-4836-b84a-9a36aa3478df",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-0302fb48-b9ff-41d5-9307-453c8ad93179",
+        "request_id": "s1-request-12bc374b-94a2-4164-8f33-e53be7d2f4d0",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-2e41d3c5-6dc6-4075-983b-181fcbae8fe9",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-1a44c71c-90cd-4cf9-ae27-f9ad2be3c3c4",
+        "request_id": "s1-request-f59117a2-1c8e-4961-a087-d30522327cd2",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-84c3c859-4667-4560-b0da-b4f0df9bf4fb",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-1a44c71c-90cd-4cf9-ae27-f9ad2be3c3c4",
+        "request_id": "s1-request-64b08354-0d08-4f7f-8b1e-f707cecff90f",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-63c82687-91b1-4331-9322-9e0ae1444077",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-73c92735-f987-4626-9ee8-a4ebc422a81b",
+        "request_id": "s1-request-e717656a-ecd2-42be-9e3b-1316710ea576",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-f106fe75-9a14-47b0-9efc-f8f99a2ff32b",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-73c92735-f987-4626-9ee8-a4ebc422a81b",
+        "request_id": "s1-request-2bd5a656-f216-46aa-9d8c-6a85630cb5d0",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ac3f9ed7-e17b-42c1-bd15-b8e458184543",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-bb54a54a-301a-4ae6-829f-734c02be8d0a",
+        "request_id": "s1-request-a7103455-99ff-47e3-be1c-2456811f813f",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-4724cb75-2592-4c90-b10b-386010cba874",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-bb54a54a-301a-4ae6-829f-734c02be8d0a",
+        "request_id": "s1-request-949c7705-9540-4ac7-a797-fb86bf98a72c",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-1b53e9e1-d7d1-46ed-a936-ccb726732f2c",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-d046d635-8398-44c4-8528-21fd145b7e59",
+        "request_id": "s1-request-666c297d-e654-49aa-8d95-f003f626aa48",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-4f6de5cc-9d6b-4f62-91a9-e29cd38110b4",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-d046d635-8398-44c4-8528-21fd145b7e59",
+        "request_id": "s1-request-54fd5630-7e33-4bc3-8fa2-1238d1890797",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-348e1d2b-4f0b-4edc-b601-0f6906dd8964",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-b7f7c601-e972-4c0b-bda1-00fa442747ca",
+        "request_id": "s1-request-ef52624d-e5c5-4794-b64e-69e32e195fe0",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-360c4c09-1fa7-41e4-a44c-aa0689fb736d",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-b7f7c601-e972-4c0b-bda1-00fa442747ca",
+        "request_id": "s1-request-afdbe8e9-5086-4d70-bc53-c7183410c2f2",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-38794203-6437-4f7c-b0fb-88c11c27ac80",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-233eec37-075a-45e8-802d-d85900ffebeb",
+        "request_id": "s1-request-76f4ad79-8b20-489d-95c4-816c5795b313",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ab0d2861-bde4-42a5-8877-a56fa06b55c7",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-233eec37-075a-45e8-802d-d85900ffebeb",
+        "request_id": "s1-request-303153c2-42b7-4f60-88b3-3f177effec1a",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-5c9e4376-0da4-450a-8580-3dca87f96120",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-7705ba4a-21f4-4d6b-b985-357269d286d9",
+        "request_id": "s1-request-ea322e90-9ec2-49f7-bd4d-944856fe0fc8",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-487638a0-2def-4020-985e-52b5189496c6",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-7705ba4a-21f4-4d6b-b985-357269d286d9",
+        "request_id": "s1-request-20dcbef7-7e2b-4911-bd5b-84430a0b5498",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-e3097ad6-fb9a-4d96-8e18-5d37e1149eb1",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-4b7a8e56-ec50-49d9-b80e-8308be05b991",
+        "request_id": "s1-request-7b606722-aada-4bcb-9991-674e0a0423fd",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-3f2e5b9b-0874-4f01-b05f-84168062cbf1",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-4b7a8e56-ec50-49d9-b80e-8308be05b991",
+        "request_id": "s1-request-49155cb5-7689-44d1-a9c3-c82603935fb2",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-103a6ae6-7c48-4d97-a38a-676b564a6e53",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-c125a953-d971-4764-93ec-1ff5378f4952",
+        "request_id": "s1-request-7269da75-b543-42a5-b5cb-737447bb3adc",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7361a639-afc2-403a-9e7b-a03c0f298be2",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-c125a953-d971-4764-93ec-1ff5378f4952",
+        "request_id": "s1-request-50d7c3e0-36e4-4c26-bf64-236665163c94",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-07732caa-317a-4aae-bb4e-fb02c39dbe25",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-1c46b963-842b-4652-b8ab-ef0ed16fd827",
+        "request_id": "s1-request-1c755cea-0c64-4937-b41f-9138f32284a0",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-d23946d4-213b-42fc-a791-72e919f4f7b5",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-1c46b963-842b-4652-b8ab-ef0ed16fd827",
+        "request_id": "s1-request-8fbd465e-28c8-467c-b797-a55ffc9f0df3",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-b7ae4809-b696-468c-bc81-a902b503864b",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-e1d92d25-3df4-4b5d-a8c5-25f7402eb78c",
+        "request_id": "s1-request-235f6f13-336c-4a69-bc80-a89800b7c7d0",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-6e9a98ed-f7a7-4238-a8d9-c30bf75b60df",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-e1d92d25-3df4-4b5d-a8c5-25f7402eb78c",
+        "request_id": "s1-request-cffcd1da-805e-4deb-bd82-73b4efe57c52",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ce8120ad-ed6d-4cc0-8ce7-fd01ed968555",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-2c184eb5-d4a5-43d7-b50c-64f754d3917d",
+        "request_id": "s1-request-d6d332a7-811a-4b0a-8076-3f13c031cfd9",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-67b12cd1-2b2f-4f29-af7b-9dcc541edd06",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-2c184eb5-d4a5-43d7-b50c-64f754d3917d",
+        "request_id": "s1-request-bdb4b416-0b9b-4805-ba1b-7094f044d639",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-19c4af32-3b30-4ae0-a68a-965f8d984505",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-83263fe4-8e00-430a-93ad-2619c2e1b5b7",
+        "request_id": "s1-request-03357baa-ecf5-4bc4-a13d-1881fc52bc1e",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a293a478-5b64-4788-80b3-4137e1b979b7",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-83263fe4-8e00-430a-93ad-2619c2e1b5b7",
+        "request_id": "s1-request-bbd65d37-a7fe-4106-8c5a-94143428020e",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-32be950f-a5d5-4e53-a7dc-a8078f8dfd6e",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-8701d9d6-e7e7-44d2-8da6-e860274ad911",
+        "request_id": "s1-request-a9121042-7d53-4d74-9b6d-33ff28c3b65e",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-089cf171-0fa1-4a44-bcea-87f76aada641",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-8701d9d6-e7e7-44d2-8da6-e860274ad911",
+        "request_id": "s1-request-541b973a-c81d-44ac-a1a3-9ba834ac8af6",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-5f3b1af4-96f9-40fe-ab17-d71c85aae2ab",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-c9e0cd6c-fb75-4459-b2ae-767591182216",
+        "request_id": "s1-request-ecebf19c-3c67-4ef7-83cd-715cfbe03022",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-371bab4e-2fe3-440b-a5ac-6bc9117d6106",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-c9e0cd6c-fb75-4459-b2ae-767591182216",
+        "request_id": "s1-request-ab032d74-1dd8-49d1-88cb-fe425e9a3ed9",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-30d35906-0bf2-446d-a70d-a46b9ba197d9",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-f6efc196-25f5-4aca-8a2c-2d5590e67c87",
+        "request_id": "s1-request-1f95688e-6383-45e0-8f6d-697ec0640f9a",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-58e699f4-2ec5-4aaa-8b07-35f4ebae153a",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-f6efc196-25f5-4aca-8a2c-2d5590e67c87",
+        "request_id": "s1-request-308d4561-413a-4f85-bda6-f977a33f819d",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-b35fb076-a9b7-49e3-bafb-caf9eb08d131",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-70f8faee-76ad-4cce-94c1-58a615003afd",
+        "request_id": "s1-request-65565a94-5636-4cf5-8c56-d1c2655b75f4",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-3df59a0d-88ca-49b7-8fdb-4c4086cc3b12",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-70f8faee-76ad-4cce-94c1-58a615003afd",
+        "request_id": "s1-request-c6659942-1216-48cb-a3e4-5f8f1c87847c",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7ba16413-bdaa-44cc-91e1-648658ed0f83",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-424a66b5-d3bf-49b8-b6ff-1d356acec061",
+        "request_id": "s1-request-64e7989f-fcc0-4c99-a2cd-18ea1c8a8703",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8aa8dc07-3f59-4a57-8c54-cdc1c76ad8ae",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-424a66b5-d3bf-49b8-b6ff-1d356acec061",
+        "request_id": "s1-request-51cb2382-6831-43cc-b300-a7f00ac72bb2",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-3a4167e1-56e7-43b9-bb84-4811f175fa12",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-8f6756bf-bdf7-42a9-acc6-ce98b49b6222",
+        "request_id": "s1-request-b5cd39e1-c794-4349-a2a2-60e711db442e",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-1c10a3bd-4431-419b-a679-699440516aa9",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-8f6756bf-bdf7-42a9-acc6-ce98b49b6222",
+        "request_id": "s1-request-6aa9a037-c52c-4baf-8efc-f064e7a940c1",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-e76aaea0-6314-41b4-9056-5a3036001a8f",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-ed56852e-4128-447d-82d2-5f7a540ea3f9",
+        "request_id": "s1-request-c505ee74-52a2-42da-8b44-a0a55ea87100",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-2c007a23-b24e-4341-b639-ed276e8cbce5",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-ed56852e-4128-447d-82d2-5f7a540ea3f9",
+        "request_id": "s1-request-1fa06ba3-80dc-4b07-bd71-cc1440c7a949",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-b76811dd-3e58-4b8a-84c2-14991496ea32",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-974eb2b1-60e6-4a6e-8d18-118b360ebbb7",
+        "request_id": "s1-request-1b2ce716-8f4a-4d15-970d-f541ef345680",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-617613e1-dfcd-47c4-b987-8a87922f26d4",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-974eb2b1-60e6-4a6e-8d18-118b360ebbb7",
+        "request_id": "s1-request-93baf766-04af-4ed3-96c5-9d5474b8e0c4",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-c050bd62-80c8-4dca-a243-e913db51c1cd",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-602c5360-f550-48d1-8d7d-1501fde681f3",
+        "request_id": "s1-request-687ced53-7b09-42c3-95cb-dbfbc4e08cb7",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-d282b645-9a23-48d7-a394-c4746519abb7",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-602c5360-f550-48d1-8d7d-1501fde681f3",
+        "request_id": "s1-request-555933c8-269c-47c5-a9ea-4fce84f32a19",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-cbec2474-5611-4f2e-a064-6265d9069a1b",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-bac1f564-d94c-4db2-99ff-99588552be5c",
+        "request_id": "s1-request-8357267f-379d-43c4-ad3e-0f79e2664451",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a7d19b9a-3eb3-4b13-88f6-eb3c6b5adcec",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-bac1f564-d94c-4db2-99ff-99588552be5c",
+        "request_id": "s1-request-92b5a7ab-e5ac-4166-b8c0-27356174a2e2",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-d15f7042-df71-4ecb-bb79-5672c49a650a",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-f1130a7f-865a-4756-b84e-b209e88260a1",
+        "request_id": "s1-request-4be7e2aa-5bad-4b95-8ced-2aac5a558eb8",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-03356a93-5382-4c4e-903b-dbfc6cf4ed1c",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-f1130a7f-865a-4756-b84e-b209e88260a1",
+        "request_id": "s1-request-e7a3f770-f1a9-43c2-8a46-b8d521e2fe89",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ea007f4f-2a45-4658-9a20-e5b707a9eba7",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-be24f957-e457-45eb-93eb-efade2c2120c",
+        "request_id": "s1-request-e6583d36-c293-4dc7-902e-710052414323",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-78cd9bec-3f7e-44d7-a8f1-631d150cafdf",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-be24f957-e457-45eb-93eb-efade2c2120c",
+        "request_id": "s1-request-0a096d22-548b-4e11-976d-0d17faf5e514",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-fc3589a6-dde2-4d5b-95de-f1c9476269de",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-ee8ca832-f6d2-4cf7-b212-e1048f01c362",
+        "request_id": "s1-request-9cda27a4-2580-426f-bd0a-7cf352f658b3",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-000a5642-402d-4bb7-bb6c-d7f621bec27e",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-ee8ca832-f6d2-4cf7-b212-e1048f01c362",
+        "request_id": "s1-request-fc0d3501-a76a-4002-9a47-b5cbed9f9ad4",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-85c07ed7-359e-44df-9860-eefa6855927a",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-4222868d-98a0-4f8d-a180-69654674a5a7",
+        "request_id": "s1-request-778e9408-225b-478a-a610-0fbbfbfafc08",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-f7ae75ce-9883-402f-b1ed-2fdce468066b",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-4222868d-98a0-4f8d-a180-69654674a5a7",
+        "request_id": "s1-request-de53fd3f-b4fa-4b6b-afda-3ecdd7c5a4ad",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-071da0b9-0ee8-4ac4-a501-1f74995b2f9b",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-bf23392c-49c6-4ea4-af17-eb563405d8d2",
+        "request_id": "s1-request-d2639817-76dd-4f19-837b-aad40bb2eaa1",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-d47a852c-56a4-4cfb-b541-c5baaacbeda9",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-bf23392c-49c6-4ea4-af17-eb563405d8d2",
+        "request_id": "s1-request-0b2572dd-7e43-4d54-8514-5e1c0352e691",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-9046a6fe-0337-4465-8f17-c0a99f2386de",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-0b84465e-f4ff-4370-a8aa-1b1dd7d8f0da",
+        "request_id": "s1-request-3b7549aa-4da0-49c2-9700-77424c15bfeb",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-4d8745df-0fdd-4e71-9d99-93a344aba91b",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-0b84465e-f4ff-4370-a8aa-1b1dd7d8f0da",
+        "request_id": "s1-request-8283e7af-5673-4175-8268-ce6ea31f9591",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-2181c63d-cecc-4e36-9117-57a8c8b6d261",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-7e5bd851-ae67-4bf9-af46-db1e11d215ef",
+        "request_id": "s1-request-549e279e-bf69-47ec-aac8-72f27ace29b2",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-0b71575e-6312-4748-9813-39f06819c4f3",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-7e5bd851-ae67-4bf9-af46-db1e11d215ef",
+        "request_id": "s1-request-f303a719-9697-461c-b143-567f6acb7679",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-97a7371b-d04e-4957-aca9-b3824896149f",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-4dddc739-a0ce-41a8-b5df-e4438b7ffafa",
+        "request_id": "s1-request-abdb6f5b-add5-4ab8-9798-1547bea584ea",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-cc656f37-9d3f-4e86-bd1e-73a8d50dfc79",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-4dddc739-a0ce-41a8-b5df-e4438b7ffafa",
+        "request_id": "s1-request-c028ccc9-27fc-4b70-9c04-a9a67920f2a4",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8281b531-d709-4047-8bc5-1e52628f3e7d",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-5bb36291-7bdf-47f3-9be9-ec3337f2420d",
+        "request_id": "s1-request-a6a65901-c1ae-4828-8c35-60c498cc8bc6",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-117c4c7c-83d6-4da2-8fd0-16d8d0e649a8",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-5bb36291-7bdf-47f3-9be9-ec3337f2420d",
+        "request_id": "s1-request-09a85ee5-ee95-4a23-bdad-0f502fd7f180",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-26934906-1383-46e5-a27d-6eb359ee892e",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-b2e1ad8c-503d-4678-98d3-23b10eb54758",
+        "request_id": "s1-request-24519c74-334a-4193-9bc1-8b62ba1d2a47",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7af5fb3a-ebc9-4905-9deb-93690535667e",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-b2e1ad8c-503d-4678-98d3-23b10eb54758",
+        "request_id": "s1-request-294ef72d-3bfb-4fb2-845b-2a155ed83133",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-e0402782-aa52-4957-8ab9-b0e8ff67d22f",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-2841bf13-1c0f-459e-9a30-fef40b8b7cae",
+        "request_id": "s1-request-bcc288cd-125c-4c0e-9935-4f9983e410a8",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7d87bef3-b13d-48fc-bbf8-e69d023a5fe2",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-2841bf13-1c0f-459e-9a30-fef40b8b7cae",
+        "request_id": "s1-request-a72b065f-b18e-46fa-9410-7366c2ad6077",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-1e012807-ea79-4ce1-8756-ef628d96ab2f",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-054db33e-461f-4757-8d7a-81951bfdd983",
+        "request_id": "s1-request-14a99855-7cf2-42d0-bec7-1f325f67d876",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-5e3fc202-a436-42ca-bd72-eebd16a049b1",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-054db33e-461f-4757-8d7a-81951bfdd983",
+        "request_id": "s1-request-23d5de82-1999-4d6b-807e-7057ef0787f8",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-1215a2f1-218a-4fc9-a548-7d8271bfc789",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-161bd113-816e-4eb6-b6a7-0f0cbf676629",
+        "request_id": "s1-request-1c6bda31-25cb-4919-a339-156768ceb1ca",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-37112bc0-73df-4f33-b3d8-cf312fc3452c",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-161bd113-816e-4eb6-b6a7-0f0cbf676629",
+        "request_id": "s1-request-1763f3ff-d3d6-4aaa-89d7-130fa98de4a7",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-57d03c17-7503-409c-8929-e9f1e86536ad",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-5523bf5e-bd12-4dc4-b431-17aa0cc6b2ef",
+        "request_id": "s1-request-60799a0c-cf98-4283-a062-bf57eca909e4",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-d5ba5e0b-81cb-4d76-91ca-2274d56db59c",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-5523bf5e-bd12-4dc4-b431-17aa0cc6b2ef",
+        "request_id": "s1-request-8ee361eb-074f-4f5e-b89d-e9b71c7fbc58",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-35947a67-07b4-4f2b-8bf8-5d53b352bb01",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-efee316d-d0aa-4b0b-abb0-e19075c75725",
+        "request_id": "s1-request-f7912a8f-3595-4c68-a266-91e8f3413906",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-80b9b272-613f-4c0c-8ce3-b6706b421bd6",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-efee316d-d0aa-4b0b-abb0-e19075c75725",
+        "request_id": "s1-request-42450883-7d09-4c32-babf-5caf052e62d6",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a09738be-1736-4d11-a968-ba666b928db9",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-5725d1ff-16be-4e9b-aa0f-650c2988699e",
+        "request_id": "s1-request-74ccf1f3-1ae3-4153-a529-812f557bf9c1",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-1c576a83-8181-49ef-bd1a-a8a7d8c10e4e",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-5725d1ff-16be-4e9b-aa0f-650c2988699e",
+        "request_id": "s1-request-b971aee1-ac7d-4ba8-9756-00ccc26ce893",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-d9c44902-86e2-4e2b-a917-38a0c79b25d2",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-efbb08c3-ac56-44ba-8996-c5f6b0c69408",
+        "request_id": "s1-request-a70c1ed3-b289-4254-8a6d-8ac4cd21652d",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-518602a2-1a11-4ff0-9b71-d2d16137ce84",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-efbb08c3-ac56-44ba-8996-c5f6b0c69408",
+        "request_id": "s1-request-3f33419f-083f-46b1-92a8-b5c79bcf3d3d",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-c597c6aa-4334-4641-8314-73a356817991",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-0272e27b-417b-4c7f-898e-dca7bc40363c",
+        "request_id": "s1-request-0ee461f6-a230-434f-b63f-7ca8d0965ccf",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-59ff69f9-df84-4354-88e9-d4c4cd78a25d",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-0272e27b-417b-4c7f-898e-dca7bc40363c",
+        "request_id": "s1-request-354e9421-5a89-4fcf-8d38-8107de131be7",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-47d8cd4c-012b-4d70-8559-4be7fddc8f86",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-c159072e-aa6a-4758-b814-ffde8fca11b0",
+        "request_id": "s1-request-5706249c-e782-4de0-b16b-c64875464c02",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-0063bb21-119e-4569-a3c3-77098347d4f6",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-c159072e-aa6a-4758-b814-ffde8fca11b0",
+        "request_id": "s1-request-9d0beb31-1cdf-4cc6-a47e-bd5bbf892579",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ed217e05-8013-46b6-99eb-cf61b5842c09",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-44cdbb77-c48a-4aff-8933-2cd5e1ce8402",
+        "request_id": "s1-request-aafde089-2191-4d97-be39-35ca4e009ab6",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-dbd869cf-cd96-4647-bb56-f4f4d5a9a6d9",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-44cdbb77-c48a-4aff-8933-2cd5e1ce8402",
+        "request_id": "s1-request-827e9d6c-4f2d-4cbe-af07-fe184af8f7c7",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-d548083e-cbdb-49b5-b1df-0ef13a51a6a8",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-63eaec30-200f-425a-ac67-dfb737ab7618",
+        "request_id": "s1-request-75d02821-bd06-4c7c-a277-a39b62045466",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a65f3f84-cdce-472e-89ac-30f3e53b139c",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-63eaec30-200f-425a-ac67-dfb737ab7618",
+        "request_id": "s1-request-ae9dd595-2791-4ff8-97c3-2a0669ed0d0a",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-3387c2b4-aed0-4f9f-8c6e-6ab2b4fce10d",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-e358cdd1-ebb7-4bfc-ae6d-b9185b49905b",
+        "request_id": "s1-request-458d71c0-3100-4834-9714-0fb4b10cdc3f",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8cd0d72a-19ee-49c3-a6dc-c660c59fbe54",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-e358cdd1-ebb7-4bfc-ae6d-b9185b49905b",
+        "request_id": "s1-request-d427c268-cae1-4990-9e57-041e83132159",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a3b8e305-7a6f-4da8-b659-a9ca3dd4c67b",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-5fe150b2-c13b-4c64-8aed-bd75e0eee278",
+        "request_id": "s1-request-af475158-64c3-45ce-bf2e-e92cf9dc664b",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-03e196d9-0800-48bd-bb90-52cfbb892557",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-5fe150b2-c13b-4c64-8aed-bd75e0eee278",
+        "request_id": "s1-request-5f1b845e-491c-4285-bf5b-6244edce6ee5",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-9a7e62c6-ebac-4d8f-be28-ddee88d864d0",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-32ebe208-3dc6-40c4-b874-33e1997650ef",
+        "request_id": "s1-request-3a73e89f-d12b-4edc-916d-a9b0554f74fd",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-01c884b2-3ec8-4789-9b87-872781d2d137",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-32ebe208-3dc6-40c4-b874-33e1997650ef",
+        "request_id": "s1-request-c5b5aa84-c19e-46a4-98ce-bd2173d25f6a",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-343031d2-5c38-46ab-a019-0a646591c61f",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-0d9b6b7d-1fec-4c7d-a0b5-da300ec6da9f",
+        "request_id": "s1-request-112a217f-6ac0-4fec-8c24-1b955cf669f2",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-111da4f4-056c-4caa-b6d8-0401f410188a",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-0d9b6b7d-1fec-4c7d-a0b5-da300ec6da9f",
+        "request_id": "s1-request-a7a7d257-8a0a-4d93-8630-f7929e2f8a5c",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7101de81-ba02-4e31-a8ee-ada5fb1c20cb",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-e147771a-acc4-4376-bd94-d6d122e28ec5",
+        "request_id": "s1-request-dca93db8-8207-412a-b437-bd6f13f95483",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-0e747cb6-2a75-4c8c-8647-280b729cd5f1",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-e147771a-acc4-4376-bd94-d6d122e28ec5",
+        "request_id": "s1-request-7a60349a-c5f9-4207-baec-07980a095c11",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-f6d4120e-4622-4b7a-8383-0e6e2f0c418e",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-93e26a17-c927-437b-ba38-644a3c49e280",
+        "request_id": "s1-request-00831239-0e91-4ab2-8709-3830b40fa4be",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7b6eaf56-a585-46b1-9b4f-da8368a29450",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-93e26a17-c927-437b-ba38-644a3c49e280",
+        "request_id": "s1-request-84a12eb6-834b-486b-9627-636027c05547",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-0af43a61-b711-4148-a41c-ff1798e74e3c",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-c03b2816-6397-4af2-8079-386368e10882",
+        "request_id": "s1-request-bc6b3905-89e6-4e0f-8ac9-1152dde6c8a6",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8ef4e706-7bd1-4383-9714-51a071168e33",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-c03b2816-6397-4af2-8079-386368e10882",
+        "request_id": "s1-request-84e2c3dc-7f10-4648-b69e-d2b0118491b7",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-647f2fd7-3751-4b96-a03f-31436c263456",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-f8cfcb2b-ead3-413b-95fe-c4fbe3db46ef",
+        "request_id": "s1-request-193ca507-58e8-4c55-aa57-7c1a31f5e41a",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-bd94c361-fa22-44a8-b677-a6db8dc7bcc2",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-f8cfcb2b-ead3-413b-95fe-c4fbe3db46ef",
+        "request_id": "s1-request-fc0ce7fc-6f7a-43a9-9e48-a5d2d1fbec14",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ab2220c3-5ab5-4504-b077-9fce881045b6",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-1106f704-b9e7-42f1-ae5e-ab3309b35874",
+        "request_id": "s1-request-76585a4d-a8f4-490c-8c7e-5b0d9c0e623c",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7965dc57-e46c-417b-a799-5dbf831014fe",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-1106f704-b9e7-42f1-ae5e-ab3309b35874",
+        "request_id": "s1-request-c448f856-f31f-42e0-8142-510a66cfee66",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7594bd16-e46e-4751-912f-9ed11d962147",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-62fdc1c0-2a8d-4e62-a9e2-fd3d89d8ed4d",
+        "request_id": "s1-request-28ab6be3-fbf5-4e45-a951-2abb7443dbe1",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-731e9dc6-9a07-46cd-a0fb-f3ce3fabe90d",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-62fdc1c0-2a8d-4e62-a9e2-fd3d89d8ed4d",
+        "request_id": "s1-request-57e060c5-8f84-44df-a064-0a48613874ae",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8b1d2b39-bcef-4f99-b986-1f4d6c4d503b",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-ebb41dc1-94ff-495f-9f1d-6d8c0590a8da",
+        "request_id": "s1-request-4df7eb2a-44b0-40fe-bfde-77612ec8a179",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-4564d833-7ae5-4ede-8c3e-cebaaf3a99ae",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-ebb41dc1-94ff-495f-9f1d-6d8c0590a8da",
+        "request_id": "s1-request-5db757ac-8de1-4d9a-a3db-ba2993fb7d05",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-3a1992ff-f5f9-4f81-8518-4fa6540aff9f",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-a458f03a-08a1-495a-9d33-f9579e2d2b1f",
+        "request_id": "s1-request-0fc095ef-75eb-4807-b90b-5c12e847bcb6",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-0fbc2716-4739-4c93-b55e-839ee2ad2018",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-a458f03a-08a1-495a-9d33-f9579e2d2b1f",
+        "request_id": "s1-request-57e8c6cd-0d9d-4071-9d37-9f61d4a273f9",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-4e3b3555-1fd6-44c0-a513-59f0c641ac10",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-f1b89527-3f8b-45fc-ac34-a30dbebec618",
+        "request_id": "s1-request-677be5a2-b12d-4719-a17d-82351a1dd2f6",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-44cb960c-88c4-432d-beea-0087d71ff440",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-f1b89527-3f8b-45fc-ac34-a30dbebec618",
+        "request_id": "s1-request-43dfa48d-7219-4c5e-8af8-0eb849cf24ef",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8d1eb82a-2fa2-4017-b45b-6a0d0f9467bb",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-aff1b174-ef90-4650-845b-2415905e4dae",
+        "request_id": "s1-request-3570b316-1254-4edf-9c63-b138c5c0c678",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-055aa324-897e-4f8a-9b32-0e39ebaed181",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-aff1b174-ef90-4650-845b-2415905e4dae",
+        "request_id": "s1-request-65d5c10f-d4d8-4d12-8915-2fb38817343f",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-3d80b0fb-ad4f-4258-ab77-c3d7cfb27a03",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-57a4b2a8-e6ba-4298-bb53-cc17f66e1077",
+        "request_id": "s1-request-f244b886-af71-4f4f-b846-c638cc620837",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-6ad1928d-1500-4bf2-9efd-16214db471ae",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-57a4b2a8-e6ba-4298-bb53-cc17f66e1077",
+        "request_id": "s1-request-55559408-7890-45c4-bb55-60b293562043",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-c86660ba-de9e-4f46-9cca-b12abb4b96ed",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-098de4c9-1cdf-4b32-a79b-b88fa1d51e29",
+        "request_id": "s1-request-f1ee46d0-1f8e-44b5-bcb1-a6ea3efa4754",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-bbe5241d-70a8-4859-9e2c-05358921f3b9",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-098de4c9-1cdf-4b32-a79b-b88fa1d51e29",
+        "request_id": "s1-request-5a91c716-a75e-407f-8cf7-c01092b04bee",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-9979b452-0bf4-465a-860a-1d74cee9cbdd",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-e0e07f7a-ea07-4996-b9e8-bd97755f6dc3",
+        "request_id": "s1-request-eea0d5ab-0afd-4d3d-acea-a27f60196816",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-9e659c2c-e8e1-4500-ba96-5187478396e8",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-e0e07f7a-ea07-4996-b9e8-bd97755f6dc3",
+        "request_id": "s1-request-82d858e1-3637-4943-b8b2-8ebc917327de",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ec41caaa-e175-4509-abda-5c09daf98a41",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-e2b9a3aa-f0d3-4aa6-a873-3c00acb13bba",
+        "request_id": "s1-request-3655c0f7-9b78-4b3b-8317-1617756a0954",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-3bc85b6f-318f-49f3-842c-12cdbb8cda9f",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-e2b9a3aa-f0d3-4aa6-a873-3c00acb13bba",
+        "request_id": "s1-request-0b36e0e5-f43c-4608-9a6f-2fd8606a9c7f",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8a75edcc-7af5-47a1-90fe-0a9f5d3d56be",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-5f8fd6b2-c71f-41f5-ac5f-22666d3d89d5",
+        "request_id": "s1-request-af6a0f64-67fc-4827-8528-d17ca2b569a1",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-27511009-85d6-4204-afab-8c475e0080aa",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-5f8fd6b2-c71f-41f5-ac5f-22666d3d89d5",
+        "request_id": "s1-request-0bbdbef9-77c6-456e-b693-65e81dcc6363",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8c54030f-61bb-499c-a689-861b5b569093",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-c6f0f700-5ac4-4d36-b88c-dcf741d0fc89",
+        "request_id": "s1-request-3a7e94ec-f09d-40b6-9c41-14441c4a40d7",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-9815ba1e-7157-4372-b7de-f7aba634b758",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-c6f0f700-5ac4-4d36-b88c-dcf741d0fc89",
+        "request_id": "s1-request-eddb669a-9981-495e-9b1e-a1c3d9a1a029",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8d92a740-0c55-4325-b45f-144bbe89f078",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-55c72528-29c9-4600-aac5-153d999dd735",
+        "request_id": "s1-request-77bf2f46-f8c2-4b9c-aaa4-b6b6a26c0e2a",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-2c66b1b7-9924-4b87-81bb-7186d64fdfd6",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-55c72528-29c9-4600-aac5-153d999dd735",
+        "request_id": "s1-request-6ecda32b-40b5-4f93-9535-794cff7b1156",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-0e3f2a0b-9f7c-444e-8dc3-bfa75f524776",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-32020885-d89f-40cf-95e0-289dcb7a9810",
+        "request_id": "s1-request-82d8f848-8833-45c1-883c-aae9456a4384",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-03be0daa-bf7b-444c-b99d-8c80645a4e9d",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-32020885-d89f-40cf-95e0-289dcb7a9810",
+        "request_id": "s1-request-2dbb9c76-1fcd-48fd-9ad9-821c6ab41d2c",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-1555d8f3-7c16-4a28-9935-cd28afc2987f",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-f9fe4d0f-966e-44d7-af7f-dbcbfe8d1343",
+        "request_id": "s1-request-c5e0999a-b8b1-40a9-be67-3edeb92530cc",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-aee9be18-1dc2-47a9-b328-9d8485f3d0cb",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-f9fe4d0f-966e-44d7-af7f-dbcbfe8d1343",
+        "request_id": "s1-request-0ffa89d9-7f17-4900-ae86-736c3b74f555",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-015f1ec5-1cec-4a41-9583-1d0c6fd938fb",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-50e50ee0-9b2f-4fe9-9799-3399f158df11",
+        "request_id": "s1-request-c31c7772-fcb3-41d6-8628-b2cc78165959",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-4e6b401d-28be-448b-b766-21236af0003c",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-50e50ee0-9b2f-4fe9-9799-3399f158df11",
+        "request_id": "s1-request-ddb3ca79-5c1e-462d-9a77-427c60455210",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-bea21cb2-12f7-4df3-b0ed-ac7cdb2785d4",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-0afc0e6d-ce5b-47fd-a5c8-8f7d09319b78",
+        "request_id": "s1-request-154bfb6d-8ce5-49f9-94f7-5235dfa4c7d3",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-0118b12f-31fb-4684-b85c-be511b2f32e1",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-0afc0e6d-ce5b-47fd-a5c8-8f7d09319b78",
+        "request_id": "s1-request-41eb8275-0d80-4afc-ac65-55bbd31f2cd7",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-b56c2dc0-59ba-4c4a-b51b-39ef25566c30",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-af9674a2-6b1d-4886-b076-0e16ce368c6c",
+        "request_id": "s1-request-351c8802-5ca9-4bed-b740-e50a0620d861",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-89344e33-ebcb-42e3-a2f8-0adffaaaac37",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-af9674a2-6b1d-4886-b076-0e16ce368c6c",
+        "request_id": "s1-request-dab5cfd3-c0b4-407b-ad2d-0164b9408ab0",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-6ec2c2a2-bc1a-4e9d-84dc-e5043673f3c2",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-ca208975-f8f8-4bec-a76f-16d57f28b07f",
+        "request_id": "s1-request-bb659b28-f663-4c8a-a6ca-0e70e5fb09b5",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-cafa0a9d-0e17-4f54-bbb7-949a82e2009e",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-ca208975-f8f8-4bec-a76f-16d57f28b07f",
+        "request_id": "s1-request-6354b884-9948-4ea3-8cd9-05f7248d9d33",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7fb699a7-eccf-4f6a-ad2a-8d3b5f328709",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-c6ed1cd4-cc92-43e0-977e-bee7b23b63e7",
+        "request_id": "s1-request-abbaecb3-f072-44ab-b625-e095626a9cf4",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ae276c3e-b0ba-45a4-9e52-0dcb66ecc79a",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-c6ed1cd4-cc92-43e0-977e-bee7b23b63e7",
+        "request_id": "s1-request-fb3d5b6e-8ae4-44d6-b8be-0fd56c28664b",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-10fa48a4-e45b-4803-9c3b-6dbc0f63c5f5",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-b3ee6319-9b30-45d3-a047-5043251e14fd",
+        "request_id": "s1-request-9b7f305e-9426-40dc-8c5d-ccaa2b2cd10e",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-04db1db4-9a9f-476a-948a-632eb1783899",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-b3ee6319-9b30-45d3-a047-5043251e14fd",
+        "request_id": "s1-request-3968c6d5-52a4-4d79-a34e-b1235dc31282",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-f0ec172e-c148-4374-8edc-f0cdbfea4567",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-8a120d7d-1380-4b26-90f3-396ecb8faa93",
+        "request_id": "s1-request-d15c8f15-2c4c-47a3-94a7-4d1aea5e123c",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a883b8f3-1ae0-4539-9d38-0fac49b700d7",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-8a120d7d-1380-4b26-90f3-396ecb8faa93",
+        "request_id": "s1-request-8500a830-e604-4221-8def-f0a610ec7963",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-63535bd5-6d12-4939-a178-07d6a1614084",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-400b842b-1c09-4064-bcc6-bfc4623a7499",
+        "request_id": "s1-request-ccdef848-53e7-4edc-975e-c1174dc37e0d",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-13f452d0-afde-4a9f-b7b7-cbca08b9d2e8",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-400b842b-1c09-4064-bcc6-bfc4623a7499",
+        "request_id": "s1-request-8e58981a-357e-4896-95a5-5ddc3cf4c11f",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-c0d7478c-746f-4ed9-8cf9-e1a70c9f54bd",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-491622c5-6315-46b0-b897-f5cd6aa1fc12",
+        "request_id": "s1-request-c4b072c3-e925-490c-835e-540c91ea4289",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-b6313f39-3004-4a66-88fb-a0fa8d1e82a6",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-491622c5-6315-46b0-b897-f5cd6aa1fc12",
+        "request_id": "s1-request-7c0247f4-9247-4d83-9648-c4134128efc6",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a9185869-8540-48c1-87e3-c76e323cc166",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-03f8c7d3-9e6f-4f32-969c-50b39949a752",
+        "request_id": "s1-request-dd0aa836-a021-43f7-bbff-3c0b34807c34",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-5232cc1d-c00a-47dd-b4fd-9b05616aecf0",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-03f8c7d3-9e6f-4f32-969c-50b39949a752",
+        "request_id": "s1-request-ca3a1135-4910-41da-91c6-e0350341228c",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-75d4cda8-e067-4a91-aec9-d8d43221e927",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-80e046a8-775e-4f84-8a06-d0de461b0d7f",
+        "request_id": "s1-request-d596c6bb-1da7-44a6-9689-e96c92408190",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-043dd5c5-73a0-45cb-aa67-d7351db5c537",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-80e046a8-775e-4f84-8a06-d0de461b0d7f",
+        "request_id": "s1-request-dae975cb-8716-4e9f-b234-850ec255378a",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a74ae5fb-7b8a-44a2-a1d0-a87f10301829",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-4d4ffef8-df88-4aab-9763-5bd1daea1bdd",
+        "request_id": "s1-request-03030a30-4935-40b7-8eb8-6fdace6e7953",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-44728503-0686-45be-bcac-8e855f5cfd47",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-4d4ffef8-df88-4aab-9763-5bd1daea1bdd",
+        "request_id": "s1-request-17ba63b6-15d0-4074-b5ea-ca2f22597b7c",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a8333313-eede-4211-abe0-82ce31542d18",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-d1193bff-91aa-4add-9578-4e38a0a8a80a",
+        "request_id": "s1-request-07b709e6-6e4d-4d1c-b27a-5fa7106381f4",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ca9b5817-e91c-4157-b1f3-b154ef1cdf11",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-d1193bff-91aa-4add-9578-4e38a0a8a80a",
+        "request_id": "s1-request-a68c09c0-da70-46ca-8569-4f60d7561021",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-99bc121e-6bb0-4a51-8c63-045352f15a27",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-48a5c1c6-ca9f-42d0-9630-db21a78f046e",
+        "request_id": "s1-request-942bad1d-3fb4-4e9b-bd94-869bdfa89b9f",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8b8172d1-831b-41e3-bf53-5012aa0ae50b",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-48a5c1c6-ca9f-42d0-9630-db21a78f046e",
+        "request_id": "s1-request-844855a3-61ad-43fb-abc7-fe5ed3653ee3",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-1093e4c6-d238-4d7b-b026-c66322fa9c6b",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-8013c8e4-a40a-420b-ba7c-5f006846dd25",
+        "request_id": "s1-request-092e93e6-5cb6-4362-a39f-b0331f25fd70",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-2c8cbf1b-0033-4bc1-9f21-d4d2d344450d",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-8013c8e4-a40a-420b-ba7c-5f006846dd25",
+        "request_id": "s1-request-50760e57-56cd-485d-ab57-8976f809d5b6",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-582c46b5-9e22-4fbb-846d-e7d77b36e179",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-3d251017-5003-4715-bcb3-7336294b083c",
+        "request_id": "s1-request-f2d609e3-f8e3-4926-96e2-3ccd1f98faa7",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-85048101-8ecf-4e0a-afb2-68a4bea9b257",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-3d251017-5003-4715-bcb3-7336294b083c",
+        "request_id": "s1-request-942086ab-a56e-4726-aed9-281fc8e0b8e2",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-52cf8bb5-b97d-43e9-80f5-3c42b850ce53",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-a683b80f-0ed9-4fef-9fab-c2d34e1ae396",
+        "request_id": "s1-request-a29c14ae-5317-439c-89e9-389167967905",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-267ee7ff-a80b-43df-ac40-5221018abb8c",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-a683b80f-0ed9-4fef-9fab-c2d34e1ae396",
+        "request_id": "s1-request-6250497d-c963-49c1-a948-3e69780d8c2e",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-bcf06619-8283-41ef-bfc3-1bec98afa4a6",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-888c274e-1c18-45bb-93cd-65af3e57c096",
+        "request_id": "s1-request-da5cc3b2-3e51-49b0-8ab8-b6a187b865e0",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-2ad02e1a-4679-47a7-a95b-019f75557257",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-888c274e-1c18-45bb-93cd-65af3e57c096",
+        "request_id": "s1-request-2ff2b925-f77a-4d08-a23f-ea79d73b8d22",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ec076a14-ee0d-47db-8a08-56374d671b30",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-16682470-175d-476a-b1ba-8094b3a3b19d",
+        "request_id": "s1-request-be474195-69f9-4e93-a682-4b7f37bdc202",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-a72a9498-4e03-4278-bd57-106a782a7f34",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-16682470-175d-476a-b1ba-8094b3a3b19d",
+        "request_id": "s1-request-38858093-d552-44e5-b3bb-992030eed14d",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-6f28557b-769e-4d01-951c-8d85657482a7",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-0a66031d-4344-4c63-b3db-940c74105ab4",
+        "request_id": "s1-request-54e4c259-89df-44a7-9a1a-b8a06d692cd4",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-58702d06-a46b-47fc-911a-595cfe5f41a5",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-0a66031d-4344-4c63-b3db-940c74105ab4",
+        "request_id": "s1-request-6fe76993-713f-4ed7-9b34-182fed3c721e",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7a908020-f3c0-4088-a60b-c81bb77d2594",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-747bf1bc-1dcb-4f3c-bea8-06d6e853306e",
+        "request_id": "s1-request-b551993b-01b4-4791-9f77-9aebafa42e82",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-1d543b78-88b7-4889-a16f-31c9a0bc2713",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-747bf1bc-1dcb-4f3c-bea8-06d6e853306e",
+        "request_id": "s1-request-cdd2b799-98eb-4c87-b50a-92a06eba9290",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-b4d92ca4-4fe8-4190-9bbb-ebc1b9162e34",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-c14ec598-4cdc-42bc-810e-6f442a09cbef",
+        "request_id": "s1-request-0082d34b-29b5-4d68-80a8-7e21d5a114cb",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-f98b0407-e7ec-4840-86b0-8a26c05db081",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-c14ec598-4cdc-42bc-810e-6f442a09cbef",
+        "request_id": "s1-request-d6a3b981-c8e2-4086-9a07-66a4bcdbb372",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-b1c578fc-a83e-45c8-a4bf-d5a81e3adcc6",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-9067373a-d877-4ae7-a029-c5762abe8930",
+        "request_id": "s1-request-5c0bb24b-24d3-4abf-91ed-1b49068f652c",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-1c6f874f-6749-4892-8d89-1805b343315a",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-9067373a-d877-4ae7-a029-c5762abe8930",
+        "request_id": "s1-request-52645779-4559-48e5-a2be-c10b6ca43477",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-c84c0743-26ae-4c9b-9251-0c9818f8cf81",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-ed41dbe5-3df8-4b18-8953-5c29b21ccd90",
+        "request_id": "s1-request-8f072bee-21f1-4427-b9fa-bb36ce8cb7cf",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-23a699be-db97-49f3-b4af-04f7571adce1",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-ed41dbe5-3df8-4b18-8953-5c29b21ccd90",
+        "request_id": "s1-request-8f45673b-f7a5-41ea-9d64-d37c6ef39d68",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-09e424d6-2dd3-4693-ab4d-cae6605f8785",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-17d8f50c-709e-4fde-8303-e176b8f3d840",
+        "request_id": "s1-request-07e29d66-84ad-4d2c-8928-3705a0a8f5d7",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-87ed2699-5118-40d0-b38a-0ff9d1361f73",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-17d8f50c-709e-4fde-8303-e176b8f3d840",
+        "request_id": "s1-request-f07b815a-75fb-49b5-9946-5b1a6d4222e5",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-cb421d0f-8188-4dde-8fe9-49e339b924ce",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-d36f66ae-6df8-4637-b735-4e96e04e517b",
+        "request_id": "s1-request-12fc7991-9002-4ba6-abfd-9f0cdb2807cc",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-93f609a9-bcaf-47c5-8f0f-304e163f45f9",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-d36f66ae-6df8-4637-b735-4e96e04e517b",
+        "request_id": "s1-request-9d75605b-5cca-4ac9-a660-2872adf83661",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-40cf778f-b588-4e82-9664-f369da20e648",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-85e7bc01-95b7-491c-afef-c14fc43c4e55",
+        "request_id": "s1-request-b1c4b07c-ab65-4dbb-b8ae-09c973409ce0",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-8e74e1c8-b6c1-4415-a108-b1f5bdf13092",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-85e7bc01-95b7-491c-afef-c14fc43c4e55",
+        "request_id": "s1-request-7ca1c4bd-070b-4e42-ae7c-c26415d85084",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-42922dba-0461-458f-8b3f-e5382dcbeeef",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-6296d4f4-02db-4826-b124-37f5f03a986d",
+        "request_id": "s1-request-c862c019-4db8-4be6-8db0-0fed7f013099",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-08c7a1a2-1e6a-4e16-aa47-4e07745f989e",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-6296d4f4-02db-4826-b124-37f5f03a986d",
+        "request_id": "s1-request-7d4aa75b-7901-43b2-a406-c189e4c27d96",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-ec244f4c-b312-42ba-9398-c7fa39bcb585",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-5526f821-b98e-40aa-bc40-2efb718ddc04",
+        "request_id": "s1-request-761b64ca-d7cc-4702-9e62-88158aca32c8",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-2f24db9b-8728-4288-a8a5-78cb795865e3",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-5526f821-b98e-40aa-bc40-2efb718ddc04",
+        "request_id": "s1-request-dc83744c-3104-45cc-8bde-da3ad9a8bab4",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-7a29e5b6-e18f-4cdc-9583-4dd84c99bf9c",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-6104bc37-72ba-4c5c-86b1-cf6356e58300",
+        "request_id": "s1-request-9f3c6a0f-9f61-4cb6-8e6a-91482a712a26",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-31bc2281-7535-44df-b31f-a1cadfd3883b",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-6104bc37-72ba-4c5c-86b1-cf6356e58300",
+        "request_id": "s1-request-e76e59a3-e1ab-4c29-9796-b0d6349d2763",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-273c270b-d88a-40e7-8e93-71cf33eeb8d5",
+        "from_bucket": "available",
+        "to_bucket": "reserved",
+        "quantity": 1,
+        "order_id": "s1-order-a4ba3e3a-2771-486f-baea-38a439531668",
+        "request_id": "s1-request-8cd18072-4715-43f6-8fe3-73cacaf3f6ea",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      },
+      {
+        "movement_id": "s1-movement-4d35493e-4a68-4b2d-ad45-b407d60fcc0e",
+        "from_bucket": "reserved",
+        "to_bucket": "sold",
+        "quantity": 1,
+        "order_id": "s1-order-a4ba3e3a-2771-486f-baea-38a439531668",
+        "request_id": "s1-request-91564e9e-93e3-42b6-897a-b0bbe07e0dc8",
+        "observed_at": "2026-11-23T10:00:00.000Z"
+      }
+    ],
+    "stock_ledger_checksum": "610032075d9681b4f273aefa6df1ebfdb6568dea364d23866474350ed56b85c0"
+  }
+}

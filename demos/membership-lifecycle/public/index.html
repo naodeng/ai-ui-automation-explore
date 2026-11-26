@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-CN" data-type="software">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="page-type" content="software" />
+    <meta name="site-kind" content="software" />
+    <meta name="theme-color" content="#f4f5f1" />
+    <title>M1 会员生命周期 Demo · AI UI Automation Explore</title>
+    <meta
+      name="description"
+      content="使用本地合成夹具演练 Silver、Gold、Platinum 等级迁移、旧会话授权、已领取优惠券和事件版本规则。"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="skip-link" href="#main">跳到主要内容</a>
+        <a class="brand" href="/" aria-label="AI UI Automation Explore">
+          <span class="brand-mark" aria-hidden="true">QA</span>
+          <span>AI UI Automation</span>
+          <span class="brand-sub">/ Explore</span>
+        </a>
+        <div class="top-meta">
+          <span>M1 · Membership Demo</span>
+          <span class="local-pill"><i class="local-dot" aria-hidden="true"></i>本地合成沙盒</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell" id="main">
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <h1 id="page-title">会员生命周期验证台</h1>
+          <p class="intro-copy">查看合成会员状态，并演练已批准的等级、旧会话与事件版本规则。</p>
+        </div>
+        <div class="intro-meta">
+          <span class="seed-pill">M1 · 合成场景</span>
+          <span class="run-meta" id="run-meta">正在创建本地 Run…</span>
+        </div>
+      </section>
+
+      <div class="layout">
+        <section class="panel state-panel" aria-labelledby="state-heading">
+          <div class="panel-head">
+            <div class="panel-title-row">
+              <h2 id="state-heading">合成用户当前状态</h2>
+              <button class="button-quiet" id="reset-run" type="button">重置合成夹具</button>
+            </div>
+          </div>
+          <div class="section-body">
+            <dl class="state-grid">
+              <div class="state-item">
+                <dt>合成用户</dt>
+                <dd id="member-id">user_m1</dd>
+              </div>
+              <div class="state-item">
+                <dt>当前会员等级</dt>
+                <dd><span class="tier-chip" id="member-tier">Gold</span></dd>
+              </div>
+              <div class="state-item">
+                <dt>事件版本</dt>
+                <dd id="event-version">v5</dd>
+              </div>
+              <div class="state-item">
+                <dt>旧会话</dt>
+                <dd><span class="session-chip" id="old-session">可用</span></dd>
+              </div>
+            </dl>
+
+            <div class="rule"></div>
+            <div class="section-heading">
+              <h3>生命周期场景 <span>（本地夹具操作）</span></h3>
+              <p>每次运行都会创建独立的合成 Run。</p>
+            </div>
+
+            <div class="scenario-list">
+              <article class="scenario-row">
+                <div class="scenario-label upgrade-label">Silver → Gold</div>
+                <div class="scenario-copy">
+                  <h4>达到升级阈值</h4>
+                  <p>准备 Silver 夹具并应用升级事件，再读取 Gold-only 授权 Oracle。</p>
+                </div>
+                <button class="button-primary scenario-action" data-scenario="silver_to_gold" type="button">
+                  运行场景
+                </button>
+              </article>
+              <article class="scenario-row">
+                <div class="scenario-label downgrade-label">Gold → Silver</div>
+                <div class="scenario-copy">
+                  <h4>续期失败后降级</h4>
+                  <p>保留夹具中的旧会话，并读取其发起新 Gold-only 购买的授权结果。</p>
+                </div>
+                <button class="button-secondary scenario-action" data-scenario="gold_to_silver" type="button">
+                  运行场景
+                </button>
+              </article>
+              <article class="scenario-row">
+                <div class="scenario-label downgrade-label">Platinum → Gold</div>
+                <div class="scenario-copy">
+                  <h4>Platinum 续期失败后降级</h4>
+                  <p>按契约示例应用降级事件；本场景只观察等级和事件版本，不读取 Gold-only 授权。</p>
+                </div>
+                <button class="button-secondary scenario-action" data-scenario="platinum_to_gold" type="button">
+                  运行场景
+                </button>
+              </article>
+            </div>
+
+            <div class="run-result" id="run-result" hidden aria-live="polite"></div>
+          </div>
+        </section>
+
+        <aside class="side-stack" aria-label="夹具和只读 Oracle">
+          <section class="panel side-panel" aria-labelledby="coupon-heading">
+            <div class="summary-head">
+              <h2 id="coupon-heading">已领取优惠券</h2>
+              <span class="summary-tag">合成夹具状态</span>
+            </div>
+            <div class="coupon-card">
+              <span class="coupon-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M4 6.5h16v3a2.5 2.5 0 0 0 0 5v3H4v-3a2.5 2.5 0 0 0 0-5z" />
+                  <path d="M12 8.5v7" />
+                </svg>
+              </span>
+              <div class="coupon-copy">
+                <p class="coupon-name">历史优惠券</p>
+                <p class="coupon-note" id="coupon-status">Seed 时点有效</p>
+              </div>
+              <span class="coupon-state">已领取</span>
+            </div>
+            <p class="coupon-policy">契约要求保留至自身过期；Seed 仅记录起始时点有效，未定义具体过期时间。</p>
+          </section>
+
+          <section class="panel oracle-panel" aria-labelledby="oracle-heading">
+            <div class="summary-head">
+              <h2 id="oracle-heading">只读会员 Oracle</h2>
+              <span class="summary-tag">服务端事实</span>
+            </div>
+            <dl class="oracle-list">
+              <div>
+                <dt>有效等级</dt>
+                <dd id="oracle-tier">Gold</dd>
+              </div>
+              <div>
+                <dt>Gold-only 授权</dt>
+                <dd id="oracle-authorization">尚未探测</dd>
+              </div>
+              <div>
+                <dt>会员事件</dt>
+                <dd id="oracle-events">暂无变更事件</dd>
+              </div>
+              <div>
+                <dt>历史优惠券账本</dt>
+                <dd id="oracle-coupon">已领取 · 当前有效</dd>
+              </div>
+            </dl>
+            <p class="oracle-note" id="oracle-observed-at">等待只读状态读取。</p>
+          </section>
+        </aside>
+      </div>
+
+      <section class="panel checks-panel" aria-labelledby="checks-heading">
+        <div class="panel-head">
+          <div class="panel-title-row">
+            <div>
+              <h2 id="checks-heading">本轮预期检查</h2>
+              <p class="panel-subtitle">契约预期和本地观察分开显示；运行结果不代表外部系统结论。</p>
+            </div>
+            <span class="summary-tag">M1-R01—R05</span>
+          </div>
+        </div>
+        <ol class="check-list">
+          <li class="check-row" data-check="M1-R01">
+            <span class="check-number">1</span>
+            <span class="check-rule">预期检查</span>
+            <p>Silver → Gold 达到阈值后，允许发起仅限 Gold 的购买。</p>
+            <span class="check-status" id="check-r01">待运行</span>
+          </li>
+          <li class="check-row" data-check="M1-R02">
+            <span class="check-number">2</span>
+            <span class="check-rule">预期检查</span>
+            <p>Gold → Silver 后，旧会话不能发起新的仅限 Gold 的购买。</p>
+            <span class="check-status" id="check-r02">待运行</span>
+          </li>
+          <li class="check-row" data-check="M1-R03">
+            <span class="check-number">3</span>
+            <span class="check-rule">预期检查</span>
+            <p>已领取的历史优惠券在其自身有效期内保持有效。</p>
+            <span class="check-status" id="check-r03">夹具：已领取且有效</span>
+          </li>
+          <li class="check-row check-row-actions" data-check="M1-R04">
+            <span class="check-number">4</span>
+            <span class="check-rule">预期检查</span>
+            <p>重复当前事件版本或重放较旧版本，不造成无效等级转换。</p>
+            <span class="check-status" id="check-r04">待运行</span>
+            <span class="check-actions">
+              <button class="button-small" id="replay-duplicate" type="button">重放当前版本</button>
+              <button class="button-small" id="replay-older" type="button">重放较旧版本</button>
+            </span>
+          </li>
+          <li class="check-row check-row-actions" data-check="M1-R05">
+            <span class="check-number">5</span>
+            <span class="check-rule">预期检查</span>
+            <p>会员状态变更在 ≤30 个模拟秒内反映到界面。</p>
+            <span class="check-status" id="check-r05">待运行</span>
+            <span class="check-actions">
+              <button class="button-small" id="advance-clock" type="button">模拟时间 +30 秒</button>
+            </span>
+          </li>
+        </ol>
+      </section>
+
+      <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+      <p class="safe-note"><i class="safe-mark" aria-hidden="true"></i>仅操作本地合成夹具；不会修改真实会员、权益或支付数据。</p>
+    </main>
+
+    <footer class="shell footer">
+      Run <code id="footer-run-id">—</code>
+      <span aria-hidden="true">·</span>
+      Seed <code>m1-gold-to-silver</code>
+      <span aria-hidden="true">·</span>
+      模拟时钟 <code id="footer-clock">—</code>
+    </footer>
+  </body>
+</html>

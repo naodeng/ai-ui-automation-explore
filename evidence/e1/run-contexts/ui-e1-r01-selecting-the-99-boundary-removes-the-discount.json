@@ -1,0 +1,10 @@
+{
+  "case_id": "E1",
+  "clock_epoch": "2026-11-23T10:00:00Z",
+  "project": "ui",
+  "run_ids": [
+    "e1-6ee5d655-364a-4969-aab7-cecb53ffc16c"
+  ],
+  "seed_id": "e1-threshold",
+  "test_title": "E1-R01: selecting the 99 boundary removes the discount"
+}

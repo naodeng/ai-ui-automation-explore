@@ -1,0 +1,1 @@
+﻿run_id,case_id,track,round,commit,seed_id,contract_version,browser_version,tool_version,model_version,actual_status,candidate_count,confirmed_count,false_positive_count,in_scope_seeded_count,confirmed_seeded_count,independently_reproduced_count,total_cost_usd,human_review_minutes,safety_violation_count,evidence_index,notes

@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T12:31:30.125Z",
+  "title": "Design System: AI UI Automation Explore",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Deep Green",
+        "canonical": "#17664f",
+        "tonalRamp": [
+          "oklch(15% 0.025 166)",
+          "oklch(25% 0.045 166)",
+          "oklch(35% 0.065 166)",
+          "oklch(45% 0.08 166)",
+          "oklch(58% 0.072 166)",
+          "oklch(72% 0.055 166)",
+          "oklch(84% 0.03 166)",
+          "oklch(96% 0.012 166)"
+        ]
+      },
+      "primary-deep": {
+        "role": "primary",
+        "displayName": "Deep Green Shade",
+        "canonical": "#124d3d",
+        "tonalRamp": [
+          "oklch(15% 0.02 163)",
+          "oklch(25% 0.04 163)",
+          "oklch(35% 0.06 163)",
+          "oklch(45% 0.075 163)",
+          "oklch(58% 0.067 163)",
+          "oklch(72% 0.05 163)",
+          "oklch(84% 0.028 163)",
+          "oklch(96% 0.012 163)"
+        ]
+      },
+      "positive-pale": {
+        "role": "secondary",
+        "displayName": "Pale Green",
+        "canonical": "#eaf3ee",
+        "tonalRamp": [
+          "oklch(15% 0.012 154)",
+          "oklch(25% 0.02 154)",
+          "oklch(35% 0.03 154)",
+          "oklch(45% 0.04 154)",
+          "oklch(58% 0.04 154)",
+          "oklch(72% 0.032 154)",
+          "oklch(84% 0.022 154)",
+          "oklch(96% 0.01 154)"
+        ]
+      },
+      "warning": {
+        "role": "secondary",
+        "displayName": "Terracotta",
+        "canonical": "#a64624",
+        "tonalRamp": [
+          "oklch(15% 0.018 39)",
+          "oklch(25% 0.04 39)",
+          "oklch(35% 0.07 39)",
+          "oklch(45% 0.11 39)",
+          "oklch(58% 0.11 39)",
+          "oklch(72% 0.08 39)",
+          "oklch(84% 0.045 39)",
+          "oklch(96% 0.018 39)"
+        ]
+      },
+      "warning-pale": {
+        "role": "secondary",
+        "displayName": "Pale Terracotta",
+        "canonical": "#fff2eb",
+        "tonalRamp": [
+          "oklch(15% 0.012 51)",
+          "oklch(25% 0.02 51)",
+          "oklch(35% 0.035 51)",
+          "oklch(45% 0.05 51)",
+          "oklch(58% 0.05 51)",
+          "oklch(72% 0.04 51)",
+          "oklch(84% 0.025 51)",
+          "oklch(96% 0.01 51)"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Warm Neutral Ground",
+        "canonical": "#f4f5f1",
+        "tonalRamp": [
+          "oklch(15% 0.004 110)",
+          "oklch(25% 0.006 110)",
+          "oklch(35% 0.009 110)",
+          "oklch(45% 0.012 110)",
+          "oklch(58% 0.013 110)",
+          "oklch(72% 0.011 110)",
+          "oklch(84% 0.008 110)",
+          "oklch(96% 0.004 110)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White Surface",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(15% 0.003 150)",
+          "oklch(25% 0.004 150)",
+          "oklch(35% 0.005 150)",
+          "oklch(45% 0.006 150)",
+          "oklch(58% 0.006 150)",
+          "oklch(72% 0.005 150)",
+          "oklch(84% 0.004 150)",
+          "oklch(96% 0.002 150)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#17221f",
+        "tonalRamp": [
+          "oklch(15% 0.006 165)",
+          "oklch(25% 0.012 165)",
+          "oklch(35% 0.018 165)",
+          "oklch(45% 0.02 165)",
+          "oklch(58% 0.018 165)",
+          "oklch(72% 0.014 165)",
+          "oklch(84% 0.008 165)",
+          "oklch(96% 0.003 165)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Green Gray",
+        "canonical": "#59645e",
+        "tonalRamp": [
+          "oklch(15% 0.005 157)",
+          "oklch(25% 0.012 157)",
+          "oklch(35% 0.02 157)",
+          "oklch(45% 0.025 157)",
+          "oklch(58% 0.022 157)",
+          "oklch(72% 0.016 157)",
+          "oklch(84% 0.009 157)",
+          "oklch(96% 0.004 157)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Soft Green Gray Line",
+        "canonical": "#e4e8e2",
+        "tonalRamp": [
+          "oklch(15% 0.003 145)",
+          "oklch(25% 0.006 145)",
+          "oklch(35% 0.01 145)",
+          "oklch(45% 0.014 145)",
+          "oklch(58% 0.013 145)",
+          "oklch(72% 0.01 145)",
+          "oklch(84% 0.006 145)",
+          "oklch(96% 0.003 145)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Page Display",
+        "purpose": "The page title and primary hierarchy."
+      },
+      "body": {
+        "displayName": "UI Body",
+        "purpose": "Supporting copy and descriptions."
+      },
+      "label": {
+        "displayName": "UI Label",
+        "purpose": "Form labels, steps, and compact state text."
+      },
+      "amount": {
+        "displayName": "Amount",
+        "purpose": "Payable totals with tabular numerals."
+      }
+    },
+    "shadows": [
+      {
+        "name": "button-rest",
+        "value": "0 5px 12px rgba(23,102,79,.16)",
+        "purpose": "Softly raises the primary action above the page."
+      },
+      {
+        "name": "button-hover",
+        "value": "0 8px 18px rgba(23,102,79,.2)",
+        "purpose": "Adds depth as the primary action lifts on hover."
+      },
+      {
+        "name": "control-focus",
+        "value": "0 0 0 3px rgba(23,102,79,.12)",
+        "purpose": "Visible keyboard focus for the cart selector."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-response",
+        "value": "transform .16s, background .16s, box-shadow .16s",
+        "purpose": "Brief feedback for hover and press."
+      },
+      {
+        "name": "select-focus",
+        "value": "border-color .16s, box-shadow .16s",
+        "purpose": "Brief feedback when the cart selector receives focus."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "800px"
+      },
+      {
+        "name": "narrow",
+        "value": "480px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Creates a local sandbox order after the server confirms it.",
+      "html": "<button class=\"ds-button-primary\" type=\"button\">Create sandbox order</button>",
+      "css": ".ds-button-primary { width: 100%; min-height: 50px; margin-top: 24px; border: 0; border-radius: 10px; background: #17664f; color: #fff; cursor: pointer; font: 700 13px Inter, ui-sans-serif, system-ui, sans-serif; box-shadow: 0 5px 12px rgba(23,102,79,.16); transition: transform .16s, background .16s, box-shadow .16s; } .ds-button-primary:hover { transform: translateY(-1px); background: #124d3d; box-shadow: 0 8px 18px rgba(23,102,79,.2); } .ds-button-primary:active { transform: translateY(1px); } .ds-button-primary:focus-visible { outline: 3px solid rgba(23,102,79,.27); outline-offset: 3px; } .ds-button-primary:disabled { cursor: wait; opacity: .68; transform: none; box-shadow: none; }"
+    },
+    {
+      "name": "Checkout Panel",
+      "kind": "card",
+      "refersTo": "surface-panel",
+      "description": "Separates cart and summary information with one quiet border.",
+      "html": "<section class=\"ds-panel\"><h2 class=\"ds-panel-title\">Products and offers</h2></section>",
+      "css": ".ds-panel { border: 1px solid #e4e8e2; border-radius: 16px; background: #fff; } .ds-panel-title { margin: 0; color: #17221f; font: 690 16px Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: -.025em; }"
+    },
+    {
+      "name": "Cart Select",
+      "kind": "input",
+      "refersTo": "select-field",
+      "description": "Selects the synthetic cart amount and shows its current coupon threshold.",
+      "html": "<label class=\"ds-select-label\" for=\"ds-cart\">Choose cart amount</label><div class=\"ds-select-wrap\"><select class=\"ds-select\" id=\"ds-cart\"><option>At the coupon threshold · ¥100.00</option><option>Below the coupon threshold · ¥99.00</option></select><span class=\"ds-select-arrow\" aria-hidden=\"true\"><svg viewBox=\"0 0 12 8\"><path d=\"M2 2 6 6 10 2\" /></svg></span></div>",
+      "css": ".ds-select-label { display: block; margin-bottom: 10px; color: #3c4943; font: 670 13px Inter, ui-sans-serif, system-ui, sans-serif; } .ds-select-wrap { position: relative; } .ds-select { width: 100%; height: 48px; padding: 0 44px 0 14px; border: 1px solid #dce2dc; border-radius: 10px; background: #fff; color: #17221f; font: 13px Inter, ui-sans-serif, system-ui, sans-serif; appearance: none; transition: border-color .16s, box-shadow .16s; } .ds-select:focus-visible { border-color: #17664f; outline: 0; box-shadow: 0 0 0 3px rgba(23,102,79,.12); } .ds-select-arrow { position: absolute; top: 20px; right: 16px; width: 12px; height: 8px; color: #7c8781; pointer-events: none; } .ds-select-arrow svg { display: block; width: 12px; height: 8px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }"
+    },
+    {
+      "name": "Local Sandbox Chip",
+      "kind": "chip",
+      "refersTo": "status-chip",
+      "description": "Keeps the local-only boundary visible in the page header.",
+      "html": "<span class=\"ds-local-chip\"><span class=\"ds-local-chip-dot\" aria-hidden=\"true\"></span>Local sandbox</span>",
+      "css": ".ds-local-chip { display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border: 1px solid #cde1d4; border-radius: 999px; background: #f3f8f4; color: #124d3d; font: 650 13px Inter, ui-sans-serif, system-ui, sans-serif; } .ds-local-chip-dot { width: 6px; height: 6px; border-radius: 50%; background: #439a70; }"
+    },
+    {
+      "name": "Checkout Stepper",
+      "kind": "nav",
+      "description": "Shows the three checkout stages and highlights the current one.",
+      "html": "<nav class=\"ds-steps\" aria-label=\"Checkout steps\"><span class=\"ds-step\">1 Cart</span><span class=\"ds-step ds-step-current\">2 Confirm</span><span class=\"ds-step\">3 Complete</span></nav>",
+      "css": ".ds-steps { display: flex; align-items: center; gap: 10px; color: #66726b; font: 13px Inter, ui-sans-serif, system-ui, sans-serif; white-space: nowrap; } .ds-step { display: inline-flex; align-items: center; gap: 8px; } .ds-step-current { color: #124d3d; font-weight: 690; } .ds-step-current::before { display: grid; width: 24px; height: 24px; place-items: center; border-radius: 50%; background: #17664f; color: #fff; content: \"2\"; }"
+    },
+    {
+      "name": "Coupon Status",
+      "kind": "custom",
+      "description": "Keeps the coupon rule, eligibility note, and state together.",
+      "html": "<div class=\"ds-coupon-card\"><strong>C20 · ¥100 minimum</strong><span class=\"ds-coupon-state\">Applied</span></div>",
+      "css": ".ds-coupon-card { display: flex; align-items: center; justify-content: space-between; gap: 13px; min-height: 76px; padding: 15px 16px; border: 1px solid #f0d7ca; border-radius: 12px; background: #fffaf7; color: #563a2e; font: 690 13px Inter, ui-sans-serif, system-ui, sans-serif; } .ds-coupon-state { color: #17664f; font-weight: 720; white-space: nowrap; } .ds-coupon-card[data-state=\"below-threshold\"] .ds-coupon-state { color: #a64624; }"
+    },
+    {
+      "name": "Payable Total",
+      "kind": "custom",
+      "description": "Makes the final amount visually distinct and easy to compare.",
+      "html": "<div class=\"ds-payable\"><span>Amount due</span><strong><small>¥</small>80.00</strong></div>",
+      "css": ".ds-payable { display: flex; align-items: end; justify-content: space-between; gap: 16px; padding-top: 18px; margin-top: 18px; border-top: 1px solid #e9ede8; color: #4c5952; font: 13px Inter, ui-sans-serif, system-ui, sans-serif; } .ds-payable strong { color: #17221f; font: 710 30px/1 Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: -.04em; font-variant-numeric: tabular-nums; } .ds-payable small { margin-right: 3px; font-size: 17px; letter-spacing: -.02em; }"
+    },
+    {
+      "name": "Synthetic Scenario Action",
+      "kind": "button",
+      "refersTo": "M1 lifecycle scenario controls",
+      "description": "Runs one approved Silver/Gold scenario in an isolated in-memory Run without creating a purchase.",
+      "html": "<button type=\"button\" class=\"ds-scenario-action\">Run scenario</button>",
+      "css": ".ds-scenario-action { min-height: 38px; padding: 0 15px; border: 0; border-radius: 9px; background: #17664f; color: #fff; font-weight: 680; }"
+    },
+    {
+      "name": "Membership Oracle Observation",
+      "kind": "card",
+      "refersTo": "M1 read-only Oracle panel",
+      "description": "Shows effective tier, authorization observation, membership event state, and the claimed coupon ledger from the local server.",
+      "html": "<section class=\"ds-oracle\"><h2>Membership Oracle</h2><dl><dt>Effective tier</dt><dd>Gold</dd></dl></section>",
+      "css": ".ds-oracle { border: 1px solid #e4e8e2; border-radius: 16px; background: #fff; } .ds-oracle dd { color: #17221f; font-weight: 650; }"
+    },
+    {
+      "name": "Expected Check Row",
+      "kind": "list-item",
+      "refersTo": "M1 contract check list",
+      "description": "Keeps each approved rule label visible while showing pending or locally observed state separately.",
+      "html": "<li class=\"ds-expected-check\"><span>Expected Check</span><span>Local observation: pending</span></li>",
+      "css": ".ds-expected-check { display: grid; grid-template-columns: auto 1fr auto; gap: 11px; border-bottom: 1px solid #edf0ec; color: #303b35; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Calm Verification",
+    "overview": "The interface keeps synthetic business outcomes easy to inspect across the E1 checkout and M1 membership state overview. Warm neutral grounds, white bordered surfaces, concise labels, and a clear type scale help operators compare state without turning demos into production storefronts. Deep green carries primary actions and positive observations; terracotta marks lifecycle actions and unresolved states. M1 separates contract expectations from local observations and keeps coupon expiry unknown when no exact expiry is defined.",
+    "keyCharacteristics": [
+      "A restrained, warm-neutral working surface.",
+      "Green for primary actions and positive observations; terracotta for lifecycle actions and unresolved states.",
+      "Clear separation between synthetic sandbox actions and real commerce.",
+      "Contract expectations stay separate from observations in an isolated local Run."
+    ],
+    "rules": [
+      {
+        "name": "The Outcome-First Color Rule",
+        "body": "Use green only when the synthetic business state is positive or the action is primary. Use terracotta for a clearly unmet condition; never let accent color imply a real payment or entitlement.",
+        "section": "colors"
+      },
+      {
+        "name": "The Amount Legibility Rule",
+        "body": "Keep payable values prominent and aligned with tabular numerals. Heading and amount tracking must remain no tighter than -0.04em.",
+        "section": "typography"
+      },
+      {
+        "name": "The One-Elevation Rule",
+        "body": "A panel uses its border for separation; a raised shadow belongs to an actionable control.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use the established green and terracotta colors to distinguish outcomes.",
+      "Do format money with tabular numerals and keep the payable amount prominent.",
+      "Do keep the local-only, no-payment notice near the main action.",
+      "Distinguish a seed-time coupon observation from a later expiry result.",
+      "Label local observations separately from contract expectations."
+    ],
+    "donts": [
+      "Don't combine a broad panel shadow with its border.",
+      "Don't draw interface icons with text glyphs; use CSS shapes for simple dots and SVG for the select chevron.",
+      "Don't tighten heading or amount tracking past -0.04em.",
+      "Don't make synthetic checkout copy imply a real charge or fulfillment.",
+      "Do not claim coupon expiry or propagation timing that the demo did not observe.",
+      "Do not imply that a local authorization probe creates a Gold-only purchase."
+    ]
+  }
+}

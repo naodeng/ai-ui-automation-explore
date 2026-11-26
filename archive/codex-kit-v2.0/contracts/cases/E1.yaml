@@ -1,0 +1,41 @@
+contract_version: "1.0-demo"
+case_id: E1
+status: proposed_for_demo
+source_type: synthetic_teaching_assumption
+name: Coupon and checkout
+scope:
+  ui: [/cart, /checkout, /orders]
+  allowed_writes: [sandbox_order_only]
+  prohibited: [real_payment, real_fulfilment, real_coupon_redemption]
+entities: [cart, coupon, quote, order, coupon_ledger]
+scenario:
+  coupon_code: C20
+  threshold_subtotal: 100
+  discount_amount: 20
+  below_threshold_subtotal: 99
+  expected_payable_at_threshold: 80
+  expected_payable_below_threshold: 99
+  shipping: 0
+  tax: 0
+rules:
+  - id: E1-R01
+    statement: Valid C20 applies 20 discount only when subtotal >= 100.
+    source: demo_contract
+    oracle: checkout_quote
+  - id: E1-R02
+    statement: Payable price in new order equals authoritative quote.
+    source: demo_contract
+    oracle: order_ledger
+  - id: E1-R03
+    statement: Repeating identical idempotency key does not create multiple effective orders.
+    source: demo_contract
+    oracle: order_ledger
+  - id: E1-R04
+    statement: Coupon state follows configured sandbox payment and cancellation flow.
+    source: demo_contract
+    oracle: coupon_ledger
+risks: [wrong_total, stale_discount, duplicate_order, stale_quote, coupon_state_drift]
+p0_tests: [E1-01, E1-02, E1-04, E1-06]
+unknowns_to_approve:
+  - Whether tax and shipping belong to threshold calculation in real product
+  - Exact coupon locking, cancellation and sandbox payment states

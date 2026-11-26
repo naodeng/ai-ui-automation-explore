@@ -1,0 +1,31 @@
+{
+  "mission_id": "E1-blind-readonly-001",
+  "case_id": "E1",
+  "allowed_origin": "http://127.0.0.1:4179",
+  "allowed_paths": [
+    "/"
+  ],
+  "account_role": "qa-synthetic-buyer-readonly",
+  "budget": {
+    "max_actions": 20,
+    "max_duration_seconds": 600,
+    "max_writes": 0
+  },
+  "allowed_actions": [
+    "observe",
+    "click_safe",
+    "navigate_allowed",
+    "refresh"
+  ],
+  "oracles": [],
+  "required_evidence": [
+    "screenshot",
+    "action_log"
+  ],
+  "stop_conditions": [
+    "scope_violation",
+    "unauthorized_write",
+    "exhausted_budget",
+    "tool_error"
+  ]
+}

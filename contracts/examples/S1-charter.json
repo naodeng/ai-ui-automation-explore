@@ -1,0 +1,39 @@
+{
+  "mission_id": "S1-local-observe-001",
+  "case_id": "S1",
+  "allowed_origin": "http://127.0.0.1:3000",
+  "allowed_paths": [
+    "/flash-sale",
+    "/queue",
+    "/flash-sale/result"
+  ],
+  "account_role": "qa-synthetic-buyer",
+  "budget": {
+    "max_actions": 15,
+    "max_duration_seconds": 600,
+    "max_writes": 0
+  },
+  "allowed_actions": [
+    "observe",
+    "click_safe",
+    "navigate_allowed",
+    "refresh",
+    "read_oracle"
+  ],
+  "oracles": [
+    "campaign_clock",
+    "flashsale_ledger"
+  ],
+  "required_evidence": [
+    "screenshot",
+    "action_log",
+    "oracle_result"
+  ],
+  "stop_conditions": [
+    "scope_violation",
+    "unauthorized_write",
+    "exhausted_budget",
+    "missing_oracle",
+    "unknown_write_result"
+  ]
+}

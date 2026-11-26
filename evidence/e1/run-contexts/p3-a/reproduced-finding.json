@@ -1,0 +1,32 @@
+{
+  "finding_id": "E1-P3A-SEEDED-UI-FAULT-REPRODUCED",
+  "case_id": "E1",
+  "run_id": "e1-6af9cb0d-4777-42ae-b538-acba74461fed",
+  "status": "reproduced_issue",
+  "rule_id": "E1-R01",
+  "observed_behavior": "Under a deliberately seeded local UI mutation, checkout displayed 7900 payable cents and 2000 discount cents for the 9900-cent basket, while the authoritative Oracle recorded 9900 payable cents and zero discount. The regression failed on both independent runs.",
+  "hypothesis": "The deterministic UI regression detects a client-rendered amount that diverges from the authoritative quote ledger.",
+  "evidence_ids": [
+    "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-screenshot",
+    "e1-68d152c3-a05a-4cc1-b3bb-290cd6ef9936-oracle",
+    "e1-6af9cb0d-4777-42ae-b538-acba74461fed-screenshot",
+    "e1-6af9cb0d-4777-42ae-b538-acba74461fed-oracle"
+  ],
+  "oracle_evidence_id": "e1-6af9cb0d-4777-42ae-b538-acba74461fed-oracle",
+  "reproduction": {
+    "independent_runs": 2,
+    "successful_reproductions": 2,
+    "steps": [
+      "Reset a fresh local E1 run with the e1-threshold seed.",
+      "Select the E1-99 synthetic SKU and compare visible payable/discount with the same run and quote in the read-only Oracle.",
+      "Repeat in a new browser run with a new run_id.",
+      "Remove the temporary UI mutation and rerun the same regression; it passes."
+    ]
+  },
+  "human_review": {
+    "status": "pending",
+    "reviewer": null,
+    "approved_at": null,
+    "notes": "This reproduced finding describes a deliberately seeded and removed local UI mutation. It is a sensitivity proof, not a production defect; no AI Agent blind evaluation or human defect confirmation was performed."
+  }
+}

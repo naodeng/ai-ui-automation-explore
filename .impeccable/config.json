@@ -1,0 +1,15 @@
+{
+  "buildPath": "comp",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-11-24T09:37:29.129Z",
+        "reason": "User confirmed: Inter is part of the approved E1 prototype and retained in the implementation."
+      }
+    ]
+  }
+}

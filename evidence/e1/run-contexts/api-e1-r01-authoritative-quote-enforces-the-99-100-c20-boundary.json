@@ -1,0 +1,10 @@
+{
+  "case_id": "E1",
+  "clock_epoch": "2026-11-23T10:00:00Z",
+  "project": "api",
+  "run_ids": [
+    "e1-dc9e2ea0-5716-4b12-906e-c2b92995eabf"
+  ],
+  "seed_id": "e1-threshold",
+  "test_title": "E1-R01: authoritative quote enforces the 99/100 C20 boundary"
+}

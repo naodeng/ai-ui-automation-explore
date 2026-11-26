@@ -1,0 +1,18 @@
+{
+  "run_id": "E1-DEMO-PLANNED-001",
+  "case_id": "E1",
+  "track": "A",
+  "seed_id": "e1-threshold",
+  "contract_version": "1.0-demo",
+  "app_commit": "NOT_IMPLEMENTED",
+  "browser": "chromium_planned",
+  "executor_version": "NOT_INSTALLED",
+  "model_version": null,
+  "started_at": "2026-11-23T00:00:00Z",
+  "ended_at": null,
+  "environment": "isolated_local_demo",
+  "status": "not_run",
+  "authorization_ref": null,
+  "budget": null,
+  "evidence_index": null
+}

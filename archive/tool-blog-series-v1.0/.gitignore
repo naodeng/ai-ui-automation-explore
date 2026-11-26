@@ -1,0 +1,9 @@
+# Never put real credentials or test evidence containing personal data into Git
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+artifacts/raw/
+node_modules/
+.DS_Store

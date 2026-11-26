@@ -1,0 +1,22 @@
+{
+  "finding_id": "E1-SUS-001",
+  "case_id": "E1",
+  "run_id": "E1-DEMO-PLANNED-001",
+  "status": "suspected_issue",
+  "rule_id": "E1-R01",
+  "observed_behavior": "Demo placeholder: UI may show stale coupon discount after subtotal changes. No execution was performed.",
+  "hypothesis": "stale_checkout_quote",
+  "evidence_ids": [],
+  "oracle_evidence_id": null,
+  "reproduction": {
+    "independent_runs": 0,
+    "successful_reproductions": 0,
+    "steps": []
+  },
+  "human_review": {
+    "status": "pending",
+    "reviewer": null,
+    "approved_at": null,
+    "notes": "Synthetic example only; no actual bug claim"
+  }
+}

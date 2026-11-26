@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN" data-type="software">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="page-type" content="software" />
+    <meta name="site-kind" content="software" />
+    <meta name="theme-color" content="#f4f5f1" />
+    <title>S1 商品秒杀 Demo · AI UI Automation Explore</title>
+    <meta name="description" content="仅在本机合成数据上演练开售时钟、库存预约、模拟完成、取消与超时释放。" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="skip-link" href="#main">跳到主要内容</a>
+        <a class="brand" href="/flash-sale" aria-label="AI UI Automation Explore">
+          <span class="brand-mark" aria-hidden="true">QA</span>
+          <span>AI UI Automation</span>
+          <span class="brand-sub">/ Explore</span>
+        </a>
+        <div class="top-meta">
+          <span>S1 · Flash Sale</span>
+          <span class="local-pill"><i class="local-dot" aria-hidden="true"></i>本地合成沙盒</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell" id="main">
+      <section id="campaign-view" aria-labelledby="page-title">
+        <div class="intro">
+          <div>
+            <h1 id="page-title">商品秒杀验证台</h1>
+            <p class="intro-copy">使用服务端模拟时钟与独立库存台账，检查已批准的秒杀规则。</p>
+          </div>
+          <div class="intro-meta">
+            <span class="seed-pill">S1 · 合成场景</span>
+            <span class="run-meta">Run <code id="run-id">—</code></span>
+          </div>
+        </div>
+
+        <div class="layout">
+          <section class="panel campaign-panel" aria-labelledby="campaign-heading">
+            <div class="product-frame">
+              <img src="/synthetic-headphones.png" alt="合成商品 A：一副虚构的黑色头戴式耳机" />
+            </div>
+            <div class="campaign-copy">
+              <div class="campaign-title-row">
+                <div>
+                  <h2 id="campaign-heading">合成商品 A</h2>
+                  <p class="product-note">本地合成商品 · 不含真实商品或价格</p>
+                </div>
+                <span class="campaign-tag">限量演练</span>
+              </div>
+              <div class="product-facts">
+                <span class="fact-chip">
+                  <span class="fact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4.5 7.7 7.5 4.4 7.5-4.4M12 12.1V21"/></svg></span>
+                  <span>初始库存 <strong id="initial-stock">100 件</strong></span>
+                </span>
+                <span class="fact-chip">
+                  <span class="fact-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="7.2" r="3.2"/><path d="M5.5 20v-1.2a6.5 6.5 0 0 1 13 0V20z"/></svg></span>
+                  <span>每人限购 <strong id="per-user-limit">1 件</strong></span>
+                </span>
+              </div>
+              <div class="sale-status" id="sale-status-wrap" data-status="not_started">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span id="campaign-status">活动未开始</span>
+              </div>
+              <button class="button-primary purchase-button" id="purchase" type="button" disabled>
+                开售后提交测试购买
+              </button>
+              <p class="action-note" id="purchase-note">服务端开售前，购买操作不可用。</p>
+            </div>
+          </section>
+
+          <section class="panel stock-panel" aria-labelledby="stock-heading">
+            <div class="panel-heading">
+              <div class="heading-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 4-8 4-8-4 8-4Z"/><path d="m4 12 8 4 8-4M4 16l8 4 8-4"/></svg></div>
+              <div>
+                <h2 id="stock-heading">库存台账</h2>
+                <p class="panel-kicker">五种状态分别记录</p>
+              </div>
+              <span class="summary-tag">只读观察</span>
+            </div>
+            <dl class="stock-list">
+              <div class="stock-row"><dt><i class="bucket-dot available-dot" aria-hidden="true"></i>可用</dt><dd id="stock-available">100</dd></div>
+              <div class="stock-row"><dt><i class="bucket-dot reserved-dot" aria-hidden="true"></i>预留</dt><dd id="stock-reserved">0</dd></div>
+              <div class="stock-row"><dt><i class="bucket-dot sold-dot" aria-hidden="true"></i>已售</dt><dd id="stock-sold">0</dd></div>
+              <div class="stock-row"><dt><i class="bucket-dot pending-dot" aria-hidden="true"></i>待释放</dt><dd id="stock-pending-release">0</dd></div>
+              <div class="stock-row"><dt><i class="bucket-dot released-dot" aria-hidden="true"></i>已释放</dt><dd id="stock-released">0</dd></div>
+            </dl>
+            <p class="stock-total">初始库存 <strong id="stock-total">100</strong> 件；各状态不合并计算。</p>
+          </section>
+
+          <section class="panel clock-panel" aria-labelledby="clock-heading">
+            <div class="panel-heading">
+              <div class="heading-icon clock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg></div>
+              <div>
+                <h2 id="clock-heading">服务端 Fake Clock</h2>
+                <p class="panel-kicker">时间由当前 Run 控制</p>
+              </div>
+            </div>
+            <div class="clock-readout" id="server-clock">Seed 时钟 · 正在读取</div>
+            <div class="clock-meta">
+              <span>开售时刻 <strong id="sale-start">—</strong></span>
+              <span>当前 Run 独立计时</span>
+            </div>
+            <div class="clock-actions">
+              <button class="button-primary" id="advance-clock" type="button">推进 1 秒</button>
+              <button class="button-quiet" id="reset-run" type="button">重置 Run</button>
+            </div>
+          </section>
+
+          <section class="panel oracle-panel" aria-labelledby="oracle-heading">
+            <div class="panel-heading">
+              <div class="heading-icon oracle-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v13c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-13M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg></div>
+              <div>
+                <h2 id="oracle-heading">只读 FlashSaleOracle</h2>
+                <p class="panel-kicker">独立服务端事实</p>
+              </div>
+            </div>
+            <dl class="oracle-list">
+              <div><dt>活动状态</dt><dd id="oracle-campaign-status">正在读取</dd></div>
+              <div><dt>订单记录</dt><dd id="oracle-order-count">0</dd></div>
+              <div><dt>库存流水</dt><dd id="oracle-movement-count">0</dd></div>
+              <div><dt>Seed</dt><dd id="seed-id">—</dd></div>
+            </dl>
+            <p class="oracle-note">观察时间 <code id="oracle-observed-at">—</code></p>
+            <p class="checksum-note">Ledger SHA-256 <code id="oracle-checksum">—</code></p>
+          </section>
+        </div>
+
+        <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+        <p class="safe-note"><i class="safe-mark" aria-hidden="true"></i>仅操作本地合成数据，不产生真实订单或支付。</p>
+      </section>
+
+      <section class="message-view panel" id="queue-view" aria-labelledby="queue-heading" hidden>
+        <span class="seed-pill">S1 · 合成场景</span>
+        <h1 id="queue-heading">排队规则尚未定义</h1>
+        <p>本 Demo 不模拟队列行为或一致性 SLA。当前范围只演练已明确的服务端开售边界与单次本地合成请求。</p>
+        <a class="button-quiet link-button" href="/flash-sale">返回秒杀验证台</a>
+      </section>
+
+      <section class="message-view panel" id="result-view" aria-labelledby="result-heading" hidden>
+        <div class="result-main">
+          <span class="seed-pill">S1 · 本地合成结果</span>
+          <h1 class="result-status-banner" id="result-heading" data-status="reserved">预约待确认</h1>
+          <p id="result-description">库存已由本地合成 Run 预留；请在倒计时结束前模拟完成购买或取消预约。</p>
+          <dl class="result-list">
+            <div><dt>订单 ID</dt><dd><code id="result-order-id">—</code></dd></div>
+            <div><dt>预约状态</dt><dd id="result-order-status">—</dd></div>
+            <div><dt>预约到期</dt><dd id="result-reservation-expiry">—</dd></div>
+            <div><dt>剩余时间</dt><dd id="result-reservation-remaining">—</dd></div>
+          </dl>
+          <div class="result-actions">
+            <button class="button-primary" id="result-complete" type="button">模拟完成购买</button>
+            <button class="button-quiet" id="result-cancel" type="button">取消预约</button>
+            <button class="button-quiet" id="result-advance-clock" type="button">推进 30 秒触发超时</button>
+          </div>
+          <div class="feedback result-feedback" id="result-feedback" role="status" aria-live="polite" hidden></div>
+        </div>
+        <div class="result-side">
+          <section class="result-summary" aria-labelledby="result-stock-heading">
+            <div class="panel-heading">
+              <div class="heading-icon layers-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 4-8 4-8-4 8-4Z"/><path d="m4 12 8 4 8-4M4 16l8 4 8-4"/></svg></div>
+              <div><h2 id="result-stock-heading">当前库存</h2><p class="panel-kicker">可售、预留、售出与释放分别记账</p></div>
+            </div>
+            <dl class="stock-list result-stock-list">
+              <div class="stock-row"><dt>可用</dt><dd id="result-stock-available">—</dd></div>
+              <div class="stock-row"><dt>预留</dt><dd id="result-stock-reserved">—</dd></div>
+              <div class="stock-row"><dt>已售</dt><dd id="result-stock-sold">—</dd></div>
+              <div class="stock-row"><dt>已释放</dt><dd id="result-stock-released">—</dd></div>
+            </dl>
+            <p class="stock-total">初始库存 <strong id="result-stock-total">100</strong> 件；状态合计保持守恒。</p>
+          </section>
+          <section class="result-summary" aria-labelledby="result-oracle-heading">
+            <div class="panel-heading">
+              <div class="heading-icon oracle-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v13c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-13M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg></div>
+              <div><h2 id="result-oracle-heading">演示账本（只读）</h2><p class="panel-kicker">独立服务端事实</p></div>
+            </div>
+            <dl class="oracle-list">
+              <div><dt>订单记录</dt><dd id="result-oracle-order-count">—</dd></div>
+              <div><dt>库存流水</dt><dd id="result-oracle-movement-count">—</dd></div>
+              <div><dt>观察时间</dt><dd id="result-oracle-observed-at">—</dd></div>
+            </dl>
+            <p class="checksum-note">Ledger SHA-256 <code id="result-oracle-checksum">—</code></p>
+          </section>
+        </div>
+        <a class="button-quiet link-button result-back" id="result-back" href="/flash-sale">返回秒杀验证台</a>
+      </section>
+    </main>
+
+    <footer class="shell footer">
+      Run <code id="footer-run-id">—</code>
+      <span aria-hidden="true">·</span>
+      Seed <code>s1-100-stock</code>
+      <span aria-hidden="true">·</span>
+      模拟时钟 <code id="footer-clock">—</code>
+    </footer>
+  </body>
+</html>
