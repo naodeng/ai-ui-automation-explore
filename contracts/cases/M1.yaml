@@ -16,6 +16,7 @@ transition_examples:
 parameters:
   ui_propagation_sla_seconds: 30
   historical_claimed_coupon_policy: retain_until_expiry
+  historical_claimed_coupon_expires_at: "2026-11-23T10:00:30Z"
   event_ordering: strictly_increasing_event_version
 rules:
   - id: M1-R01

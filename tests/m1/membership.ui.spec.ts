@@ -41,8 +41,8 @@ test("state overview runs both transitions, replay checks and simulated time", a
   await page.locator("#advance-clock").click();
   await expect(page.locator("#footer-clock")).toContainText("10:00:30");
   await expect(page.locator("#check-r05")).toHaveText("本地观察：0 个模拟秒（即时同步）");
-  await expect(page.locator("#coupon-status")).toHaveText("有效性待核实（过期时间未定义）");
-  await expect(page.locator("#check-r03")).toHaveText("无法判定：过期时间未定义");
+  await expect(page.locator("#coupon-status")).toHaveText("已过期（本地模拟）");
+  await expect(page.locator("#check-r03")).toHaveText("到期边界：已过期");
   await page.screenshot({ path: "evidence/m1/m1-implementation-desktop-downgrade.png", fullPage: true });
   const downgradeRunId = await page.locator("#footer-run-id").innerText();
   await writeFile(
@@ -64,7 +64,7 @@ test("state overview runs both transitions, replay checks and simulated time", a
             old_session: "available",
             authorization: "denied",
             fake_clock_after_advance: "2026-11-23T10:00:30.000Z",
-            coupon_status_after_advance: "not_evaluated",
+            coupon_status_after_advance: "expired",
           },
         ],
       },
@@ -72,6 +72,25 @@ test("state overview runs both transitions, replay checks and simulated time", a
       2,
     ) + "\n",
   );
+});
+
+test("Platinum renewal failure example is available in the UI", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "会员生命周期验证台" })).toBeVisible();
+  await page.locator('[data-scenario="platinum_to_gold"]').click();
+  await expect(page.locator("#member-tier")).toHaveText("Gold");
+  await expect(page.locator("#event-version")).toHaveText("v6");
+  await expect(page.locator("#oracle-tier")).toHaveText("Gold");
+  await expect(page.locator("#run-result")).toContainText("Platinum → Gold");
+  await expect(page.locator("#run-result")).toContainText("未采集 Gold-only 授权");
+  await page.screenshot({ path: "evidence/m1/m1-implementation-platinum-to-gold.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  const widths = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    content: document.documentElement.scrollWidth,
+  }));
+  expect(widths.content).toBeLessThanOrEqual(widths.viewport);
+  await page.screenshot({ path: "evidence/m1/m1-implementation-mobile-platinum-to-gold.png", fullPage: true });
 });
 
 test("state overview fits a 390px mobile viewport without horizontal overflow", async ({ page }) => {

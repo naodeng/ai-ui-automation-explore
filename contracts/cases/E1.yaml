@@ -5,7 +5,7 @@ source_type: synthetic_teaching_assumption
 name: Coupon and checkout
 scope:
   ui: [/cart, /checkout, /orders]
-  allowed_writes: [sandbox_order_only]
+  allowed_writes: [sandbox_order_only, sandbox_coupon_lifecycle]
   prohibited: [real_payment, real_fulfilment, real_coupon_redemption]
 entities: [cart, coupon, quote, order, coupon_ledger]
 scenario:
@@ -17,6 +17,13 @@ scenario:
   expected_payable_below_threshold: 99
   shipping: 0
   tax: 0
+  coupon_lifecycle:
+    initial_status: available
+    on_order_created: reserved
+    on_sandbox_payment: sandbox_redeemed
+    on_pre_payment_cancellation: released
+    released_status_for_reuse: available
+    order_statuses: [sandbox_created, sandbox_paid, cancelled]
 rules:
   - id: E1-R01
     statement: Valid C20 applies 20 discount only when subtotal >= 100.
@@ -31,11 +38,10 @@ rules:
     source: demo_contract
     oracle: order_ledger
   - id: E1-R04
-    statement: Coupon state follows configured sandbox payment and cancellation flow.
+    statement: A discounted sandbox order reserves C20; simulated payment marks it sandbox_redeemed, while cancellation before payment releases it for reuse. Repeated actions do not duplicate ledger events and invalid terminal transitions are rejected.
     source: demo_contract
     oracle: coupon_ledger
 risks: [wrong_total, stale_discount, duplicate_order, stale_quote, coupon_state_drift]
 p0_tests: [E1-01, E1-02, E1-04, E1-06]
 unknowns_to_approve:
   - Whether tax and shipping belong to threshold calculation in real product
-  - Exact coupon locking, cancellation and sandbox payment states

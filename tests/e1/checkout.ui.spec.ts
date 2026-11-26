@@ -6,6 +6,28 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { ensureEvidenceDirectory, newRunId, resetRun } from "./support.ts";
 
+test("E1 default run isolation: separate bare pages retain separate C20 state", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "确认订单" })).toBeVisible();
+  const firstRunId = new URL(page.url()).searchParams.get("run_id");
+
+  const secondPage = await page.context().newPage();
+  await secondPage.goto("/");
+  await expect(secondPage.getByRole("heading", { name: "确认订单" })).toBeVisible();
+  const secondRunId = new URL(secondPage.url()).searchParams.get("run_id");
+  expect(firstRunId).toBeTruthy();
+  expect(secondRunId).toBeTruthy();
+  expect(secondRunId).not.toBe(firstRunId);
+
+  await page.getByRole("button", { name: "创建沙盒订单" }).click();
+  await expect(page.getByRole("heading", { name: "沙盒订单待支付" })).toBeVisible();
+  await page.getByRole("button", { name: "模拟支付" }).click();
+  await expect(page.getByRole("heading", { name: "沙盒模拟支付完成" })).toBeVisible();
+
+  await expect(secondPage.locator("#coupon-state")).toHaveText("已应用");
+  await expect(secondPage.locator("#payable-value")).toHaveText("80.00");
+});
+
 async function expectTrackingFloor(page: Page, selector: string): Promise<void> {
   const trackingRatio = await page.locator(selector).evaluate((element) => {
     const style = getComputedStyle(element);
@@ -17,10 +39,12 @@ async function expectTrackingFloor(page: Page, selector: string): Promise<void> 
 async function expectE1VisualBar(page: Page, panelRadius: string): Promise<void> {
   await expectTrackingFloor(page, "h1");
   await expectTrackingFloor(page, "#payable");
-  const panelStyles = await page.locator(".panel").evaluateAll((elements) => elements.map((element) => {
+  const panelStyles = await page.locator(".panel").evaluateAll((elements) => elements
+    .filter((element) => element.getClientRects().length > 0)
+    .map((element) => {
     const style = getComputedStyle(element);
     return { borderRadius: style.borderTopLeftRadius, boxShadow: style.boxShadow };
-  }));
+    }));
   expect(panelStyles).toEqual([
     { borderRadius: panelRadius, boxShadow: "none" },
     { borderRadius: panelRadius, boxShadow: "none" },
@@ -136,7 +160,7 @@ async function writeE1MismatchEvidence(input: {
   }, null, 2)}\n`);
 }
 
-test("E1-R01: checkout UI shows the 100 threshold quote", async ({ page, trackedRequest: request }) => {
+test("E1-R01/R04: checkout shows the 100 threshold and simulates payment", async ({ page, trackedRequest: request }, testInfo) => {
   const runId = newRunId();
   await resetRun(request, runId);
   await ensureEvidenceDirectory();
@@ -169,13 +193,50 @@ test("E1-R01: checkout UI shows the 100 threshold quote", async ({ page, tracked
   await expect(page.locator("#payable-value")).toHaveCSS("font-size", prototypeMobileTotalFontSize);
   await page.screenshot({ path: "evidence/e1/e1-implementation-mobile-100.png", fullPage: true });
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
+  await page.setViewportSize({ width: 1440, height: 900 });
   await page.getByRole("button", { name: "创建沙盒订单" }).click();
-  await expect(page.getByRole("status")).toContainText("沙盒订单已创建");
+  await expect(page.getByRole("heading", { name: "沙盒订单待支付" })).toBeVisible();
+  await expect(page.locator("#lifecycle-coupon-status")).toHaveText("已锁定");
+  await expect(page.getByRole("button", { name: "模拟支付" })).toBeVisible();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({ path: "evidence/e1/e1-r04-pending-desktop.png" });
+  await testInfo.attach("e1-r04-pending-desktop.png", { path: "evidence/e1/e1-r04-pending-desktop.png" });
+  await page.getByRole("button", { name: "模拟支付" }).click();
+  await expect(page.getByRole("heading", { name: "沙盒模拟支付完成" })).toBeVisible();
+  await expect(page.locator("#lifecycle-coupon-status")).toHaveText("模拟已使用");
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({ path: "evidence/e1/e1-r04-paid-desktop.png" });
+  await testInfo.attach("e1-r04-paid-desktop.png", { path: "evidence/e1/e1-r04-paid-desktop.png" });
 
   const oracle = await request.get("/__test/oracle/checkout", {
     params: { run_id: runId, seed_id: "e1-threshold", user_id: "user_e1" },
   });
-  expect((await oracle.json()).orders[0].payable_cents).toBe(8_000);
+  const oracleBody = await oracle.json();
+  expect(oracleBody.orders[0]).toMatchObject({ status: "sandbox_paid", payable_cents: 8_000 });
+  expect(oracleBody.coupon).toMatchObject({ status: "sandbox_redeemed" });
+});
+
+test("E1-R04: cancellation releases C20 and returns to a fresh quote", async ({ page, trackedRequest: request }, testInfo) => {
+  const runId = newRunId();
+  await resetRun(request, runId);
+  await page.goto(`/?run_id=${encodeURIComponent(runId)}`);
+  await expect(page.getByRole("button", { name: "创建沙盒订单" })).toBeEnabled();
+  await page.getByRole("button", { name: "创建沙盒订单" }).click();
+  await expect(page.getByRole("heading", { name: "沙盒订单待支付" })).toBeVisible();
+  await page.getByRole("button", { name: "取消订单" }).click();
+  await expect(page.getByRole("heading", { name: "沙盒订单已取消" })).toBeVisible();
+  await expect(page.locator("#lifecycle-coupon-status")).toHaveText("已释放");
+  await expect(page.locator("#lifecycle-coupon-note")).toContainText("可用于新的沙盒订单");
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
+  await page.screenshot({ path: "evidence/e1/e1-r04-cancelled-mobile.png", fullPage: true });
+  await testInfo.attach("e1-r04-cancelled-mobile.png", { path: "evidence/e1/e1-r04-cancelled-mobile.png" });
+
+  await page.getByRole("button", { name: "返回结算，创建新的沙盒订单" }).click();
+  await expect(page.getByRole("heading", { name: "确认订单" })).toBeVisible();
+  await expect(page.locator("#coupon-state")).toHaveText("已应用");
+  await expect(page.locator("#payable-value")).toHaveText("80.00");
 });
 
 test("E1-R01: selecting the 99 boundary removes the discount", async ({ page, trackedRequest: request }) => {

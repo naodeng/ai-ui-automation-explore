@@ -31,7 +31,7 @@ function readContract(): E1Contract {
   if (typeof document.contract_version !== "string" || !isRecord(document.scenario) || !Array.isArray(document.rules)) {
     throw new Error("E1 contract is missing its version, scenario, or rules");
   }
-  const expectedRules = new Map([["E1-R01", "checkout_quote"], ["E1-R02", "order_ledger"], ["E1-R03", "order_ledger"]]);
+  const expectedRules = new Map([["E1-R01", "checkout_quote"], ["E1-R02", "order_ledger"], ["E1-R03", "order_ledger"], ["E1-R04", "coupon_ledger"]]);
   for (const [id, oracle] of expectedRules) {
     const rule = document.rules.find((item) => isRecord(item) && item.id === id);
     if (!isRecord(rule) || rule.oracle !== oracle) {
@@ -93,13 +93,13 @@ export interface QuoteAmounts {
   payable_cents: number;
 }
 
-export function calculateQuote(input: { subtotalCents: number; couponCode: string }): QuoteAmounts {
+export function calculateQuote(input: { subtotalCents: number; couponCode: string; couponAvailable?: boolean }): QuoteAmounts {
   const { subtotalCents, couponCode } = input;
   if (!Number.isSafeInteger(subtotalCents) || subtotalCents < 0) {
     throw new RangeError("subtotal must be a non-negative integer amount in cents");
   }
 
-  const discount = couponCode === E1_POLICY.coupon_code && subtotalCents >= E1_POLICY.threshold_cents
+  const discount = (input.couponAvailable ?? true) && couponCode === E1_POLICY.coupon_code && subtotalCents >= E1_POLICY.threshold_cents
     ? E1_POLICY.discount_cents
     : 0;
   return {

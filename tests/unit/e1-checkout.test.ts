@@ -24,6 +24,17 @@ test("E1-R01: C20 does not discount the 99-unit subtotal", () => {
   });
 });
 
+test("E1-R04: an unavailable coupon does not reduce a later quote", () => {
+  assert.deepEqual(calculateQuote({ subtotalCents: 10_000, couponCode: "C20", couponAvailable: false }), {
+    subtotal_cents: 10_000,
+    coupon_code: "C20",
+    discount_cents: 0,
+    shipping_cents: 0,
+    tax_cents: 0,
+    payable_cents: 10_000,
+  });
+});
+
 test("rejects a negative subtotal at the domain boundary", () => {
   assert.throws(() => calculateQuote({ subtotalCents: -1, couponCode: "C20" }), /subtotal/i);
 });

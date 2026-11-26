@@ -15,7 +15,8 @@ class TestStructure(unittest.TestCase):
             with self.subTest(tool=x['slug']):
                 p=R/'content/blog/drafts/tools'/Path(x['article']).name
                 self.assertTrue(p.is_file())
-                self.assertIn('status: "outline"',p.read_text(encoding='utf-8'))
+                self.assertIn(x['status'], {'outline','draft'})
+                self.assertIn(f'status: "{x["status"]}"',p.read_text(encoding='utf-8'))
     def test_preserved_history(self):
         self.assertTrue((R/'archive/codex-kit-v2.0/AGENTS.md').is_file())
         self.assertTrue((R/'archive/tool-blog-series-v1.0/AGENTS.md').is_file())

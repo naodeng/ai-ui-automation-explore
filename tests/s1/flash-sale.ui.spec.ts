@@ -6,7 +6,7 @@ test("state overview matches the pre-open design and fits the supported viewport
   await page.goto("/flash-sale");
   await expect(page.getByRole("heading", { name: "商品秒杀验证台" })).toBeVisible();
   await expect(page.locator("#campaign-status")).toHaveText("活动未开始");
-  await expect(page.getByRole("button", { name: "开售后提交测试购买" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "开售后预约测试库存" })).toBeDisabled();
   await expect(page.locator("#stock-available")).toHaveText("100");
   await expect(page.locator("#stock-reserved")).toHaveText("0");
   await expect(page.locator("#stock-sold")).toHaveText("0");
@@ -39,7 +39,7 @@ test("one local purchase follows the fake clock to the server start boundary", a
 
   await page.locator("#advance-clock").click();
   await expect(page.locator("#server-clock")).toContainText("09:59:51");
-  await expect(page.getByRole("button", { name: "开售后提交测试购买" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "开售后预约测试库存" })).toBeDisabled();
 
   const clock = await page.request.post("/api/clock/advance", {
     data: { run_id: runId, seconds: 9 },
@@ -47,13 +47,76 @@ test("one local purchase follows the fake clock to the server start boundary", a
   expect(clock.status()).toBe(200);
   await page.reload();
   await expect(page.locator("#campaign-status")).toHaveText("开售中");
-  await expect(page.getByRole("button", { name: "提交一次测试购买" })).toBeEnabled();
-  await page.getByRole("button", { name: "提交一次测试购买" }).click();
+  await expect(page.getByRole("button", { name: "预约一次测试库存" })).toBeEnabled();
+  await page.getByRole("button", { name: "预约一次测试库存" }).click();
   await expect(page).toHaveURL(/\/flash-sale\/result\?/);
-  await expect(page.getByRole("heading", { name: "测试购买成功" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "预约待确认" })).toBeVisible();
   await expect(page.locator("#result-order-id")).toContainText("s1-order-");
+  await expect(page.locator("#result-order-status")).toHaveText("预约中");
+  await expect(page.locator("#result-reservation-remaining")).toHaveText("30 秒");
+  await expect(page.locator("#result-stock-reserved")).toHaveText("1");
+  await page.getByRole("button", { name: "模拟完成购买" }).click();
+  await expect(page.getByRole("heading", { name: "测试购买成功" })).toBeVisible();
   await expect(page.locator("#result-stock-sold")).toHaveText("1");
   await page.screenshot({ path: "evidence/s1/s1-desktop-purchase-result.png", fullPage: true });
+});
+
+test("S1-R05: cancel and Fake Clock timeout release reservations in the UI", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/flash-sale");
+  const desktopRunId = await page.locator("#run-id").textContent();
+  const desktopClock = await page.request.post("/api/clock/advance", {
+    data: { run_id: desktopRunId, seconds: 10 },
+  });
+  expect(desktopClock.status()).toBe(200);
+  await page.reload();
+  await page.getByRole("button", { name: "预约一次测试库存" }).click();
+  await expect(page.getByRole("heading", { name: "预约待确认" })).toBeVisible();
+  await page.screenshot({ path: "evidence/s1/s1-r05-reserved-desktop.png", fullPage: true });
+  const desktopWidths = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    content: document.documentElement.scrollWidth,
+  }));
+  expect(desktopWidths.content).toBeLessThanOrEqual(desktopWidths.viewport);
+
+  await page.getByRole("button", { name: "取消预约" }).click();
+  await expect(page.getByRole("heading", { name: "预约已释放" })).toBeVisible();
+  await page.screenshot({ path: "evidence/s1/s1-r05-cancelled-desktop.png", fullPage: true });
+  await page.getByRole("link", { name: "返回秒杀验证台" }).click();
+  await page.getByRole("button", { name: "预约一次测试库存" }).click();
+  await expect(page.getByRole("heading", { name: "预约待确认" })).toBeVisible();
+  await page.getByRole("button", { name: "推进 30 秒触发超时" }).click();
+  await expect(page.getByRole("heading", { name: "预约超时已释放" })).toBeVisible();
+  await page.screenshot({ path: "evidence/s1/s1-r05-expired-desktop.png", fullPage: true });
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/flash-sale");
+  const runId = await page.locator("#run-id").textContent();
+  const clock = await page.request.post("/api/clock/advance", {
+    data: { run_id: runId, seconds: 10 },
+  });
+  expect(clock.status()).toBe(200);
+  await page.reload();
+  await page.getByRole("button", { name: "预约一次测试库存" }).click();
+  await expect(page.getByRole("heading", { name: "预约待确认" })).toBeVisible();
+  await expect(page.locator("#result-stock-available")).toHaveText("99");
+  await expect(page.locator("#result-stock-reserved")).toHaveText("1");
+  await page.screenshot({ path: "evidence/s1/s1-r05-reserved-mobile.png", fullPage: true });
+
+  await page.getByRole("button", { name: "取消预约" }).click();
+  await expect(page.getByRole("heading", { name: "预约已释放" })).toBeVisible();
+  await expect(page.locator("#result-stock-available")).toHaveText("100");
+  await expect(page.locator("#result-stock-reserved")).toHaveText("0");
+  await page.screenshot({ path: "evidence/s1/s1-r05-cancelled-mobile.png", fullPage: true });
+
+  await page.getByRole("link", { name: "返回秒杀验证台" }).click();
+  await page.getByRole("button", { name: "预约一次测试库存" }).click();
+  await expect(page.getByRole("heading", { name: "预约待确认" })).toBeVisible();
+  await page.getByRole("button", { name: "推进 30 秒触发超时" }).click();
+  await expect(page.getByRole("heading", { name: "预约超时已释放" })).toBeVisible();
+  await expect(page.locator("#result-stock-available")).toHaveText("100");
+  await expect(page.locator("#result-stock-reserved")).toHaveText("0");
+  await page.screenshot({ path: "evidence/s1/s1-r05-expired-mobile.png", fullPage: true });
 });
 
 test("S1-R02: serial purchases exhaust stock, reject the next request, and show sold out", async ({ page }) => {
@@ -74,6 +137,10 @@ test("S1-R02: serial purchases exhaust stock, reject the next request, and show 
     });
     expect(response.status(), `serial purchase ${index}`).toBe(201);
     const result = await response.json();
+    const complete = await page.request.post(`/api/orders/${result.order.order_id}/simulate-complete`, {
+      data: { run_id: runId },
+    });
+    expect(complete.status(), `complete serial purchase ${index}`).toBe(200);
     acceptedPurchases.push({
       request_id: result.request_id,
       order_id: result.order.order_id,
@@ -104,7 +171,7 @@ test("S1-R02: serial purchases exhaust stock, reject the next request, and show 
     stock_buckets: { available: 0, reserved: 0, sold: 100, pending_release: 0, released: 0 },
   });
   expect(oracle.orders).toHaveLength(100);
-  expect(oracle.stock_movements).toHaveLength(100);
+  expect(oracle.stock_movements).toHaveLength(200);
   expect(oracle.stock_ledger_checksum).toMatch(/^[a-f0-9]{64}$/);
 
   await page.goto(`/flash-sale?run_id=${encodeURIComponent(runId!)}`);
@@ -112,7 +179,7 @@ test("S1-R02: serial purchases exhaust stock, reject the next request, and show 
   await expect(page.locator("#stock-available")).toHaveText("0");
   await expect(page.locator("#stock-sold")).toHaveText("100");
   await expect(page.locator("#oracle-order-count")).toHaveText("100");
-  await expect(page.locator("#oracle-movement-count")).toHaveText("100");
+  await expect(page.locator("#oracle-movement-count")).toHaveText("200");
   await expect(page.getByRole("button", { name: "测试库存已售罄" })).toBeDisabled();
   await page.screenshot({ path: "evidence/s1/s1-desktop-sold-out.png", fullPage: true });
 

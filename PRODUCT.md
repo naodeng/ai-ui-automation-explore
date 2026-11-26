@@ -28,7 +28,7 @@ The original v1.0 documentation package contains project plans and contracts, no
 
 ## Capabilities and Constraints
 
-- E1 has a local checkout demo for its approved coupon boundary, quote/order consistency, and idempotency rules. M1 has a local membership lifecycle demo. S1 has a first local flash-sale slice for the pre-open boundary, one-per-user limit, idempotent replay, separate stock buckets, and a read-only Oracle; S1-R02 remains partial and S1-R05 is not run.
+- E1 has a local checkout demo for its approved coupon boundary, quote/order consistency, idempotency, and synthetic coupon lifecycle. Each bare checkout page receives a unique Run ID. M1 has a local membership lifecycle demo for its approved numbered rules and transition examples. S1 has a local flash-sale demo covering all five approved rules, including bounded reservation checks in one in-memory Node process and cancellation/timeout release. These checks do not prove cross-process/database concurrency, load behavior, or production semantics; see the P2 case reviews.
 - Only explicit rules marked `approved_for_demo` may be implemented. Items under `unknowns_to_approve` stay out of scope until confirmed.
 - Use synthetic fixtures only. Do not connect to production systems, real accounts, real payments, or real fulfillment.
 - The project researches and evaluates existing UI automation tools; it does not define a required shared runtime for every tool or build a general-purpose browser agent.

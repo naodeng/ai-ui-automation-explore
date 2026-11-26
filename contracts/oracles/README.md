@@ -2,7 +2,7 @@
 
 > English (canonical) · [简体中文](README.zh-CN.md)
 
-**Status:** The E1 `CheckoutOracle`, M1 `MembershipOracle`, and first-slice S1 `FlashSaleOracle` are implemented as read-only observations. S1 does not model queue, cancellation, or timeout-release behavior.
+**Status:** The E1 `CheckoutOracle`, M1 `MembershipOracle`, and S1 `FlashSaleOracle` are implemented as read-only observations. S1 covers reservation, completion, cancellation, and Fake Clock timeout release; it does not simulate a queue.
 
 Each Oracle exposes read-only observations for one synthetic `run_id` and `seed_id`. It must never reset data, advance the clock, submit an order, change membership, or inject a fault. A caller that supplies an unknown run must receive a not-found result; it must not fall back to another run or to global state.
 
@@ -17,7 +17,7 @@ In normal local-demo mode, this endpoint is exposed through the E1 loopback serv
 Return the authoritative quote and order facts for the requested synthetic user:
 
 - quote subtotal, coupon code, discount, shipping, tax, and payable amount;
-- quote-only coupon observations for that quote or order; E1 records `discount_applied_to_quote` and does not model locking, redemption, payment, or cancellation;
+- coupon status (`available`, `reserved`, or `sandbox_redeemed`) and quote/order-linked ledger events (`discount_applied_to_quote`, `reserved_for_sandbox_order`, `sandbox_redeemed_after_payment`, and `released_after_cancellation`); `sandbox_redeemed` records only the local simulated state and is not a real coupon redemption;
 - the requested order's status and payable amount, when an `order_id` is supplied.
 
 The response reports shipping and tax separately. The approved E1 fixture sets both to zero. No conclusion is made about whether either amount should count toward a nonzero coupon threshold.
@@ -32,7 +32,7 @@ M1 exposes its membership facts from the local membership demo's test observatio
 
 The loopback-only S1 service returns the matching campaign state and start time, all five stock buckets, relevant orders, immutable stock movements, and a ledger checksum. Unknown or mismatched run, seed, campaign, or SKU identities fail closed.
 
-The Oracle reports the facts without deciding which order states count as effective sold quantity. That definition and the queue consistency SLA remain open in S1. The current slice makes one direct `available → sold` movement for a successful local purchase; reservation, cancellation, and timeout-release paths are not implemented. One successful purchase does not prove exhaustion safety or server concurrency behavior.
+The Oracle reports facts and does not derive an `effective_sold_quantity` field. The synthetic S1 contract defines `success` as the only effective successful order state; a reservation occupies `reserved` and simulated completion moves it to `sold`. Cancellation or timeout records `reserved → released → available` as one atomic action with conserved final buckets. The 101-request check covers only the local single-process in-memory demo; it does not prove production database concurrency or load behavior. Queue semantics and the consistency SLA remain undefined.
 
 ## Evidence requirements
 

@@ -16,18 +16,22 @@ needed=[
 for rel in needed:
     if not (ROOT/rel).is_file(): errors.append('Missing '+rel)
 items=json.loads((ROOT/'data/tool-catalog.json').read_text(encoding='utf-8'))
+# Verified or later states require evidence and human review, so package integrity accepts only editable draft states.
+article_statuses={'outline','draft'}
 if len(items)!=24:errors.append(f'Expected 24 tools, got {len(items)}')
 if len(set(x['slug'] for x in items))!=24:errors.append('Duplicate slugs')
 for x in items:
     slug=x['slug']
-    article=ROOT/'content/blog/drafts/tools'/Path(x['article']).name
-    prompt=ROOT/'prompts/blog'/Path(x['prompt']).relative_to('codex-prompts')
+    article=ROOT/Path(x['article'])
+    prompt=ROOT/Path(x['prompt'])
     tool=ROOT/'tools'/slug/'README.md'
     for path in [article,prompt,tool]:
         if not path.is_file():errors.append('Missing '+str(path.relative_to(ROOT)))
     if article.is_file():
         s=article.read_text(encoding='utf-8')
-        if 'status: "outline"' not in s:errors.append('Unexpected article state '+slug)
+        status=x.get('status')
+        if status not in article_statuses:errors.append('Invalid article state '+slug)
+        elif f'status: "{status}"' not in s:errors.append('Article/catalog state mismatch '+slug)
         if x['official_url'] not in s:errors.append('Official URL missing '+slug)
 for case in ('E1','M1','S1'):
     if len(list((ROOT/'content/blog/cases').glob(case+'-*.md')))!=1:errors.append('Case note not unique '+case)
@@ -68,6 +72,6 @@ if errors:
 print(
     'PASS: static package integrity. This validator does not execute demos or browser tests; '
     'see docs/reviews/P2-E1-review.md for E1 results. '
-    'S1 first local slice is implemented; see P2-S1-review.md for rule-level results and remaining limits. '
+    'E1/M1/S1 local synthetic demos are implemented; see P2 review docs for rule-level results and remaining limits. '
     'Comparative tool installs NOT RUN; see P2 review docs for runtime status.'
 )

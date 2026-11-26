@@ -13,7 +13,6 @@ const PUBLIC_HOST = BLIND_EVAL_MODE ? process.env.E1_PUBLIC_HOST : HOST;
 const EVALUATOR_HOST = process.env.E1_EVALUATOR_HOST;
 const EVALUATOR_PORT = process.env.E1_EVALUATOR_PORT === undefined ? Number.NaN : Number(process.env.E1_EVALUATOR_PORT);
 const USER_ID = "user_e1";
-const DEFAULT_RUN_ID = "e1-local";
 const FIXTURE_VERSION = "1.0-demo";
 const PUBLIC_DIR = resolve(process.cwd(), "demos/ecommerce-checkout/public");
 
@@ -38,8 +37,11 @@ interface QuoteRecord extends QuoteAmounts {
   user_id: string;
   quote_id: string;
   created_at: string;
+  coupon_status: CouponStatus;
   rule_ids: string[];
 }
+
+type CouponStatus = "available" | "reserved" | "sandbox_redeemed";
 
 interface OrderRecord {
   case_id: "E1";
@@ -49,15 +51,20 @@ interface OrderRecord {
   order_id: string;
   quote_id: string;
   idempotency_key: string;
-  status: "sandbox_created";
+  status: "sandbox_created" | "sandbox_paid" | "cancelled";
   payable_cents: number;
   created_at: string;
   rule_ids: string[];
 }
 
 interface CouponObservation {
-  event_type: "discount_applied_to_quote";
+  event_type:
+    | "discount_applied_to_quote"
+    | "reserved_for_sandbox_order"
+    | "sandbox_redeemed_after_payment"
+    | "released_after_cancellation";
   quote_id: string;
+  order_id?: string;
   user_id: string;
   coupon_code: string;
   discount_cents: number;
@@ -74,6 +81,8 @@ interface RunState {
   orders: Map<string, OrderRecord>;
   orderByIdempotencyKey: Map<string, string>;
   couponLedger: CouponObservation[];
+  coupon_status: CouponStatus;
+  coupon_reserved_order_id: string | null;
 }
 
 class HttpError extends Error {
@@ -112,8 +121,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-function validateRunId(value: unknown, useDefault = false): string {
-  if (value === undefined && useDefault) return DEFAULT_RUN_ID;
+function validateRunId(value: unknown): string {
   if (typeof value !== "string" || !/^[a-zA-Z0-9._:-]{3,120}$/.test(value)) {
     throw new HttpError(400, "invalid_run_id");
   }
@@ -149,6 +157,8 @@ function createInitialState(runId: string): RunState {
     orders: new Map(),
     orderByIdempotencyKey: new Map(),
     couponLedger: [],
+    coupon_status: "available",
+    coupon_reserved_order_id: null,
   };
 }
 
@@ -177,6 +187,7 @@ function stateChecksum(state: RunState): string {
     quotes: [...state.quotes.values()].sort((a, b) => a.quote_id.localeCompare(b.quote_id)),
     orders: [...state.orders.values()].sort((a, b) => a.order_id.localeCompare(b.order_id)),
     coupon_ledger: [...state.couponLedger],
+    coupon: { status: state.coupon_status, reserved_order_id: state.coupon_reserved_order_id },
   };
   return createHash("sha256").update(JSON.stringify(snapshot)).digest("hex");
 }
@@ -270,7 +281,7 @@ async function route(req: IncomingMessage, res: ServerResponse, surface: RouteSu
     return;
   }
   if (url.pathname === "/api/cart" && req.method === "GET") {
-    const state = getOrCreateRun(validateRunId(url.searchParams.get("run_id") ?? undefined, true));
+    const state = getOrCreateRun(validateRunId(url.searchParams.get("run_id") ?? undefined));
     return json(res, 200, cartResponse(state));
   }
   if (url.pathname === "/api/cart/select") {
@@ -291,7 +302,11 @@ async function route(req: IncomingMessage, res: ServerResponse, surface: RouteSu
     if (couponCode !== E1_POLICY.coupon_code) throw new HttpError(400, "unsupported_coupon");
     const state = getOrCreateRun(runId);
     const cart = E1_CATALOG[state.cart_sku_id];
-    const amounts = calculateQuote({ subtotalCents: cart.subtotal_cents, couponCode });
+    const amounts = calculateQuote({
+      subtotalCents: cart.subtotal_cents,
+      couponCode,
+      couponAvailable: state.coupon_status === "available",
+    });
     const quote: QuoteRecord = {
       case_id: "E1",
       run_id: runId,
@@ -299,6 +314,7 @@ async function route(req: IncomingMessage, res: ServerResponse, surface: RouteSu
       user_id: state.user_id,
       quote_id: randomUUID(),
       created_at: state.clock_epoch,
+      coupon_status: state.coupon_status,
       rule_ids: ["E1-R01"],
       ...amounts,
     };
@@ -332,6 +348,9 @@ async function route(req: IncomingMessage, res: ServerResponse, surface: RouteSu
       if (!existing || existing.quote_id !== quoteId) throw new HttpError(409, "idempotency_key_conflict");
       return json(res, 200, existing);
     }
+    if (quote.discount_cents > 0 && state.coupon_status !== "available") {
+      throw new HttpError(409, "coupon_unavailable");
+    }
 
     const order: OrderRecord = {
       case_id: "E1",
@@ -344,11 +363,73 @@ async function route(req: IncomingMessage, res: ServerResponse, surface: RouteSu
       status: "sandbox_created",
       payable_cents: quote.payable_cents,
       created_at: state.clock_epoch,
-      rule_ids: ["E1-R02", "E1-R03"],
+      rule_ids: ["E1-R02", "E1-R03", "E1-R04"],
     };
     state.orders.set(order.order_id, order);
     state.orderByIdempotencyKey.set(idempotencyKey, order.order_id);
+    if (quote.discount_cents > 0) {
+      state.coupon_status = "reserved";
+      state.coupon_reserved_order_id = order.order_id;
+      state.couponLedger.push({
+        event_type: "reserved_for_sandbox_order",
+        quote_id: quote.quote_id,
+        order_id: order.order_id,
+        user_id: state.user_id,
+        coupon_code: quote.coupon_code,
+        discount_cents: quote.discount_cents,
+        observed_at: state.clock_epoch,
+      });
+    }
     return json(res, 201, order);
+  }
+  const orderAction = url.pathname.match(/^\/api\/orders\/([a-f0-9-]+)\/(simulate-payment|cancel)$/);
+  if (orderAction) {
+    requireMethod(req, "POST");
+    if (surface === "public") throw new HttpError(403, "orders_disabled_in_blind_eval");
+    const body = await readJsonBody(req);
+    const runId = validateRunId(body.run_id);
+    const state = runs.get(runId);
+    if (!state) throw new HttpError(404, "run_not_found");
+    const order = state.orders.get(orderAction[1]);
+    if (!order) throw new HttpError(404, "order_not_found");
+
+    if (orderAction[2] === "simulate-payment") {
+      if (order.status === "sandbox_paid") return json(res, 200, order);
+      if (order.status === "cancelled") throw new HttpError(409, "invalid_order_transition");
+      order.status = "sandbox_paid";
+      if (state.coupon_reserved_order_id === order.order_id) {
+        state.coupon_status = "sandbox_redeemed";
+        state.coupon_reserved_order_id = null;
+        state.couponLedger.push({
+          event_type: "sandbox_redeemed_after_payment",
+          quote_id: order.quote_id,
+          order_id: order.order_id,
+          user_id: state.user_id,
+          coupon_code: E1_POLICY.coupon_code,
+          discount_cents: E1_POLICY.discount_cents,
+          observed_at: state.clock_epoch,
+        });
+      }
+      return json(res, 200, order);
+    }
+
+    if (order.status === "cancelled") return json(res, 200, order);
+    if (order.status === "sandbox_paid") throw new HttpError(409, "invalid_order_transition");
+    order.status = "cancelled";
+    if (state.coupon_reserved_order_id === order.order_id) {
+      state.coupon_status = "available";
+      state.coupon_reserved_order_id = null;
+      state.couponLedger.push({
+        event_type: "released_after_cancellation",
+        quote_id: order.quote_id,
+        order_id: order.order_id,
+        user_id: state.user_id,
+        coupon_code: E1_POLICY.coupon_code,
+        discount_cents: E1_POLICY.discount_cents,
+        observed_at: state.clock_epoch,
+      });
+    }
+    return json(res, 200, order);
   }
   if (url.pathname === "/__test/reset") {
     requireMethod(req, "POST");
@@ -377,9 +458,13 @@ async function route(req: IncomingMessage, res: ServerResponse, surface: RouteSu
     if (!state || seedId !== state.seed_id || userId !== state.user_id) throw new HttpError(404, "run_not_found");
     const quoteId = url.searchParams.get("quote_id");
     const orderId = url.searchParams.get("order_id");
+    const selectedOrder = orderId ? state.orders.get(orderId) : undefined;
     const quotes = [...state.quotes.values()].filter((record) => !quoteId || record.quote_id === quoteId);
     const orders = [...state.orders.values()].filter((record) => !orderId || record.order_id === orderId);
-    const couponLedger = state.couponLedger.filter((event) => !quoteId || event.quote_id === quoteId);
+    const couponLedger = state.couponLedger.filter((event) =>
+      (!quoteId || event.quote_id === quoteId)
+      && (!orderId || event.order_id === orderId || event.quote_id === selectedOrder?.quote_id),
+    );
     return json(res, 200, {
       case_id: "E1",
       run_id: state.run_id,
@@ -388,6 +473,11 @@ async function route(req: IncomingMessage, res: ServerResponse, surface: RouteSu
       observed_at: state.clock_epoch,
       quotes,
       orders,
+      coupon: {
+        coupon_code: E1_POLICY.coupon_code,
+        status: state.coupon_status,
+        reserved_order_id: state.coupon_reserved_order_id,
+      },
       coupon_ledger: couponLedger,
     });
   }
@@ -416,8 +506,6 @@ if (BLIND_EVAL_MODE) {
     throw new Error("E1_EVALUATOR_PORT must be a distinct unprivileged TCP port");
   }
 }
-runs.set(DEFAULT_RUN_ID, createInitialState(DEFAULT_RUN_ID));
-
 function createListener(surface: RouteSurface) {
   return createServer((req, res) => {
     void route(req, res, surface).catch((error: unknown) => {

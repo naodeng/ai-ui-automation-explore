@@ -1,6 +1,6 @@
 {
   "manifest_version": "1.0-demo",
-  "status": "e1_m1_runtime_verified_s1_first_runtime_slice",
+  "status": "e1_m1_s1_runtime_verified_p2_local_synthetic",
   "cases": [
     {
       "case_id": "E1",
@@ -26,6 +26,7 @@
       "initial_conditions": {
         "tier": "gold",
         "claimed_coupon": "already_claimed_and_not_expired",
+        "claimed_coupon_expires_at": "2026-11-23T10:00:30Z",
         "event_version": 5,
         "old_session_available": true
       }
@@ -141,6 +142,7 @@
       "initial_conditions": {
         "stock": 100,
         "per_user_limit": 1,
+        "reservation_timeout_seconds": 30,
         "sale_start": "2026-11-23T10:00:00Z",
         "orders": 0
       }
@@ -148,8 +150,9 @@
   ],
   "notes": [
     "E1 and M1 runtimes create isolated in-memory runs from their approved seed entries; each run receives a new unique run_id.",
-    "The M1 historical coupon is valid at the seed clock instant. Its exact expiry is unspecified; after clock advancement, expiry status is not evaluated.",
+    "The M1 synthetic historical coupon expires at 2026-11-23T10:00:30Z. It is valid while fake time is before that instant and expired at or after it; this is a local teaching fixture only.",
     "All users are synthetic. No real accounts, payments or shipments.",
-    "S1 first local runtime slice has a deterministic serial stock-exhaustion path: 100 synthetic users can each buy one unit and a 101st attempt is rejected. This is not concurrency or load testing; S1-R02 remains partial without those checks."
+    "S1-R02 passes the serial stock-exhaustion path and a bounded 101-request check within one in-memory Node process; this does not prove cross-process/database concurrency or load behavior.",
+    "S1-R05 passes synthetic cancellation and Fake Clock timeout release paths; each path releases a reservation once and preserves the inventory ledger balance."
   ]
 }

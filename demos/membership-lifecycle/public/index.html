@@ -9,7 +9,7 @@
     <title>M1 会员生命周期 Demo · AI UI Automation Explore</title>
     <meta
       name="description"
-      content="使用本地合成夹具演练会员等级变更、旧会话授权、已领取优惠券和事件版本规则。"
+      content="使用本地合成夹具演练 Silver、Gold、Platinum 等级迁移、旧会话授权、已领取优惠券和事件版本规则。"
     />
     <link rel="stylesheet" href="/styles.css" />
     <script src="/app.js" defer></script>
@@ -94,6 +94,16 @@
                   <p>保留夹具中的旧会话，并读取其发起新 Gold-only 购买的授权结果。</p>
                 </div>
                 <button class="button-secondary scenario-action" data-scenario="gold_to_silver" type="button">
+                  运行场景
+                </button>
+              </article>
+              <article class="scenario-row">
+                <div class="scenario-label downgrade-label">Platinum → Gold</div>
+                <div class="scenario-copy">
+                  <h4>Platinum 续期失败后降级</h4>
+                  <p>按契约示例应用降级事件；本场景只观察等级和事件版本，不读取 Gold-only 授权。</p>
+                </div>
+                <button class="button-secondary scenario-action" data-scenario="platinum_to_gold" type="button">
                   运行场景
                 </button>
               </article>

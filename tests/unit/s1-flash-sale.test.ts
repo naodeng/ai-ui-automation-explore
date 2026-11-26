@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   advanceFlashSaleClock,
+  cancelFlashSaleReservation,
+  completeFlashSalePurchase,
   createFlashSaleRun,
   flashSaleStockTotal,
   submitFlashSalePurchase,
@@ -16,6 +18,7 @@ const seed: S1SeedEntry = {
   initial_conditions: {
     stock: 100,
     per_user_limit: 1,
+    reservation_timeout_seconds: 30,
     sale_start: "2026-11-23T10:00:00Z",
     orders: 0,
   },
@@ -39,13 +42,16 @@ test("S1-R01: a purchase before the server start time leaves the run unchanged",
   assert.equal(run.movements.length, 0);
 });
 
-test("S1-R02: one successful sandbox purchase preserves all stock buckets", () => {
+test("S1-R02: completing one reservation preserves all stock buckets", () => {
   const run = createRun("s1-stock-conservation");
   advanceFlashSaleClock(run, 10);
 
-  const result = submitFlashSalePurchase(run, "user_s1_001", "request-stock-1");
+  const reservation = submitFlashSalePurchase(run, "user_s1_001", "request-stock-1");
+  if (reservation.kind !== "created") throw new Error("Expected the reservation to be created");
+  const result = completeFlashSalePurchase(run, reservation.order.order_id);
 
-  assert.equal(result.kind, "created");
+  assert.equal(result.kind, "updated");
+  assert.equal(result.order.status, "success");
   assert.deepEqual(run.stock_buckets, {
     available: 99,
     reserved: 0,
@@ -54,22 +60,24 @@ test("S1-R02: one successful sandbox purchase preserves all stock buckets", () =
     released: 0,
   });
   assert.equal(flashSaleStockTotal(run.stock_buckets), run.initial_stock);
-  assert.equal(run.movements.length, 1);
-  assert.equal(result.kind === "created" ? result.order.order_id : "", run.movements[0].order_id);
-  assert.equal(result.kind === "created" ? result.request_id : "", run.movements[0].request_id);
-  assert.equal(run.movements[0].from_bucket, "available");
-  assert.equal(run.movements[0].to_bucket, "sold");
-  assert.equal(run.movements[0].quantity, 1);
+  assert.equal(run.movements.length, 2);
+  assert.equal(result.order.order_id, run.movements[1].order_id);
+  assert.equal(result.request_id, run.movements[1].request_id);
+  assert.equal(run.movements[1].from_bucket, "reserved");
+  assert.equal(run.movements[1].to_bucket, "sold");
+  assert.equal(run.movements[1].quantity, 1);
 });
 
 test("S1-R03: a synthetic user cannot make a second effective successful purchase", () => {
   const run = createRun("s1-user-limit");
   advanceFlashSaleClock(run, 10);
-  const first = submitFlashSalePurchase(run, "user_s1_001", "request-user-1");
+  const reservation = submitFlashSalePurchase(run, "user_s1_001", "request-user-1");
+  if (reservation.kind !== "created") throw new Error("Expected the reservation to be created");
+  const first = completeFlashSalePurchase(run, reservation.order.order_id);
 
   const second = submitFlashSalePurchase(run, "user_s1_001", "request-user-2");
 
-  assert.equal(first.kind, "created");
+  assert.equal(first.kind, "updated");
   assert.equal(second.kind, "rejected");
   assert.equal(second.code, "user_purchase_limit_reached");
   assert.equal(run.orders.length, 1);
@@ -93,11 +101,60 @@ test("S1-R04: replaying the same idempotency key returns one order and one movem
   assert.equal(flashSaleStockTotal(run.stock_buckets), run.initial_stock);
 });
 
+test("S1-R05: cancelling a reservation returns stock through the release ledger exactly once", () => {
+  const run = createRun("s1-cancel-release");
+  advanceFlashSaleClock(run, 10);
+  const reservation = submitFlashSalePurchase(run, "user_s1_001", "request-cancel-1");
+  if (reservation.kind !== "created") throw new Error("Expected the reservation to be created");
+  const cancelled = cancelFlashSaleReservation(run, reservation.order.order_id);
+  const repeated = cancelFlashSaleReservation(run, reservation.order.order_id);
+
+  assert.equal(cancelled.kind, "updated");
+  assert.equal(cancelled.order.status, "cancelled");
+  assert.equal(repeated.kind, "replayed");
+  assert.deepEqual(run.stock_buckets, {
+    available: 100,
+    reserved: 0,
+    sold: 0,
+    pending_release: 0,
+    released: 0,
+  });
+  assert.deepEqual(run.movements.map((movement) => [movement.from_bucket, movement.to_bucket]), [
+    ["available", "reserved"],
+    ["reserved", "released"],
+    ["released", "available"],
+  ]);
+  assert.equal(flashSaleStockTotal(run.stock_buckets), run.initial_stock);
+});
+
+test("S1-R05: a reservation expires at the exact Fake Clock boundary", () => {
+  const run = createRun("s1-timeout-release");
+  advanceFlashSaleClock(run, 10);
+  const reservation = submitFlashSalePurchase(run, "user_s1_001", "request-timeout-1");
+  if (reservation.kind !== "created") throw new Error("Expected the reservation to be created");
+
+  advanceFlashSaleClock(run, 29);
+  assert.equal(run.orders[0].status, "reserved");
+  advanceFlashSaleClock(run, 1);
+  const afterExpiryMovements = run.movements.length;
+  advanceFlashSaleClock(run, 1);
+
+  assert.equal(run.orders[0].status, "expired");
+  assert.equal(run.movements.length, afterExpiryMovements);
+  assert.equal(run.movements.length, 3);
+  assert.equal(run.stock_buckets.available, 100);
+  assert.equal(run.stock_buckets.reserved, 0);
+  assert.equal(flashSaleStockTotal(run.stock_buckets), run.initial_stock);
+  assert.equal(completeFlashSalePurchase(run, reservation.order.order_id).kind, "rejected");
+});
+
 test("S1 Runs isolate their clocks, orders and stock buckets", () => {
   const firstRun = createRun("s1-isolated-a");
   const secondRun = createRun("s1-isolated-b");
   advanceFlashSaleClock(firstRun, 10);
-  submitFlashSalePurchase(firstRun, "user_s1_001", "request-isolated-a");
+  const reservation = submitFlashSalePurchase(firstRun, "user_s1_001", "request-isolated-a");
+  if (reservation.kind !== "created") throw new Error("Expected the reservation to be created");
+  completeFlashSalePurchase(firstRun, reservation.order.order_id);
 
   assert.notEqual(firstRun.run_id, secondRun.run_id);
   assert.equal(firstRun.stock_buckets.sold, 1);

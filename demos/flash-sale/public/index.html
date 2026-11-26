@@ -7,7 +7,7 @@
     <meta name="site-kind" content="software" />
     <meta name="theme-color" content="#f4f5f1" />
     <title>S1 商品秒杀 Demo · AI UI Automation Explore</title>
-    <meta name="description" content="仅在本机合成数据上演练开售时钟、单用户限购、请求幂等与库存台账。" />
+    <meta name="description" content="仅在本机合成数据上演练开售时钟、库存预约、模拟完成、取消与超时释放。" />
     <link rel="stylesheet" href="/styles.css" />
     <script src="/app.js" defer></script>
   </head>
@@ -143,15 +143,51 @@
       </section>
 
       <section class="message-view panel" id="result-view" aria-labelledby="result-heading" hidden>
-        <span class="seed-pill">S1 · 本地合成结果</span>
-        <h1 id="result-heading">测试购买成功</h1>
-        <p>此结果来自当前本地 Run 的合成订单与只读 Oracle。</p>
-        <dl class="result-list">
-          <div><dt>订单 ID</dt><dd><code id="result-order-id">—</code></dd></div>
-          <div><dt>可用库存</dt><dd id="result-stock-available">—</dd></div>
-          <div><dt>已售库存</dt><dd id="result-stock-sold">—</dd></div>
-        </dl>
-        <a class="button-quiet link-button" id="result-back" href="/flash-sale">返回秒杀验证台</a>
+        <div class="result-main">
+          <span class="seed-pill">S1 · 本地合成结果</span>
+          <h1 class="result-status-banner" id="result-heading" data-status="reserved">预约待确认</h1>
+          <p id="result-description">库存已由本地合成 Run 预留；请在倒计时结束前模拟完成购买或取消预约。</p>
+          <dl class="result-list">
+            <div><dt>订单 ID</dt><dd><code id="result-order-id">—</code></dd></div>
+            <div><dt>预约状态</dt><dd id="result-order-status">—</dd></div>
+            <div><dt>预约到期</dt><dd id="result-reservation-expiry">—</dd></div>
+            <div><dt>剩余时间</dt><dd id="result-reservation-remaining">—</dd></div>
+          </dl>
+          <div class="result-actions">
+            <button class="button-primary" id="result-complete" type="button">模拟完成购买</button>
+            <button class="button-quiet" id="result-cancel" type="button">取消预约</button>
+            <button class="button-quiet" id="result-advance-clock" type="button">推进 30 秒触发超时</button>
+          </div>
+          <div class="feedback result-feedback" id="result-feedback" role="status" aria-live="polite" hidden></div>
+        </div>
+        <div class="result-side">
+          <section class="result-summary" aria-labelledby="result-stock-heading">
+            <div class="panel-heading">
+              <div class="heading-icon layers-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 4-8 4-8-4 8-4Z"/><path d="m4 12 8 4 8-4M4 16l8 4 8-4"/></svg></div>
+              <div><h2 id="result-stock-heading">当前库存</h2><p class="panel-kicker">可售、预留、售出与释放分别记账</p></div>
+            </div>
+            <dl class="stock-list result-stock-list">
+              <div class="stock-row"><dt>可用</dt><dd id="result-stock-available">—</dd></div>
+              <div class="stock-row"><dt>预留</dt><dd id="result-stock-reserved">—</dd></div>
+              <div class="stock-row"><dt>已售</dt><dd id="result-stock-sold">—</dd></div>
+              <div class="stock-row"><dt>已释放</dt><dd id="result-stock-released">—</dd></div>
+            </dl>
+            <p class="stock-total">初始库存 <strong id="result-stock-total">100</strong> 件；状态合计保持守恒。</p>
+          </section>
+          <section class="result-summary" aria-labelledby="result-oracle-heading">
+            <div class="panel-heading">
+              <div class="heading-icon oracle-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v13c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-13M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/></svg></div>
+              <div><h2 id="result-oracle-heading">演示账本（只读）</h2><p class="panel-kicker">独立服务端事实</p></div>
+            </div>
+            <dl class="oracle-list">
+              <div><dt>订单记录</dt><dd id="result-oracle-order-count">—</dd></div>
+              <div><dt>库存流水</dt><dd id="result-oracle-movement-count">—</dd></div>
+              <div><dt>观察时间</dt><dd id="result-oracle-observed-at">—</dd></div>
+            </dl>
+            <p class="checksum-note">Ledger SHA-256 <code id="result-oracle-checksum">—</code></p>
+          </section>
+        </div>
+        <a class="button-quiet link-button result-back" id="result-back" href="/flash-sale">返回秒杀验证台</a>
       </section>
     </main>
 

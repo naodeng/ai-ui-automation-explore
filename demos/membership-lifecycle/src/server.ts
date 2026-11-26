@@ -12,13 +12,15 @@ const MAX_BODY_BYTES = 16_384;
 type RunId = string & { readonly __brand: "RunId" };
 type EventVersion = number & { readonly __brand: "EventVersion" };
 type Tier = "normal" | "silver" | "gold" | "platinum";
-type ScenarioId = "seed" | "silver_to_gold" | "gold_to_silver";
+type ScenarioId = "seed" | "silver_to_gold" | "gold_to_silver" | "platinum_to_gold";
 type ReplayKind = "duplicate_current" | "older";
 
 interface M1Seed {
   seedId: string;
   clockEpoch: string;
   clockEpochMs: number;
+  couponExpiresAt: string;
+  couponExpiresAtMs: number;
   userId: string;
   tier: Tier;
   eventVersion: EventVersion;
@@ -67,6 +69,8 @@ interface M1Run {
   seedId: string;
   clockEpoch: string;
   clockEpochMs: number;
+  couponExpiresAt: string;
+  couponExpiresAtMs: number;
   simulatedAtMs: number;
   userId: string;
   tier: Tier;
@@ -133,17 +137,22 @@ function loadM1Seed(): M1Seed {
   const initial = entry.initial_conditions;
   const seedId = entry.seed_id;
   const clockEpoch = entry.clock_epoch;
+  const couponExpiresAt = initial.claimed_coupon_expires_at;
   const userIds = entry.synthetic_users;
   const eventVersion = initial.event_version;
   const tier = initial.tier;
   const coupon = initial.claimed_coupon;
   const oldSessionAvailable = initial.old_session_available;
   const clockEpochMs = typeof clockEpoch === "string" ? Date.parse(clockEpoch) : Number.NaN;
+  const couponExpiresAtMs = typeof couponExpiresAt === "string" ? Date.parse(couponExpiresAt) : Number.NaN;
 
   if (
     typeof seedId !== "string" ||
     typeof clockEpoch !== "string" ||
     Number.isNaN(clockEpochMs) ||
+    typeof couponExpiresAt !== "string" ||
+    Number.isNaN(couponExpiresAtMs) ||
+    couponExpiresAtMs <= clockEpochMs ||
     !Array.isArray(userIds) ||
     typeof userIds[0] !== "string" ||
     !isTier(tier) ||
@@ -158,6 +167,8 @@ function loadM1Seed(): M1Seed {
     seedId,
     clockEpoch,
     clockEpochMs,
+    couponExpiresAt: new Date(couponExpiresAtMs).toISOString(),
+    couponExpiresAtMs,
     userId: userIds[0],
     tier,
     eventVersion,
@@ -180,6 +191,8 @@ function createInitialRun(runId = createRunId()): M1Run {
     seedId: seed.seedId,
     clockEpoch: seed.clockEpoch,
     clockEpochMs: seed.clockEpochMs,
+    couponExpiresAt: seed.couponExpiresAt,
+    couponExpiresAtMs: seed.couponExpiresAtMs,
     simulatedAtMs: seed.clockEpochMs,
     userId: seed.userId,
     tier: seed.tier,
@@ -198,8 +211,9 @@ function fakeTime(run: M1Run): string {
   return new Date(run.simulatedAtMs).toISOString();
 }
 
-function couponStatusAt(run: M1Run): "valid_at_seed" | "not_evaluated" {
-  return run.simulatedAtMs === run.clockEpochMs ? "valid_at_seed" : "not_evaluated";
+function couponStatusAt(run: M1Run): "valid_at_seed" | "valid" | "expired" {
+  if (run.simulatedAtMs >= run.couponExpiresAtMs) return "expired";
+  return run.simulatedAtMs === run.clockEpochMs ? "valid_at_seed" : "valid";
 }
 
 function applyMembershipEvent(
@@ -286,6 +300,25 @@ function runScenario(scenarioId: Exclude<ScenarioId, "seed">): M1Run {
     return { ...run, authorizationObservation };
   }
 
+  if (scenarioId === "platinum_to_gold") {
+    run = {
+      ...run,
+      tier: "platinum",
+      scenarioId,
+      scenarioSetup: {
+        kind: "fixture_preparation",
+        fromTier: "gold",
+        toTier: "platinum",
+      },
+    };
+    return applyMembershipEvent(run, {
+      event_version: makeEventVersion(run.eventVersion + 1),
+      event_type: "renewal_failed_at_period_end",
+      from_tier: "platinum",
+      to_tier: "gold",
+    });
+  }
+
   run = applyMembershipEvent(run, {
     event_version: makeEventVersion(run.eventVersion + 1),
     event_type: "renewal_failed_at_period_end",
@@ -311,7 +344,7 @@ function snapshot(run: M1Run) {
       claimed: run.historicalCouponIsClaimedAndValid,
       current_status: couponStatusAt(run),
       expiry_policy: "retain_until_expiry",
-      exact_expiry: null,
+      exact_expiry: run.couponExpiresAt,
     },
     fake_clock: {
       epoch: run.clockEpoch,
@@ -344,7 +377,7 @@ function oracle(run: M1Run) {
         claimed: run.historicalCouponIsClaimedAndValid,
         current_status: couponStatusAt(run),
         expiry_policy: "retain_until_expiry",
-        exact_expiry: null,
+        exact_expiry: run.couponExpiresAt,
       },
     },
   };
@@ -480,7 +513,7 @@ async function handle(req: IncomingMessage, res: ServerResponse): Promise<void> 
   if (path === "/api/scenarios/run") {
     requireMethod(req, "POST");
     const body = await readJsonBody(req);
-    if (body.scenario_id !== "silver_to_gold" && body.scenario_id !== "gold_to_silver") {
+    if (body.scenario_id !== "silver_to_gold" && body.scenario_id !== "gold_to_silver" && body.scenario_id !== "platinum_to_gold") {
       throw new HttpError(400, "invalid_scenario_id");
     }
     const run = runScenario(body.scenario_id);

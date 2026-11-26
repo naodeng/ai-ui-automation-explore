@@ -1,0 +1,27 @@
+{
+  "schema_version": "p4-visual-dry-run/v1",
+  "case_id": "E1",
+  "rule_id": "E1-R01",
+  "run_id": "e1-6af9cb0d-4777-42ae-b538-acba74461fed",
+  "quote_id": "6b93bd07-7683-4d18-a4af-e326ed20598b",
+  "candidate_source": "fixed P3 seeded-fault evidence replay; not visual output",
+  "visual_inference": "NOT_RUN",
+  "model_invoked": false,
+  "external_request": false,
+  "observed_ui_cents": {
+    "payable": 7900,
+    "discount": 2000
+  },
+  "oracle_cents": {
+    "payable": 9900,
+    "discount": 0
+  },
+  "delta_cents": {
+    "payable": -2000,
+    "discount": 2000
+  },
+  "oracle_comparison": "mismatch",
+  "candidate_disposition": "oracle_supports_mismatch",
+  "defect_confirmed": false,
+  "human_review_required": true
+}

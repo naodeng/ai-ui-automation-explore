@@ -1,45 +1,46 @@
 # P2 S1 实现评审
 
-**状态：** 首个本地合成运行切片已实现；规则状态按实际验证范围标记。视觉稿已批准，桌面与窄屏版式已对照基线检查。
+**状态：** S1 合成 Demo 已覆盖全部五条已批准规则；最新跨案例本地回归与生命周期视口检查均通过。
 
 ## 实现范围
 
-- 在 `develop` 上实现 S1 本地服务和 UI，服务仅绑定 `127.0.0.1:4181`。
-- 每个 Run 从固定合成 Seed 独立创建，数据保存在当前 Node 进程内存。
-- 覆盖开售前拒绝、服务端 Fake Clock、一次成功购买、单用户限购、幂等重放、五种库存桶与只读 Oracle。
-- 成功购买使用单步 `available → sold` 流水。没有队列模拟、预留/释放生命周期或真实业务数据。
+- 本地服务只监听 `127.0.0.1:4181`；每个 Run 都在内存中隔离创建，并使用固定合成 Seed。
+- 购买请求创建 30 秒 Fake Clock 预约。模拟完成将 `reserved → sold`；取消和超时以只执行一次的原子动作记录 `reserved → released → available`。
+- 仅 `success` 计入有效成功购买。取消或超时后的用户可以重新预约；成功购买用户不能超过一次。
+- 只读 Oracle 暴露活动事实、五种库存桶、订单、不可变流水和校验和。不涉及队列、支付、履约或真实业务数据。
+- R02 有界 API 检查向本机单进程服务并发发送 101 个预约请求，再完成接受的 100 个预约。这只是本地回归，不是生产数据库竞争证明或负载测试。
 
 ## Rule 状态
 
 | Rule | 状态 | 证据与边界 |
 |---|---|---|
-| S1-R01 | PASS | API 在开售前拒绝请求且状态不变；推进 Fake Clock 到开售边界后允许一次合成购买。UI 初始按钮禁用。 |
-| S1-R02 | PARTIAL | UI/API 回归按顺序完成 100 笔购买，第 101 次尝试被拒绝；Oracle 确认 `available=0`、`sold=100`、其余库存桶为 0，订单与流水各 100 条。未运行并发或负载验证，不能据此证明并发下无超卖。 |
-| S1-R03 | PASS | 同一用户成功购买后，使用新幂等键再次购买会被限购拒绝。 |
-| S1-R04 | PASS | 重用幂等键返回原订单；库存状态和流水没有增加。 |
-| S1-R05 | NOT RUN | 尚未定义的取消/超时释放时序未实现；Oracle 只暴露当前库存桶与流水事实。 |
+| S1-R01 | PASS | API 在开售前拒绝请求且库存不变；Fake Clock 到开售时刻后允许预约。 |
+| S1-R02 | PASS（本机有界范围） | 100 次串行购买后第 101 次被拒绝；另一次 101 请求本地 API 并发运行准确得到 100 个预约、1 个拒绝，完成 100 个唯一订单并检查最终库存守恒。未覆盖多进程/数据库行为或负载。 |
+| S1-R03 | PASS | 同一用户购买成功后使用新幂等键会被限购拒绝；已有有效预约时也不能重复创建预约。 |
+| S1-R04 | PASS | 重用幂等键返回同一订单，不新增预约或库存流水；重复完成/取消保持终态且不重复写入流水。 |
+| S1-R05 | PASS | 取消立即释放；Fake Clock 在 `now >= expires_at` 时触发超时释放。两种路径均只释放一次，库存可再次预约；释放后完成购买会被拒绝。 |
 
 ## 验证记录
 
-- `npm test`：PASS，退出码 0。TypeScript 检查通过；9 项 Node 单元测试通过；E1 5 项 API + 2 项 UI、M1 6 项 API + 3 项 UI、S1 2 项 API + 4 项 UI 全部通过。
-- `.venv/bin/python -m unittest discover -s tests -v`：PASS，16 项通过。
-- `.venv/bin/python scripts/validate_project.py`：PASS；`git -c core.whitespace=cr-at-eol diff --check -- . ':!archive/**'`：PASS。历史归档保持只读，CSV CRLF 按行尾规则检查。
-- 视觉截图由 Playwright 在 1487×1058、1440×900、1024×900、768×900 和 390×844 视口生成并检查；新增售罄状态有单独桌面截图。
-- 环境：Node v26.13.1、npm 11.20.0、Playwright 1.65.1、Python 3.9.6。Playwright 使用项目随附的无头 Chromium 和本地回环服务。
+- `npm test`：PASS，退出码 0；TypeScript 与 24 项 Node 单元测试通过；E1 9 项 API/4 项 UI、M1 7 项 API/4 项 UI、S1 5 项 API/5 项 UI 均通过，共 34 项 Playwright 测试。
+- S1 API 覆盖含 101 请求有界并发与 100 个预约完成后的库存守恒检查；S1 UI 5 项全部通过，含桌面和 390px 窄屏取消/超时生命周期。
+- `.venv/bin/python -m unittest discover -s tests -q`：PASS，17 项；`.venv/bin/python scripts/validate_project.py`：PASS。
+- `node --check demos/flash-sale/public/app.js && git diff --check`：PASS。
+- Playwright API/UI 使用项目随附无头 Chromium。本机回环测试首次遇到沙箱 `EPERM`，随后按一次性沙箱外授权执行，没有在沙箱内重试。
 
 ## 证据
 
-- 视觉基线：[`S1 秒杀界面稿`](../../evidence/s1/design/s1-flash-sale-state-before-open-v2.png)
-- Run 与 Oracle 记录：[`S1 API 记录`](../../evidence/s1/run-contexts/s1-r01-r04-api.json)
-- 视口截图：`evidence/s1/s1-design-baseline-pre-open.png`、`s1-desktop-pre-open.png`、`s1-tablet-landscape-pre-open.png`、`s1-tablet-portrait-pre-open.png`、`s1-mobile-pre-open.png`
-- 购买成功截图：`evidence/s1/s1-desktop-purchase-result.png`
-- 售罄状态截图与 Oracle 记录：`evidence/s1/s1-desktop-sold-out.png`、`evidence/s1/run-contexts/s1-r02-serial-stockout.json`
+- 开售前视觉基线：[S1 秒杀界面稿](../../evidence/s1/design/s1-flash-sale-state-before-open-v2.png)
+- 已批准的生命周期稿：[桌面](../../evidence/s1/design/s1-r05-lifecycle-desktop-proposal.png)、[窄屏](../../evidence/s1/design/s1-r05-lifecycle-mobile-proposal.png)、[决策记录](../../evidence/s1/design/s1-r05-lifecycle-prototype.zh-CN.md)
+- API 与 Oracle 基线：[R01–R04 记录](../../evidence/s1/run-contexts/s1-r01-r04-api.json)
+- 有界并发：[R02 并发记录](../../evidence/s1/run-contexts/s1-r02-concurrent-reservations.json)
+- 串行售罄：[R02 串行记录](../../evidence/s1/run-contexts/s1-r02-serial-stockout.json)
+- 生命周期截图：桌面 `evidence/s1/s1-r05-reserved-desktop.png`、`s1-r05-cancelled-desktop.png`、`s1-r05-expired-desktop.png`；窄屏 `s1-r05-reserved-mobile.png`、`s1-r05-cancelled-mobile.png`、`s1-r05-expired-mobile.png`；另有 `s1-desktop-purchase-result.png`。
 
-## 未验证范围
+## 限制
 
-- R02 的服务端并发安全，以及所有负载测试。
-- R05 取消/超时后的释放时序和 exactly-once 行为。
-- 排队语义、排序保证和最终一致性 SLA。
-- 真实服务、生产数据、支付与 AI 浏览器工具比较。
-
-S1 的队列、有效售出与预留的定义以及生命周期边界仍按契约列为未决项；本轮没有补造业务规则。
+- 并发检查只覆盖单个内存 Node 进程，不证明跨进程或数据库原子性。
+- 未运行负载测试、生产流量、队列语义、排序保证或一致性 SLA。
+- `pending_release` 保持 0。`released` 桶只在一次同步释放动作的两条不可变流水之间暂时出现，最终快照为 0；库存方程仍守恒。
+- 未使用真实商品、账号、购买、支付或履约。
+- 历史 S1-R05 实现记录保留了最终通过结果，但没有保留开发时的 RED 命令和失败输出。因此该历史切片的 TDD 过程证据不完整；本报告不把现存 GREEN 回归结果追述为已观测的 RED→GREEN。该过程证据无法事后重建。

@@ -17,7 +17,7 @@ test("M1 baseline exposes the approved synthetic seed and read-only oracles", as
     claimed: true,
     current_status: "valid_at_seed",
     expiry_policy: "retain_until_expiry",
-    exact_expiry: null,
+    exact_expiry: "2026-11-23T10:00:30.000Z",
   });
   expect(created.oracle.membership_authorization).toEqual({ status: "not_observed" });
 
@@ -28,7 +28,12 @@ test("M1 baseline exposes the approved synthetic seed and read-only oracles", as
     run_id: created.state.run_id,
     membership_events: { effective_tier: "gold", current_event_version: 5 },
     entitlement_ledger: {
-      historical_coupon: { claimed: true, current_status: "valid_at_seed", expiry_policy: "retain_until_expiry" },
+      historical_coupon: {
+        claimed: true,
+        current_status: "valid_at_seed",
+        expiry_policy: "retain_until_expiry",
+        exact_expiry: "2026-11-23T10:00:30.000Z",
+      },
     },
   });
 });
@@ -105,6 +110,30 @@ test("Gold to Silver blocks the available old session from a new Gold-only purch
   });
 });
 
+test("M1 Platinum renewal failure applies the approved Platinum to Gold example", async ({ trackedRequest: request }) => {
+  const response = await request.post("/api/scenarios/run", { data: { scenario_id: "platinum_to_gold" } });
+  expect(response.status()).toBe(201);
+  const result = await response.json();
+
+  expect(result.state).toMatchObject({
+    scenario_id: "platinum_to_gold",
+    tier: "gold",
+    event_version: 6,
+    scenario_setup: { kind: "fixture_preparation", fromTier: "gold", toTier: "platinum" },
+    membership_events: [
+      expect.objectContaining({
+        event_version: 6,
+        event_type: "renewal_failed_at_period_end",
+        from_tier: "platinum",
+        to_tier: "gold",
+        disposition: "applied",
+      }),
+    ],
+  });
+  expect(result.oracle.membership_events).toMatchObject({ effective_tier: "gold", current_event_version: 6 });
+  expect(result.oracle.membership_authorization).toEqual({ status: "not_observed" });
+});
+
 test("duplicate and older event replays leave tier and event version unchanged", async ({ trackedRequest: request }) => {
   const created = await (await request.post("/api/runs")).json();
   const runId = created.state.run_id;
@@ -142,25 +171,36 @@ test("duplicate and older event replays leave tier and event version unchanged",
   });
 });
 
-test("fake clock advances by a bounded amount without inventing coupon expiry", async ({ trackedRequest: request }) => {
+test("M1-R03: a claimed synthetic coupon expires at the exact configured fake-clock boundary", async ({ trackedRequest: request }) => {
   const created = await (await request.post("/api/runs")).json();
-  const response = await request.post("/api/clock/advance", {
-    data: { run_id: created.state.run_id, seconds: 30 },
+  const beforeExpiryResponse = await request.post("/api/clock/advance", {
+    data: { run_id: created.state.run_id, seconds: 29 },
   });
-  expect(response.status()).toBe(200);
-  const advanced = await response.json();
-  expect(advanced.state.fake_clock).toMatchObject({
+  expect(beforeExpiryResponse.status()).toBe(200);
+  const beforeExpiry = await beforeExpiryResponse.json();
+  expect(beforeExpiry.state.fake_clock).toMatchObject({
     epoch: "2026-11-23T10:00:00Z",
-    now: "2026-11-23T10:00:30.000Z",
-    simulated_seconds_since_start: 30,
+    now: "2026-11-23T10:00:29.000Z",
+    simulated_seconds_since_start: 29,
   });
-  expect(advanced.state.historical_coupon.current_status).toBe("not_evaluated");
-  expect(advanced.oracle.entitlement_ledger.historical_coupon.current_status).toBe("not_evaluated");
+  expect(beforeExpiry.state.historical_coupon.current_status).toBe("valid");
+
+  const atExpiryResponse = await request.post("/api/clock/advance", {
+    data: { run_id: created.state.run_id, seconds: 1 },
+  });
+  expect(atExpiryResponse.status()).toBe(200);
+  const atExpiry = await atExpiryResponse.json();
+  expect(atExpiry.state.fake_clock.now).toBe("2026-11-23T10:00:30.000Z");
+  expect(atExpiry.state.historical_coupon.current_status).toBe("expired");
+  expect(atExpiry.oracle.entitlement_ledger.historical_coupon).toMatchObject({
+    current_status: "expired",
+    exact_expiry: "2026-11-23T10:00:30.000Z",
+  });
 });
 
 test("unknown scenarios and invalid fake clock input fail at the API boundary", async ({ trackedRequest: request }) => {
   const unsupported = await request.post("/api/scenarios/run", {
-    data: { scenario_id: "platinum_to_gold" },
+    data: { scenario_id: "emerald_to_gold" },
   });
   expect(unsupported.status()).toBe(400);
   expect(await unsupported.json()).toMatchObject({ error: "invalid_scenario_id" });

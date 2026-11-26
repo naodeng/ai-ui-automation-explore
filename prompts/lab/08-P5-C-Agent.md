@@ -2,7 +2,13 @@
 
 # P5｜C：自主 Browser Agent 的有界探索
 
-前置：P3-A 真实通过；P4 可有可无；模型、Host 权限和隔离批准已存在。阅读 `AGENTS.md`、`docs/09-方案C-自主Agent受限PoC.md`、`docs/12-安全隔离与恢复.md`、`contracts/exploration-charter.schema.json`。
+## 执行门禁
+
+P5 是 MVP 之后的可选研究。**在 MVP v0.1–v0.3 的全部功能与验收完成前，不得执行本 Prompt、安装或启动 Agent。** 启动前还需用户单独批准目标、Agent 运行时、网络范围和权限边界，并核实运行环境能满足安全要求。
+
+当前可选 OrbStack 隔离实验不是 P5 实测，不是指定运行时，也不能替代 P5 的 Agent 执行证据。方案 C 博客草稿先保留为 `draft / unverified`。
+
+满足上述门禁后，阅读 `AGENTS.md`、`docs/09-方案C-自主Agent受限PoC.md`、`docs/12-安全隔离与恢复.md`、`contracts/exploration-charter.schema.json`，并核对 P0–P4 的验收记录。
 
 实现最小 `Charter → Policy Gate → Observation → Hypothesis → Safe Action → Evidence → Oracle → Reproducer → Human Review` Loop。**首选单 Agent + 单执行器**，不搭多 Agent 平台。
 

@@ -10,6 +10,7 @@ export interface S1SeedEntry {
     per_user_limit: number;
     sale_start: string;
     orders: number;
+    reservation_timeout_seconds: number;
   };
 }
 
@@ -38,8 +39,9 @@ export interface FlashSaleOrder {
   user_id: string;
   sku_id: "s1-synthetic-item";
   quantity: 1;
-  status: "success";
+  status: "reserved" | "success" | "cancelled" | "expired";
   created_at: string;
+  reservation_expires_at: string;
 }
 
 export interface FlashSaleRun {
@@ -54,6 +56,7 @@ export interface FlashSaleRun {
   simulated_at_ms: number;
   sale_start_at: string;
   sale_start_at_ms: number;
+  reservation_timeout_seconds: number;
   initial_stock: number;
   per_user_limit: number;
   synthetic_user_ids: string[];
@@ -68,6 +71,10 @@ export type PurchaseResult =
   | { kind: "replayed"; request_id: string; order: FlashSaleOrder }
   | { kind: "rejected"; request_id: string; code: string };
 
+export type OrderTransitionResult =
+  | { kind: "updated" | "replayed"; request_id: string; order: FlashSaleOrder }
+  | { kind: "rejected"; request_id: string; code: string };
+
 export function createFlashSaleRun(seed: S1SeedEntry, runId: string): FlashSaleRun {
   const clockEpochMs = Date.parse(seed.clock_epoch);
   const saleStartAtMs = Date.parse(seed.initial_conditions.sale_start);
@@ -77,6 +84,8 @@ export function createFlashSaleRun(seed: S1SeedEntry, runId: string): FlashSaleR
     !Number.isSafeInteger(seed.initial_conditions.stock) ||
     seed.initial_conditions.stock <= 0 ||
     seed.initial_conditions.per_user_limit !== 1 ||
+    !Number.isSafeInteger(seed.initial_conditions.reservation_timeout_seconds) ||
+    seed.initial_conditions.reservation_timeout_seconds <= 0 ||
     seed.initial_conditions.orders !== 0 ||
     seed.synthetic_users.length === 0 ||
     seed.synthetic_users.some((userId) => typeof userId !== "string" || userId.length === 0) ||
@@ -98,6 +107,7 @@ export function createFlashSaleRun(seed: S1SeedEntry, runId: string): FlashSaleR
     simulated_at_ms: clockEpochMs,
     sale_start_at: new Date(saleStartAtMs).toISOString(),
     sale_start_at_ms: saleStartAtMs,
+    reservation_timeout_seconds: seed.initial_conditions.reservation_timeout_seconds,
     initial_stock: seed.initial_conditions.stock,
     per_user_limit: seed.initial_conditions.per_user_limit,
     synthetic_user_ids: [...seed.synthetic_users],
@@ -116,6 +126,7 @@ export function createFlashSaleRun(seed: S1SeedEntry, runId: string): FlashSaleR
 
 export function advanceFlashSaleClock(run: FlashSaleRun, seconds: number): void {
   run.simulated_at_ms += seconds * 1000;
+  expireDueReservations(run);
 }
 
 export function flashSaleStockTotal(buckets: StockBuckets): number {
@@ -135,6 +146,7 @@ export function flashSaleLedgerChecksum(run: FlashSaleRun): string {
     seed_id: run.seed_id,
     campaign_id: run.campaign_id,
     simulated_at_ms: run.simulated_at_ms,
+    reservation_timeout_seconds: run.reservation_timeout_seconds,
     stock_buckets: run.stock_buckets,
     orders: run.orders,
     movements: run.movements,
@@ -146,6 +158,51 @@ function assertStockConservation(run: FlashSaleRun): void {
   const values = Object.values(run.stock_buckets);
   if (values.some((value) => !Number.isSafeInteger(value) || value < 0) || flashSaleStockTotal(run.stock_buckets) !== run.initial_stock) {
     throw new Error("S1 stock buckets do not conserve the initial stock");
+  }
+}
+
+function moveStock(
+  run: FlashSaleRun,
+  order: FlashSaleOrder,
+  requestId: string,
+  from: keyof StockBuckets,
+  to: keyof StockBuckets,
+): void {
+  if (run.stock_buckets[from] < 1) throw new Error(`S1 stock bucket ${from} is empty`);
+  const observedAt = new Date(run.simulated_at_ms).toISOString();
+  run.stock_buckets[from] -= 1;
+  run.stock_buckets[to] += 1;
+  run.movements.push({
+    movement_id: `s1-movement-${randomUUID()}`,
+    from_bucket: from,
+    to_bucket: to,
+    quantity: 1,
+    order_id: order.order_id,
+    request_id: requestId,
+    observed_at: observedAt,
+  });
+  assertStockConservation(run);
+}
+
+function updateOrderStatus(run: FlashSaleRun, order: FlashSaleOrder, status: FlashSaleOrder["status"]): FlashSaleOrder {
+  const updated = { ...order, status };
+  const index = run.orders.findIndex((candidate) => candidate.order_id === order.order_id);
+  if (index < 0) throw new Error("S1 order disappeared from its Run");
+  run.orders[index] = updated;
+  return updated;
+}
+
+function releaseReservation(run: FlashSaleRun, order: FlashSaleOrder, status: "cancelled" | "expired", requestId: string): FlashSaleOrder {
+  moveStock(run, order, requestId, "reserved", "released");
+  moveStock(run, order, requestId, "released", "available");
+  return updateOrderStatus(run, order, status);
+}
+
+function expireDueReservations(run: FlashSaleRun): void {
+  for (const order of run.orders) {
+    if (order.status === "reserved" && run.simulated_at_ms >= Date.parse(order.reservation_expires_at)) {
+      releaseReservation(run, order, "expired", `s1-request-${randomUUID()}`);
+    }
   }
 }
 
@@ -169,6 +226,9 @@ export function submitFlashSalePurchase(
   if (run.orders.filter((order) => order.user_id === userId && order.status === "success").length >= run.per_user_limit) {
     return { kind: "rejected", request_id: requestId, code: "user_purchase_limit_reached" };
   }
+  if (run.orders.some((order) => order.user_id === userId && order.status === "reserved")) {
+    return { kind: "rejected", request_id: requestId, code: "active_reservation_exists" };
+  }
   if (run.stock_buckets.available < 1) return { kind: "rejected", request_id: requestId, code: "sold_out" };
 
   const now = new Date(run.simulated_at_ms).toISOString();
@@ -179,24 +239,46 @@ export function submitFlashSalePurchase(
     user_id: userId,
     sku_id: run.sku_id,
     quantity: 1,
-    status: "success",
+    status: "reserved",
     created_at: now,
+    reservation_expires_at: new Date(run.simulated_at_ms + run.reservation_timeout_seconds * 1000).toISOString(),
   };
-  const movement: StockMovement = {
-    movement_id: `s1-movement-${randomUUID()}`,
-    from_bucket: "available",
-    to_bucket: "sold",
-    quantity: 1,
-    order_id: order.order_id,
-    request_id: order.request_id,
-    observed_at: now,
-  };
-
-  run.stock_buckets.available -= 1;
-  run.stock_buckets.sold += 1;
   run.orders.push(order);
-  run.movements.push(movement);
   run.idempotency_index.set(idempotencyKey, order.order_id);
+  moveStock(run, order, requestId, "available", "reserved");
   assertStockConservation(run);
   return { kind: "created", request_id: requestId, order };
+}
+
+export function completeFlashSalePurchase(run: FlashSaleRun, orderId: string): OrderTransitionResult {
+  const requestId = `s1-request-${randomUUID()}`;
+  const order = run.orders.find((candidate) => candidate.order_id === orderId);
+  if (!order) return { kind: "rejected", request_id: requestId, code: "order_not_found" };
+  if (order.status === "success") return { kind: "replayed", request_id: requestId, order };
+  if (order.status !== "reserved") return { kind: "rejected", request_id: requestId, code: "invalid_order_transition" };
+  if (run.simulated_at_ms >= Date.parse(order.reservation_expires_at)) {
+    expireDueReservations(run);
+    return { kind: "rejected", request_id: requestId, code: "invalid_order_transition" };
+  }
+
+  moveStock(run, order, requestId, "reserved", "sold");
+  const completed = updateOrderStatus(run, order, "success");
+  return { kind: "updated", request_id: requestId, order: completed };
+}
+
+export function cancelFlashSaleReservation(run: FlashSaleRun, orderId: string): OrderTransitionResult {
+  const requestId = `s1-request-${randomUUID()}`;
+  const order = run.orders.find((candidate) => candidate.order_id === orderId);
+  if (!order) return { kind: "rejected", request_id: requestId, code: "order_not_found" };
+  if (order.status === "cancelled" || order.status === "expired") {
+    return { kind: "replayed", request_id: requestId, order };
+  }
+  if (order.status !== "reserved") return { kind: "rejected", request_id: requestId, code: "invalid_order_transition" };
+  if (run.simulated_at_ms >= Date.parse(order.reservation_expires_at)) {
+    expireDueReservations(run);
+    return { kind: "rejected", request_id: requestId, code: "invalid_order_transition" };
+  }
+
+  const cancelled = releaseReservation(run, order, "cancelled", requestId);
+  return { kind: "updated", request_id: requestId, order: cancelled };
 }

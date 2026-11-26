@@ -22,7 +22,8 @@
     "test:m1": "npm run typecheck && npm run test:m1:api && npm run test:m1:e2e",
     "test:s1:api": "playwright test --config=playwright.s1.config.ts --project=api",
     "test:s1:e2e": "playwright test --config=playwright.s1.config.ts --project=ui",
-    "test:s1": "npm run typecheck && npm run test:s1:api && npm run test:s1:e2e"
+    "test:s1": "npm run typecheck && npm run test:s1:api && npm run test:s1:e2e",
+    "p4:dry-run": "node experiments/p4-visual-dry-run/run.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.65.1",

@@ -2,31 +2,31 @@
   "case_id": "M1",
   "seed_id": "m1-gold-to-silver",
   "fake_clock_epoch": "2026-11-23T10:00:00Z",
-  "captured_at": "2026-11-25T01:57:54.519Z",
+  "captured_at": "2026-11-26T03:25:04.985Z",
   "runs": [
     {
       "scenario": "seed",
-      "run_id": "m1-1728e9d8-2933-4c3f-b1ab-8367044c0f1d",
+      "run_id": "m1-29a04460-ba5e-4767-bc0b-6454da9a3080",
       "tier": "gold",
       "event_version": 5,
       "coupon_status": "valid_at_seed"
     },
     {
       "scenario": "silver_to_gold",
-      "run_id": "m1-7ee2929c-de3f-4e28-a0a5-c7c82dced175",
+      "run_id": "m1-c3ec2340-0030-4899-b43c-5c692ef12e6f",
       "tier": "gold",
       "event_version": 6,
       "authorization": "allowed"
     },
     {
       "scenario": "gold_to_silver",
-      "run_id": "m1-4c9cfeb5-e1b3-4a3c-ae95-d7f6d5e5294c",
+      "run_id": "m1-4790e167-8d8f-4eee-bf9e-f3a206727db7",
       "tier": "silver",
       "event_version": 6,
       "old_session": "available",
       "authorization": "denied",
       "fake_clock_after_advance": "2026-11-23T10:00:30.000Z",
-      "coupon_status_after_advance": "not_evaluated"
+      "coupon_status_after_advance": "expired"
     }
   ]
 }

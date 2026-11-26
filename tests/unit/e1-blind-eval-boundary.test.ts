@@ -103,6 +103,20 @@ test("blind evaluation separates public routes from authenticated evaluator rout
   });
   assert.equal(blockedOrder.status, 403);
 
+  const blockedSandboxPayment = await fetch(`${publicOrigin}/api/orders/00000000-0000-4000-8000-000000000000/simulate-payment`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ run_id: "e1-blind-001" }),
+  });
+  assert.equal(blockedSandboxPayment.status, 403);
+
+  const blockedCancellation = await fetch(`${publicOrigin}/api/orders/00000000-0000-4000-8000-000000000000/cancel`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ run_id: "e1-blind-001" }),
+  });
+  assert.equal(blockedCancellation.status, 403);
+
   const unauthenticatedOracle = await fetch(`${evaluatorOrigin}/__test/oracle/checkout?run_id=e1-local&seed_id=e1-threshold&user_id=user_e1`);
   assert.equal(unauthenticatedOracle.status, 401);
 
@@ -113,7 +127,7 @@ test("blind evaluation separates public routes from authenticated evaluator rout
   });
   assert.equal(unauthenticatedReset.status, 401);
 
-  const evaluatorOracle = await fetch(`${evaluatorOrigin}/__test/oracle/checkout?run_id=e1-local&seed_id=e1-threshold&user_id=user_e1`, {
+  const evaluatorOracle = await fetch(`${evaluatorOrigin}/__test/oracle/checkout?run_id=e1-blind-001&seed_id=e1-threshold&user_id=user_e1`, {
     headers: { "x-control-token": token },
   });
   assert.equal(evaluatorOracle.status, 200);

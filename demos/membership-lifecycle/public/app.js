@@ -177,9 +177,11 @@ function renderResponse(value) {
   }
 
   if (isRecord(entitlement.historical_coupon)) {
-    const couponStatus = entitlement.historical_coupon.current_status === "valid_at_seed"
-      ? "已领取 · Seed 时点有效"
-      : "已领取 · 过期状态待核实";
+    const couponStatus = entitlement.historical_coupon.current_status === "expired"
+      ? "已领取 · 已过期（本地模拟）"
+      : entitlement.historical_coupon.current_status === "valid_at_seed"
+        ? "已领取 · Seed 时点有效"
+        : "已领取 · 到期前有效（本地模拟）";
     setText("oracle-coupon", couponStatus);
   }
   setText("oracle-observed-at", "Oracle 观察时间（模拟）：" + response.oracle.observed_at);
@@ -191,12 +193,17 @@ function renderResponse(value) {
     "replay-older",
     "重放较旧版本 v" + Math.max(1, state.event_version - 1),
   );
-  const couponAtSeed = state.historical_coupon.current_status === "valid_at_seed";
-  setText("coupon-status", couponAtSeed ? "Seed 时点有效" : "有效性待核实（过期时间未定义）");
+  const couponStatus = state.historical_coupon.current_status;
+  const couponAtSeed = couponStatus === "valid_at_seed";
+  const couponExpired = couponStatus === "expired";
+  setText(
+    "coupon-status",
+    couponExpired ? "已过期（本地模拟）" : couponAtSeed ? "Seed 时点有效" : "到期前有效（本地模拟）",
+  );
   setCheckStatus(
     "check-r03",
-    couponAtSeed ? "夹具观察：Seed 时点有效" : "无法判定：过期时间未定义",
-    couponAtSeed ? "observed" : "pending",
+    couponExpired ? "到期边界：已过期" : couponAtSeed ? "夹具观察：Seed 时点有效" : "到期前仍有效",
+    "observed",
   );
   renderReplayStatus(membership.replay_attempts);
   renderScenarioChecks(state, response.oracle);
@@ -257,12 +264,18 @@ async function runScenario(scenarioId) {
     });
     const response = renderResponse(body);
     const observation = response.oracle.membership_authorization;
-    const label = scenarioId === "silver_to_gold" ? "Silver → Gold" : "Gold → Silver";
-    const decision = observation.decision === "allowed" ? "允许" : "拒绝";
-    showRunResult(
-      label + " · 事件版本 v" + response.state.event_version +
-        "；Gold-only 授权 Oracle：" + decision + "。这是本地合成 Run 的观察结果。",
-    );
+    const labels = {
+      silver_to_gold: "Silver → Gold",
+      gold_to_silver: "Gold → Silver",
+      platinum_to_gold: "Platinum → Gold",
+    };
+    const result = labels[scenarioId] + " · 事件版本 v" + response.state.event_version;
+    if (isRecord(observation) && typeof observation.decision === "string") {
+      const decision = observation.decision === "allowed" ? "允许" : "拒绝";
+      showRunResult(result + "；Gold-only 授权 Oracle：" + decision + "。这是本地合成 Run 的观察结果。");
+    } else {
+      showRunResult(result + "；本场景未采集 Gold-only 授权。仅显示等级迁移观察。");
+    }
     showFeedback("场景已在独立合成 Run 中执行；页面显示当前服务端返回的状态。");
   } catch (error) {
     showFeedback(error instanceof Error ? error.message : "场景执行失败；请重置后重试。", true);

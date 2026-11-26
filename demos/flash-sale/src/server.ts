@@ -4,6 +4,8 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {
   advanceFlashSaleClock,
+  cancelFlashSaleReservation,
+  completeFlashSalePurchase,
   createFlashSaleRun,
   flashSaleLedgerChecksum,
   getFlashSaleCampaignStatus,
@@ -56,6 +58,9 @@ function loadS1Seed(): S1SeedEntry {
     !Number.isSafeInteger(initial.stock) ||
     initial.stock <= 0 ||
     initial.per_user_limit !== 1 ||
+    typeof initial.reservation_timeout_seconds !== "number" ||
+    !Number.isSafeInteger(initial.reservation_timeout_seconds) ||
+    initial.reservation_timeout_seconds !== 30 ||
     initial.orders !== 0 ||
     typeof initial.sale_start !== "string" ||
     Number.isNaN(Date.parse(initial.sale_start)) ||
@@ -282,6 +287,30 @@ async function handle(req: IncomingMessage, res: ServerResponse): Promise<void> 
       return json(res, status, { error: result.code, request_id: result.request_id, state: stockView(run) });
     }
     return json(res, result.kind === "created" ? 201 : 200, {
+      result: result.kind,
+      request_id: result.request_id,
+      order: result.order,
+      state: stockView(run),
+    });
+  }
+
+  const orderAction = path.match(/^\/api\/orders\/([a-zA-Z0-9_-]{3,120})\/(simulate-complete|cancel)$/);
+  if (orderAction) {
+    requireMethod(req, "POST");
+    const body = await readJsonBody(req);
+    const run = getRun(body.run_id);
+    const orderId = orderAction[1];
+    const result = orderAction[2] === "simulate-complete"
+      ? completeFlashSalePurchase(run, orderId)
+      : cancelFlashSaleReservation(run, orderId);
+    if (result.kind === "rejected") {
+      return json(res, result.code === "order_not_found" ? 404 : 409, {
+        error: result.code,
+        request_id: result.request_id,
+        state: stockView(run),
+      });
+    }
+    return json(res, 200, {
       result: result.kind,
       request_id: result.request_id,
       order: result.order,

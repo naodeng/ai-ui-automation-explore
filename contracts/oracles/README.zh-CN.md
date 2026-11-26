@@ -2,7 +2,7 @@
 
 [English](README.md) · **简体中文**
 
-**状态：** E1 `CheckoutOracle`、M1 `MembershipOracle` 和 S1 首个切片的 `FlashSaleOracle` 已实现为只读观察。S1 不模拟排队、取消或超时释放行为。
+**状态：** E1 `CheckoutOracle`、M1 `MembershipOracle` 和 S1 `FlashSaleOracle` 已实现为只读观察。S1 覆盖预约、完成、取消和 Fake Clock 超时释放；不模拟排队。
 
 每个 Oracle 只读取一个合成 `run_id` 和 `seed_id` 的观察结果。Oracle 不得重置数据、推进时钟、提交订单、修改会员或注入故障。调用方传入未知 Run 时必须得到 not-found 结果，不得回退到其他 Run 或全局状态。
 
@@ -17,7 +17,7 @@
 接口返回该合成用户的权威报价和订单事实：
 
 - 报价小计、优惠券代码、折扣、运费、税费和应付金额；
-- 对应报价或订单的优惠券观察记录。E1 记录 `discount_applied_to_quote`，不模拟锁定、核销、支付或取消；
+- 优惠券状态（`available`、`reserved` 或 `sandbox_redeemed`）以及关联报价/订单的账本事件（`discount_applied_to_quote`、`reserved_for_sandbox_order`、`sandbox_redeemed_after_payment` 和 `released_after_cancellation`）；`sandbox_redeemed` 只记录本地模拟状态，不代表真实优惠券核销；
 - 提供 `order_id` 时，返回对应订单的状态和应付金额。
 
 响应分别报告运费和税费。已批准的 E1 夹具将二者设为零；不推断其中任何一项是否应计入非零优惠门槛。
@@ -32,7 +32,7 @@ M1 通过本地会员 Demo 的测试观察 API 返回会员事实，包括 `run_
 
 仅限本机回环访问的 S1 服务返回匹配活动的状态和开售时刻、五种库存桶、相关订单、不可变库存流水及账本校验和。未知或不匹配的 Run、Seed、活动或 SKU 身份会 fail closed。
 
-Oracle 只报告事实，不决定哪些订单状态应计为有效售出量。该定义和队列一致性 SLA 在 S1 中仍未决。当前切片在本地购买成功时执行一次直接的 `available → sold` 库存变化；尚未实现预留、取消或超时释放路径。一次成功购买不能证明库存耗尽安全或服务端并发行为。
+Oracle 只报告事实，不计算 `effective_sold_quantity`。S1 的合成合同将 `success` 作为唯一有效成功订单状态；预约占用 `reserved`，模拟完成后进入 `sold`。取消或超时以同一原子动作记录 `reserved → released → available`，最终桶数量保持守恒。R02 的 101 请求检查只验证本机单进程内存 Demo；不证明生产数据库并发安全，也不是负载测试。队列语义与一致性 SLA 仍未定义。
 
 ## 证据要求
 

@@ -51,6 +51,7 @@
       .step.current .step-number { border-color: var(--green); background: var(--green); color: white; }
       .step-line { width: 28px; height: 1px; background: #dfe4df; }
       .layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; align-items: start; gap: 22px; }
+      .layout[hidden] { display: none; }
       .panel { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
       .main-panel { overflow: hidden; }
       .panel-head { padding: 23px 26px 18px; border-bottom: 1px solid #edf0ec; }
@@ -95,6 +96,32 @@
       .message { display: none; margin-top: 14px; padding: 12px 13px; border: 1px solid #d5e5da; border-radius: 9px; color: var(--green-dark); background: var(--green-pale); font-size: 13px; line-height: 1.5; }
       .message.error { border-color: #e8c8b9; color: #713a27; background: #fff5f0; }
       .primary:disabled { cursor: wait; opacity: .68; transform: none; box-shadow: none; }
+      .secondary { width: 100%; min-height: 46px; margin-top: 10px; border: 1px solid #d9b4a4; border-radius: 10px; background: #fff; color: var(--orange); cursor: pointer; font-size: 13px; font-weight: 700; }
+      .secondary:hover { background: #fff8f4; }
+      .secondary:focus-visible { outline: 3px solid rgba(166,70,36,.2); outline-offset: 3px; }
+      .lifecycle-view[hidden] { display: none; }
+      .lifecycle-layout { grid-template-areas: "details status"; }
+      .lifecycle-detail-panel { grid-area: details; }
+      .lifecycle-status-panel { grid-area: status; }
+      .lifecycle-detail-panel .section-body { padding-top: 20px; }
+      .lifecycle-status-panel { padding: 24px; }
+      .lifecycle-banner { display: flex; align-items: center; gap: 12px; min-height: 62px; padding: 14px 16px; border-radius: 11px; color: var(--orange); background: var(--orange-pale); font-size: 15px; font-weight: 720; }
+      .lifecycle-banner.success { color: var(--green-dark); background: var(--green-pale); }
+      .lifecycle-icon { width: 25px; height: 25px; display: grid; place-items: center; border: 1.5px solid currentColor; border-radius: 50%; font-size: 15px; line-height: 1; }
+      .lifecycle-coupon { margin-top: 14px; padding: 14px; border-radius: 10px; background: #f2f6f2; }
+      .lifecycle-coupon-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; }
+      .lifecycle-coupon-row strong { color: var(--green-dark); font-weight: 720; }
+      .lifecycle-note { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+      .lifecycle-result { margin-top: 18px; padding-top: 17px; border-top: 1px solid #e9ede8; }
+      .lifecycle-result[hidden] { display: none; }
+      .lifecycle-result h3 { margin: 0 0 11px; font-size: 14px; }
+      .result-line { padding: 11px 12px; border-radius: 9px; color: var(--green-dark); background: var(--green-pale); font-size: 13px; font-weight: 700; }
+      .result-line.cancelled { color: var(--orange); background: var(--orange-pale); }
+      .lifecycle-safety { margin: 15px 0 0; padding: 12px 14px; border: 1px solid #e4e8e2; border-radius: 10px; color: #526159; background: #f8faf8; font-size: 13px; line-height: 1.5; }
+      .lifecycle-message { display: none; margin-top: 12px; padding: 11px 12px; border: 1px solid #e8c8b9; border-radius: 9px; color: #713a27; background: #fff5f0; font-size: 13px; line-height: 1.5; }
+      .lifecycle-message.visible { display: block; }
+      .steps .step.complete { color: var(--green-dark); }
+      .steps .step.complete .step-number { border-color: var(--green); background: var(--green); color: white; }
       footer { padding: 18px 0 26px; color: #626e67; font-size: 13px; text-align: center; }
       .skip-link { position: absolute; top: -60px; left: 16px; z-index: 2; padding: 10px 14px; border-radius: 6px; background: var(--green-dark); color: white; font-size: 13px; }
       .skip-link:focus { top: 12px; }
@@ -107,6 +134,8 @@
         .steps { padding: 0; }
         .layout { grid-template-columns: 1fr; gap: 16px; }
         .side-panel { position: static; }
+        .lifecycle-layout { grid-template-areas: "status" "details"; }
+        .lifecycle-status-panel { padding: 21px 18px; }
       }
       @media (max-width: 480px) {
         .shell { width: calc(100% - 32px); }
@@ -148,7 +177,7 @@
       </div>
     </header>
     <main class="shell" id="main">
-      <section class="intro" aria-labelledby="page-title">
+      <section class="intro" id="checkout-intro" aria-labelledby="page-title">
         <div>
           <h1 id="page-title">确认订单</h1>
           <p class="intro-copy">检查优惠与应付金额，然后创建一笔本地沙盒订单。</p>
@@ -160,7 +189,7 @@
         </nav>
       </section>
 
-      <div class="layout">
+      <div class="layout" id="checkout-layout">
         <section class="panel main-panel" aria-labelledby="cart-heading">
           <div class="panel-head">
             <div class="panel-title-row"><h2 id="cart-heading">商品与优惠</h2><span class="item-count">1 件商品</span></div>
@@ -203,6 +232,37 @@
           <div class="message" id="order-message" role="status" aria-live="polite"></div>
         </aside>
       </div>
+      <section class="lifecycle-view" id="lifecycle-view" aria-labelledby="lifecycle-title" hidden>
+        <div class="layout lifecycle-layout">
+          <section class="panel lifecycle-detail-panel" aria-labelledby="lifecycle-detail-heading">
+            <div class="panel-head"><h2 id="lifecycle-detail-heading">商品与优惠</h2></div>
+            <div class="section-body">
+              <div class="summary-line"><span>商品小计</span><strong id="lifecycle-subtotal">¥100.00</strong></div>
+              <div class="summary-line discount"><span>优惠券 C20</span><strong id="lifecycle-discount">− ¥20.00</strong></div>
+              <div class="summary-total"><span>应付金额</span><strong class="amount" id="lifecycle-payable"><small>¥</small><span id="lifecycle-payable-value">80.00</span></strong></div>
+              <div id="lifecycle-actions">
+                <button class="primary" id="simulate-payment" type="button">模拟支付</button>
+                <button class="secondary" id="cancel-order" type="button">取消订单</button>
+              </div>
+              <div class="lifecycle-result" id="lifecycle-result" hidden>
+                <h3 id="lifecycle-result-heading">完成结果</h3>
+                <div class="result-line" id="lifecycle-result-message"></div>
+                <button class="secondary" id="return-to-checkout" type="button" hidden>返回结算，创建新的沙盒订单</button>
+              </div>
+              <div class="lifecycle-message" id="lifecycle-message" role="alert" aria-live="assertive"></div>
+            </div>
+          </section>
+          <aside class="panel lifecycle-status-panel" aria-labelledby="lifecycle-title">
+            <div class="summary-head"><h2 id="lifecycle-title">订单状态</h2></div>
+            <div class="lifecycle-banner" id="lifecycle-banner"><span class="lifecycle-icon" id="lifecycle-icon" aria-hidden="true">◷</span><span id="lifecycle-status-label">待模拟支付</span></div>
+            <div class="lifecycle-coupon">
+              <div class="lifecycle-coupon-row"><span>优惠券 C20</span><strong id="lifecycle-coupon-status">已锁定</strong></div>
+              <p class="lifecycle-note" id="lifecycle-coupon-note">本地沙盒订单正在等待模拟支付</p>
+            </div>
+          </aside>
+        </div>
+        <p class="lifecycle-safety" id="lifecycle-safety">只更新本地演示数据，不会扣款或发货。</p>
+      </section>
     </main>
     <footer>AI UI Automation Explore <span aria-hidden="true">·</span> 合成数据，仅供测试研究</footer>
     <script type="module" src="/app.js"></script>

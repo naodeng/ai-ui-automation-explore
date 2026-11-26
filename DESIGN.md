@@ -72,7 +72,7 @@ components:
 
 The interface keeps synthetic business outcomes easy to inspect. Warm neutral page grounds, white bordered surfaces, concise labels, and a clear type scale give the operator room to compare state and amounts without turning the demo into a production-looking storefront.
 
-Deep green carries the primary action and positive observations. Terracotta marks the Gold/Silver lifecycle action and unresolved states. E1 checkout and the approved M1 state-overview comp now share the visual system. M1 separates contract expectations from local observations and keeps unknown coupon expiry visible as unknown.
+Deep green carries the primary action and positive observations. Terracotta marks the Gold/Silver lifecycle action and expiry/unresolved states. E1 checkout, the M1 state overview, and the S1 reservation lifecycle use the shared visual system. M1 distinguishes the synthetic coupon's configured expiry from real-world policy.
 
 **Key Characteristics:**
 - A restrained, warm-neutral working surface.
@@ -125,7 +125,7 @@ The E1 surface centers a bounded checkout shell. At desktop widths it uses a bro
 
 The S1 flash-sale QA surface reuses the same calm, local-first visual system. It keeps all five stock buckets visible as separate facts, places the Fake Clock beside the read-only Oracle, and labels the purchase as synthetic. The queue route states that queue behavior is undefined rather than simulating one.
 
-M1 uses a bounded state-overview layout: membership state and two scenario actions occupy the broad column; the historical coupon and read-only Oracle sit in the side column; expected checks span the page below. At 900px and below the main columns stack, with the coupon and Oracle side by side until 560px. Narrow screens use a two-column state grid and one-column side panels.
+M1 uses a bounded state-overview layout: membership state and scenario actions occupy the broad column; the historical coupon and read-only Oracle sit in the side column; expected checks span the page below. At 900px and below the main columns stack, with the coupon and Oracle side by side until 560px. Narrow screens use a two-column state grid and one-column side panels.
 
 The layout uses moderate gaps and generous panel padding so the cart, coupon, totals, and primary action remain separately scannable. Keep the selected amount and resulting payable total visible together in the narrow layout.
 

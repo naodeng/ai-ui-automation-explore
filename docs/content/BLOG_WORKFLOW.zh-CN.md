@@ -2,7 +2,7 @@
 
 ## 当前位置
 
-- `content/blog/drafts/tools/`：24 篇**详细提纲**，状态 `outline`。
+- `content/blog/drafts/tools/`：23 篇详细提纲（`outline`），以及 1 篇 Playwright Test 实战草稿（`draft / unverified`）。
 - `content/blog/drafts/series/`：三案例完整科普**长文草稿**，状态 `draft` / unverified。
 - `content/blog/drafts/practices/`：A 确定性、B 视觉、C 自主 Agent **三篇长文草稿**，状态 `draft` / unverified。
 - `content/blog/editorial/`：文章目录、发布批次、质量门禁、资料复核。
@@ -24,10 +24,10 @@ flowchart LR
 
 文章随项目证据逐篇推进，不等到 Roadmap P7 才开始写作：
 
-- **P3 确定性基线：** 优先把 Playwright Test 提纲推进为实战草稿；确定性路线草稿只写入已有运行证据支持的结论。
+- **P3 确定性基线：** Playwright Test 已基于本地三案例回归与 Oracle 证据推进为实战草稿，待 QA/编辑 Review；确定性路线草稿只写入已有运行证据支持的结论。
 - **P4 视觉实验：** 根据实际运行的视觉工具和截图/Trace，推进视觉路线及对应工具文章。
-- **P5 受限 Agent 探索：** 宿主隔离验收通过并取得 Agent 运行证据后，推进自主 Agent 路线及实际参与工具的文章。
-- **P6 三路线对照：** 用统一案例与可比证据完善三案例科普和路线比较内容。
+- **P5 受限 Agent 探索：** 延后到 MVP v0.1–v0.3 的全部功能和验收完成后，并经单独批准才启动。当前 C 路线长文保留为 `draft / unverified`；OrbStack 隔离基础层不代表 P5 已启动或完成，也不是必选运行时。
+- **P6 三路线对照：** P5 实际执行后，再用统一案例与可比证据完善三案例科普和路线比较；P5 未运行时，C 路线必须标为 `NOT RUN`，不能宣称完成三路线对照。
 - **P7 最终 Review：** 对已完成验证的文章进行技术、QA、编辑 Review，并等待人工定稿和发布批准；此阶段不作为批量起草的前置条件。
 
 每个阶段交接时，列出推进的草稿路径和状态。若没有草稿可推进，说明缺少哪项实测或审查证据。未执行内容继续标 `NOT RUN`；草稿更新不自动改变验证、批准或发布状态。
