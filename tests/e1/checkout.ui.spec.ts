@@ -244,6 +244,21 @@ test("E1-R04: cancellation releases C20 and returns to a fresh quote", async ({ 
   await expect(page.getByRole("heading", { name: "确认订单" })).toBeVisible();
   await expect(page.locator("#coupon-state")).toHaveText("已应用");
   await expect(page.locator("#payable-value")).toHaveText("80.00");
+
+  await page.getByRole("button", { name: "创建沙盒订单" }).click();
+  await expect(page.getByRole("heading", { name: "沙盒订单待支付" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "模拟支付" })).toBeEnabled();
+  await expect(page.getByRole("button", { name: "取消订单" })).toBeEnabled();
+  await page.getByRole("button", { name: "模拟支付" }).click();
+  await expect(page.getByRole("heading", { name: "沙盒模拟支付完成" })).toBeVisible();
+
+  const oracle = await request.get("/__test/oracle/checkout", {
+    params: { run_id: runId, seed_id: "e1-threshold", user_id: "user_e1" },
+  });
+  expect(await oracle.json()).toMatchObject({
+    coupon: { status: "sandbox_redeemed" },
+    orders: [{ status: "cancelled" }, { status: "sandbox_paid", payable_cents: 8_000 }],
+  });
 });
 
 test("E1-R01: selecting the 99 boundary removes the discount", async ({ page, trackedRequest: request }) => {

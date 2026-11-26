@@ -160,7 +160,15 @@ Reset 后可同时存在多个测试 Run 和报价。仅比较金额可能会把
 
 ### 6. 为什么 E1 API 测试通过后，UI 测试启动服务时报令牌已存在？
 
-PR #1 的 CI 中，24 条单测和 9 条 E1 API 测试先通过；随后 UI 阶段因 `.local/e1-control-token` 仍在而无法启动服务。单独运行 `npm run test:api` 后再运行 `npm run test:e2e`，也复现了相同错误：服务端口已关闭，但 API 与 UI 阶段共用的手动 Demo 令牌文件残留。修复后，Playwright 配置显式以 `--test-mode` 启动 E1，并使用单独的 `.local/e1-test-control-token`；手动 Demo 继续使用独占创建的 `.local/e1-control-token`。同一完整 `npm test` 现已在本机通过；修复后的 PR CI 结果待推送后核对。
+PR #1 的 CI 中，24 条单测和 9 条 E1 API 测试先通过；随后 UI 阶段因 `.local/e1-control-token` 仍在而无法启动服务。单独运行 `npm run test:api` 后再运行 `npm run test:e2e`，也复现了相同错误：服务端口已关闭，但 API 与 UI 阶段共用的手动 Demo 令牌文件残留。修复后，Playwright 配置显式以 `--test-mode` 启动 E1，并使用单独的 `.local/e1-test-control-token`；手动 Demo 继续使用独占创建的 `.local/e1-control-token`。同一完整 `npm test` 现已在本机通过；PR #1 上提交 `5664cff` 的 `validate` 与 `playwright` 检查均通过。
+
+### 7. 取消订单后，为什么还要创建替代订单继续测？
+
+仅确认 C20 被释放、重新报价成功，不能证明 UI 能继续完成订单。E1-R04 回归现在覆盖完整路径：待支付 → 取消并释放 C20 → 返回结算 → 创建替代订单 → 确认模拟支付和取消操作可用 → 模拟支付后用只读 Oracle 核对订单与优惠券状态。修复前，第一次取消会禁用两个生命周期按钮；新订单显示后它们仍保持禁用。2026-11-26 的定向 Playwright 用例复现并验证了此问题。
+
+### 8. 路径型截图和 Trace 如何避免证据哈希失效？
+
+Playwright 附件可能只有 `path`，例如固定位置的截图或 Playwright 输出目录中的失败 Trace。此前 Evidence Index 哈希了原始文件；后续回归覆盖截图或清理 Trace 后，旧索引便无法再验证原内容。现在路径型附件会先复制到该测试独立的 `test-results/p3-evidence/<case>/<testRunId>/attachments/`（Oracle 附件进入 `oracles/`），再计算 SHA-256。单测在归档后覆盖源截图，并确认副本字节和哈希仍匹配。2026-11-26 的完整 `npm test` 覆盖了这项回归。
 
 ## 适用范围与限制
 

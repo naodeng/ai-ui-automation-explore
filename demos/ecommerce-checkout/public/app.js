@@ -148,6 +148,8 @@ function renderLifecycle(order) {
   const hasCoupon = activeQuote.discount_cents > 0;
   const paid = order.status === "sandbox_paid";
   const cancelled = order.status === "cancelled";
+  simulatePaymentButton.disabled = order.status !== "sandbox_created";
+  cancelOrderButton.disabled = order.status !== "sandbox_created";
   checkoutLayout.hidden = true;
   lifecycleView.hidden = false;
   clearLifecycleMessage();

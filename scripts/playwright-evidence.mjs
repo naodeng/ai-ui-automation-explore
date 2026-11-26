@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { extname, join, relative, resolve, sep } from "node:path";
 
 function toRelativePath(rootDir, filePath) {
@@ -92,9 +92,13 @@ export async function writeTestEvidence(input) {
       filePath = join(directory, `${String(index + 1).padStart(3, "0")}-${safeName(attachment.name)}${extension}`);
       await writeFile(filePath, attachment.body);
     } else if (attachment.path) {
-      filePath = resolve(attachment.path);
-      const relativePath = relative(rootDir, filePath);
+      const sourcePath = resolve(rootDir, attachment.path);
+      const relativePath = relative(rootDir, sourcePath);
       if (relativePath === ".." || relativePath.startsWith(`..${sep}`) || relativePath.startsWith(sep)) continue;
+      const directory = kind === "oracle_response" ? oracleDirectory : attachmentDirectory;
+      const extension = extname(attachment.name) || extname(sourcePath) || (attachment.contentType === "application/json" ? ".json" : ".bin");
+      filePath = join(directory, `${String(index + 1).padStart(3, "0")}-${safeName(attachment.name)}${extension}`);
+      await copyFile(sourcePath, filePath);
     } else {
       continue;
     }

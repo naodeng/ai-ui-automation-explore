@@ -41,6 +41,7 @@ test("P3-A writes a schema-shaped manifest and hashed Oracle evidence for each t
     const index = JSON.parse(await readFile(artifacts.evidenceIndexPath, "utf8"));
     const result = JSON.parse(await readFile(artifacts.testResultPath, "utf8"));
     const oracleEntry = index.find((entry: { kind: string }) => entry.kind === "oracle_response");
+    const screenshotEntry = index.find((entry: { kind: string }) => entry.kind === "screenshot");
     const oracleBytes = await readFile(resolve(rootDir, oracleEntry.path));
 
     assert.equal(manifest.run_id, "E1-pw-0001");
@@ -51,7 +52,14 @@ test("P3-A writes a schema-shaped manifest and hashed Oracle evidence for each t
     assert.deepEqual(result.request_ids, ["e1-request-1"]);
     assert.equal(oracleEntry.run_id, "E1-pw-0001");
     assert.equal(oracleEntry.sha256, createHash("sha256").update(oracleBytes).digest("hex"));
-    assert.ok(index.some((entry: { kind: string }) => entry.kind === "screenshot"));
+    assert.ok(screenshotEntry);
+    const storedScreenshotPath = resolve(rootDir, screenshotEntry.path);
+    assert.notEqual(storedScreenshotPath, screenshotPath);
+    assert.match(screenshotEntry.path, /^test-results\/p3-evidence\/E1\/E1-pw-0001\/attachments\//);
+    await writeFile(screenshotPath, Buffer.from("replacement screenshot"));
+    const storedScreenshot = await readFile(storedScreenshotPath);
+    assert.equal(storedScreenshot.toString(), "synthetic screenshot");
+    assert.equal(screenshotEntry.sha256, createHash("sha256").update(storedScreenshot).digest("hex"));
     assert.deepEqual(index[0].rule_ids, ["E1-R01", "E1-R02"]);
   } finally {
     await rm(rootDir, { recursive: true, force: true });
