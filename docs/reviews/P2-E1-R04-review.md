@@ -2,7 +2,7 @@
 
 **Updated:** 2026-11-26
 
-**Status:** Implemented and verified locally on `develop`; the latest full cross-case regression passed. Changes remain uncommitted.
+**Status:** Implemented and pushed on `develop`; the full local regression and corresponding GitHub Actions run passed.
 
 ## Approved scope
 
@@ -51,9 +51,9 @@ The directly reviewable captures are [`pending desktop`](../../evidence/e1/e1-r0
 ## Limits and next step
 
 - This verifies a single-process, in-memory synthetic state machine. It does not establish persistence, multi-process transaction guarantees, production coupon semantics, or load behavior.
-- The latest full suite ran locally against the uncommitted `develop` worktree. No remote CI run has verified these latest changes.
+- Commit `1a6c6fefc2600fe4869476bde420e7a3b72d0357` passed [GitHub Actions Run 45749348367](https://github.com/naodeng/ai-ui-automation-explore/actions/runs/45749348367): both `validate` and `playwright` jobs, including evidence artifact upload, succeeded.
 - No further approval is needed for the approved E1-R04 flow. Shipping/tax threshold policy remains open; comparative visual tools and Agent exploration remain outside this demo implementation.
-- Work remains uncommitted on `develop`; the workspace contained unrelated pre-existing modifications that were preserved.
+- The final local Playwright regression regenerated screenshots and Run contexts in the worktree; they can be compared with the CI artifact for the same implementation commit.
 
 ## 2026-11-26 review-fix follow-up
 

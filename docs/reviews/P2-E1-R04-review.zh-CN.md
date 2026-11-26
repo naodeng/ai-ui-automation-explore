@@ -2,7 +2,7 @@
 
 **更新日期：** 2026-11-26
 
-**状态：** 已在 `develop` 本机实现并验证；最新跨案例完整回归通过，改动仍未提交。
+**状态：** 已在 `develop` 实现并推送；本地全量回归与对应 GitHub Actions 均通过。
 
 ## 已批准范围
 
@@ -51,9 +51,9 @@
 ## 边界与后续
 
 - 这些证据验证的是单进程、内存中的合成状态机，不证明持久化、多进程事务保证、生产优惠券语义或负载行为。
-- 最新完整回归是在未提交的 `develop` 工作区本地执行；没有远端 CI 对这批最新改动进行验证。
+- 提交 `1a6c6fefc2600fe4869476bde420e7a3b72d0357` 已通过 [GitHub Actions Run 45749348367](https://github.com/naodeng/ai-ui-automation-explore/actions/runs/45749348367)：`validate`、`playwright` 两个 Job 及 Artifact 上传步骤均 PASS。
 - 已批准的 E1-R04 无需新增人工批准。运费/税费门槛仍待定；视觉工具对比和 Agent 探索不属于本 Demo 实现。
-- 改动仍在 `develop` 上未提交；工作区其他既有未提交修改均已保留。
+- 本轮最终 Playwright 回归生成的截图与 Run 上下文已留在工作区，后续复核时可与同提交的 CI Artifact 对照。
 
 ## 2026-11-26 审查修复补充
 

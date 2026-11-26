@@ -11,7 +11,7 @@
 - M1-R03 现已覆盖固定合成优惠券的到期前和到期边界；S1-R01–R05 均在批准的本地合成范围内通过，其中 R02 有界 101 请求检查仅验证单个内存 Node 进程。
 - E1 空白页面自动生成唯一 Run ID；M1 另覆盖 YAML 中 Platinum 续期失败降为 Gold 的示例迁移，此示例不作为新增授权规则。
 - S1 预约、取消和超时后的库存账本截图已生成，桌面与 390px 窄屏状态均检查通过。M1 到期时间不代表真实优惠券政策。
-- 本轮验证为本机工作区结果；这些后续改动尚无对应的远端 CI 运行。没有启动 Browser Agent，也未进行生产级负载/分布式并发、队列 SLA 或盲化 Recall 评估。
+- GitHub Actions [Run 45749348367](https://github.com/naodeng/ai-ui-automation-explore/actions/runs/45749348367) 对提交 `1a6c6fefc2600fe4869476bde420e7a3b72d0357` 执行成功：`validate` 与 `playwright` Job 均 PASS，测试报告与合成证据 Artifact 上传成功（ID `15084317944`，保留至 2026-12-10）。没有启动 Browser Agent，也未进行生产级负载/分布式并发、队列 SLA 或盲化 Recall 评估。
 
 ## 配套文章草稿
 

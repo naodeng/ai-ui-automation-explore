@@ -45,7 +45,7 @@
 | `.venv/bin/python -m unittest discover -s tests -q` | PASS，17 项，退出码 0 |
 | `.venv/bin/python scripts/validate_project.py` | PASS，静态包完整性 |
 | `node --check`（E1/M1/S1 浏览器脚本）与 `git diff --check` | PASS，退出码 0 |
-| 远端 CI | 本机回归完成后尚未对当前工作区版本运行；需提交并推送后核对对应 GitHub Actions Run |
+| 远端 CI | GitHub Actions Run `45749348367` 对提交 `1a6c6fefc2600fe4869476bde420e7a3b72d0357` 全绿；`validate`、`playwright` 与 Artifact 上传通过 |
 
 M1 新场景沿用既有状态总览布局，桌面和 390px 窄屏截图均已检查，无横向溢出。Playwright 使用随附无头 Chromium；测试只访问本机合成 Demo，不涉及真实账号、订单、支付或外网业务流量。
 
