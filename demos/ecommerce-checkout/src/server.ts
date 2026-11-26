@@ -289,7 +289,7 @@ async function route(req: IncomingMessage, res: ServerResponse, surface: RouteSu
     const body = await readJsonBody(req);
     const runId = validateRunId(body.run_id);
     const skuId = readRequiredString(body.sku_id, "sku_id", 40);
-    if (!(skuId in E1_CATALOG)) throw new HttpError(400, "unknown_synthetic_sku");
+    if (!Object.hasOwn(E1_CATALOG, skuId)) throw new HttpError(400, "unknown_synthetic_sku");
     const state = getOrCreateRun(runId);
     state.cart_sku_id = skuId as E1SkuId;
     return json(res, 200, cartResponse(state));

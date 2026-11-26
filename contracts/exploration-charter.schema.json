@@ -37,7 +37,7 @@
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "pattern": "^/"
+        "pattern": "^/(?![/\\\\])"
       }
     },
     "account_role": {

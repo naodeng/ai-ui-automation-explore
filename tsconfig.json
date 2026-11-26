@@ -15,8 +15,10 @@
   "include": [
     "demos/ecommerce-checkout/src/**/*.ts",
     "demos/membership-lifecycle/src/**/*.ts",
+    "demos/flash-sale/src/server.ts",
     "tests/**/*.ts",
     "playwright.config.ts",
-    "playwright.m1.config.ts"
+    "playwright.m1.config.ts",
+    "playwright.s1.config.ts"
   ]
 }

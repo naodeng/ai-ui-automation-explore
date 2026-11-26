@@ -6,6 +6,13 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { ensureEvidenceDirectory, newRunId, resetRun } from "./support.ts";
 
+function sourceCommit(): string {
+  if (process.env.GITHUB_SHA) return process.env.GITHUB_SHA;
+  const sha = execFileSync("git", ["rev-parse", "HEAD"], { cwd: process.cwd(), encoding: "utf8" }).trim();
+  const changes = execFileSync("git", ["status", "--porcelain"], { cwd: process.cwd(), encoding: "utf8" }).trim();
+  return changes ? `${sha}+dirty` : sha;
+}
+
 test("E1 default run isolation: separate bare pages retain separate C20 state", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "确认订单" })).toBeVisible();
@@ -120,7 +127,7 @@ async function writeE1MismatchEvidence(input: {
     track: "A",
     seed_id: "e1-threshold",
     contract_version: "1.0-demo",
-    app_commit: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
+    app_commit: sourceCommit(),
     browser: `${page.context().browser()?.browserType().name() ?? "unknown"} ${page.context().browser()?.version() ?? "unknown"}`,
     executor_version: "Playwright Test 1.65.1",
     started_at: startedAt.toISOString(),

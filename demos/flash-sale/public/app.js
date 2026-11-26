@@ -243,8 +243,10 @@ async function submitPurchase() {
       run_id: currentState.run_id,
       order_id: result.order.order_id,
     }));
-  } catch {
-    showFeedback(error.message === "user_purchase_limit_reached" ? "该合成用户已达到单次购买上限。" : "本次本地请求未成功；请检查服务端状态后再继续。", "error");
+  } catch (error) {
+    showFeedback(error instanceof Error && error.message === "user_purchase_limit_reached"
+      ? "该合成用户已达到单次购买上限。"
+      : "本次本地请求未成功；请检查服务端状态后再继续。", "error");
     await refreshRun(currentState.run_id);
   }
 }

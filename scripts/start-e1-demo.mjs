@@ -1,5 +1,5 @@
 import { randomBytes } from "node:crypto";
-import { chmod, mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, rm, writeFile } from "node:fs/promises";
 import { spawn } from "node:child_process";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,8 +11,15 @@ const tokenPath = resolve(localDir, blindEval ? "e1-blind-control-token" : "e1-c
 const token = randomBytes(32).toString("hex");
 
 await mkdir(localDir, { recursive: true, mode: 0o700 });
-await writeFile(tokenPath, `${token}\n`, { mode: 0o600 });
-await chmod(tokenPath, 0o600);
+try {
+  await writeFile(tokenPath, `${token}\n`, { flag: "wx", mode: 0o600 });
+} catch (error) {
+  if (error?.code === "EEXIST") {
+    process.stderr.write(`E1 demo token already exists at ${tokenPath}; another launcher may be running. Stop it before starting another instance. If no instance is running, remove this stale token and retry.\n`);
+    process.exit(1);
+  }
+  throw error;
+}
 
 const child = spawn(process.execPath, [resolve(projectRoot, "demos/ecommerce-checkout/src/server.ts")], {
   cwd: projectRoot,
